@@ -1,0 +1,158 @@
+var localise = function (text) {
+
+  //Analyse text for variables
+
+  var variables = [];
+
+  //Find and isolate unique variables
+
+  text.match(/\[(.*?)\]/g).forEach(function (element, index) {
+
+    if (!variables[element]) {
+
+      variables.push(element);
+
+    };
+
+  });
+
+  //Get location
+
+  navigator.geolocation.getCurrentPosition(function (position) {
+
+    lookup(position.coords.latitude + "," + position.coords.longitude, variables);
+
+  });
+
+  //Foursquare category lookup
+
+  var foursquarelookup = function (latlng, category, callback) {
+
+    category = category.toLowerCase();
+
+    if (!venues[category]) {
+
+      return false;
+
+    }
+
+    var data = {
+
+      client_id: foursquare.id,
+      client_secret: foursquare.secret,
+      ll: latlng,
+      v: "20150516",
+      categoryId: venues[category]
+
+    };
+
+    $.ajax({
+      url: "https://api.foursquare.com/v2/venues/search",
+      data: data,
+      success: function (results) {
+
+        var results = results.response.venues;
+
+        callback(results);
+
+      },
+    });
+
+  };
+
+  //Once location received, loop over variables and replace
+
+  var lookup = function (location, variables) {
+
+    variables.forEach(function (element, index) {
+
+      //Store for later replacing
+
+      var variable = element;
+
+      //Strip brackets
+
+      variable = variable.replace("[", "").replace("]", "");
+
+      var category = variable.split("|")[0];
+      var id = variable.split("|")[1] - 1;
+
+      foursquarelookup(location, category, function (result) {
+
+        //Get nearest result
+
+        function distance(a, b) {
+          if (a.location.distance < b.location.distance)
+            return -1;
+          if (a.location.distance > b.location.distance)
+            return 1;
+          return 0;
+        }
+
+        result.sort(distance);
+
+        $("body").html($("body").html().replace("[" + variable + "]", result[id].name));
+
+      });
+
+    });
+
+
+  };
+
+};
+
+var venues = {};
+
+var getvenues = function (callback) {
+
+  //Traverse list of venue types
+
+  var traverse = function (object) {
+
+    venues[object["name"].toLowerCase()] = object["id"]
+
+    if (object.categories && object.categories.length > 0) {
+
+      object.categories.forEach(function (element, index) {
+
+        traverse(element);
+
+      });
+
+    }
+
+  };
+
+  var data = {
+
+    client_id: foursquare.id,
+    client_secret: foursquare.secret,
+    v: "20150516"
+  };
+
+  $.ajax({
+    url: "https://api.foursquare.com/v2/venues/categories",
+    data: data,
+    success: function (results) {
+
+      var categories = results.response.categories;
+
+      categories.forEach(function (element, index) {
+
+        traverse(element);
+
+      });
+
+      callback();
+
+    }
+
+  });
+}
+
+getvenues(function () {
+
+  localise($("body").html());
+
+});
