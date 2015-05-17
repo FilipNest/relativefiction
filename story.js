@@ -6,6 +6,12 @@ var localise = function (text) {
 
   //Find and isolate unique variables
 
+  if (!text.match(/\[(.*?)\]/g)) {
+
+    return false;
+
+  }
+
   text.match(/\[(.*?)\]/g).forEach(function (element, index) {
 
     if (!variables[element]) {
@@ -60,11 +66,23 @@ var localise = function (text) {
 
   };
 
+
   //Once location received, loop over variables and replace
 
   var lookup = function (location, variables) {
 
     variables.forEach(function (element, index) {
+
+      if (element === "[weather]") {
+
+        weather(location, function (result) {
+
+          $("body").html($("body").html().replace("[weather]", result.weather[0].main.toLowerCase()));
+
+        });
+
+
+      };
 
       //Store for later replacing
 
@@ -151,8 +169,39 @@ var getvenues = function (callback) {
   });
 }
 
+//Get Foursquare venues
+
 getvenues(function () {
 
   localise($("body").html());
 
 });
+
+//Get weather data
+
+gotweather = false;
+
+var weather = function (latlng, callback) {
+
+  if (!gotweather) {
+
+    data = {
+      lat: latlng.split(",")[0],
+      lon: latlng.split(",")[1],
+    }
+
+    $.ajax({
+      url: "http://api.openweathermap.org/data/2.5/weather",
+      data: data,
+      success: function (results) {
+
+        callback(results);
+
+      },
+    });
+
+    gotweather = true;
+
+  }
+
+};
