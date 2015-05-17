@@ -71,13 +71,55 @@ var localise = function (text) {
 
   var lookup = function (location, variables) {
 
+    //Get day
+
+    var d = new Date();
+    var n = d.getDay();
+
+    var day = "";
+
+    switch (n) {
+
+    case 0:
+      day = "Sunday";
+      break;
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
+      break;
+
+
+    }
+
     variables.forEach(function (element, index) {
+
+      if (element === "[day]") {
+
+        $("body").html($("body").html().replace("[day]", day));
+
+      }
 
       if (element === "[weather]") {
 
         weather(location, function (result) {
 
           $("body").html($("body").html().replace("[weather]", result.weather[0].main.toLowerCase()));
+
+          return true;
 
         });
 
