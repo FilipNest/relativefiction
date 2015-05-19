@@ -66,80 +66,17 @@ $output = json_decode($_POST["text"]);
 
 //Static variables first
 
+$static = array();
+
 //Create date elements
 
-$day = date("l",$time);
-$month = date("F",$time);
-$year = date("Y", $time);
-$hours12 = date("h", $time);
-$hours24 = date("H", $time);
-$hoursampm = date("A", $time);
-$minutes = date("i", $time);
-
-//Days
-
-$output = str_replace("[day]",$day,$output);
-
-//Months
-
-$output = str_replace("[month]", $month, $output);
-
-//Years
-
-$output = str_replace("[year]", $year, $output);
-
-//Hours (12) 
-
-$output = str_replace("[hours12]",$hours12,$output);
-
-//Hours (24)
-
-$output = str_replace("[hours24]", $hours24, $output);
-
-//Hours AM/PM
-
-$output = str_replace("[hoursampm]", $hoursampm, $output);
-
-//Minutes
-
-$output = str_replace("[minutes]", $minutes, $output);
-
-
-//Get list of dynamic variables in the text
-  
-preg_match_all("/\[([^\]]*)\]/", $output, $matches);
-
-//Store matches in array
-
-$variables = $matches[1];
-
-$categoryids = array();
-
-$placevariables = array();
-
-foreach($variables as $variable){
- 
-  $name = explode("|",$variable)[0];
-  
-  if(count(explode("|",$variable)) > 0){
-  $id = explode("|",$variable)[1];
-  }
-  
-  if(isset($foursquare['venuecategories']->$name)){
-    
-    $placevariables[] = array(
-      "tag" => $variable,
-      "category" => $foursquare['venuecategories']->$name,
-      "id" => $id
-    );
-    
-    //Get category id
-    
-    $categoryids[] = $foursquare['venuecategories']->$name;
-    
-  }
-  
-}
+$static["day"] = date("l",$time);
+$static["month"] = date("F",$time);
+$static["year"] = date("Y", $time);
+$static["hours12"] = date("h", $time);
+$static["hours24"] = date("H", $time);
+$static["hoursampm"] = date("A", $time);
+$static["minutes"] = date("i", $time);
 
 //Get weather data for location
 
@@ -427,21 +364,62 @@ $countries = array
 );
 
 
-$country = $countries[$weather->sys->country];
-
-print_r($country);
-print "<br />";
+$static["country"] = $countries[$weather->sys->country];
 
 foreach ($forecast as $name => $condition){
   
   if(in_array($weathercode,$condition)){
 
-  $weather = $name;
+  $static["weather"] = $name;
 
   }
   
 }
+
+//Swap out static variables
+
+foreach($static as $name => $value){
+ 
+  $output = str_replace("[".$name."]", $value, $output);
   
+}
+
+
+//Get list of dynamic variables in the text
+  
+preg_match_all("/\[([^\]]*)\]/", $output, $matches);
+
+//Store matches in array
+
+$variables = $matches[1];
+
+$categoryids = array();
+
+$placevariables = array();
+
+foreach($variables as $variable){
+ 
+  $name = explode("|",$variable)[0];
+  
+  if(count(explode("|",$variable)) > 0){
+  $id = explode("|",$variable)[1];
+  }
+  
+  if(isset($foursquare['venuecategories']->$name)){
+    
+    $placevariables[] = array(
+      "tag" => $variable,
+      "category" => $foursquare['venuecategories']->$name,
+      "id" => $id
+    );
+    
+    //Get category id
+    
+    $categoryids[] = $foursquare['venuecategories']->$name;
+    
+  }
+  
+} 
 
 //Make bulk request for all Foursquare categories in text
 
