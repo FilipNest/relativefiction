@@ -12,6 +12,12 @@ if(true){
 
 $request = new HTTP_Request2('https://api.foursquare.com/v2/venues/categories',
                              HTTP_Request2::METHOD_GET, array('use_brackets' => true));
+  
+$request->setConfig(array(
+    'ssl_verify_peer'   => FALSE,
+    'ssl_verify_host'   => FALSE
+));
+  
 $url = $request->getUrl();
 $url->setQueryVariables(array(
 
@@ -82,6 +88,12 @@ $static["minutes"] = date("i", $time);
 
 $request = new HTTP_Request2('http://api.openweathermap.org/data/2.5/weather',
                              HTTP_Request2::METHOD_GET, array('use_brackets' => true));
+
+$request->setConfig(array(
+    'ssl_verify_peer'   => FALSE,
+    'ssl_verify_host'   => FALSE
+));
+
 $url = $request->getUrl();
 $url->setQueryVariables(array(
 
@@ -425,6 +437,12 @@ foreach($variables as $variable){
 
 $request = new HTTP_Request2('https://api.foursquare.com/v2/venues/search',
                              HTTP_Request2::METHOD_GET, array('use_brackets' => true));
+
+$request->setConfig(array(
+    'ssl_verify_peer'   => FALSE,
+    'ssl_verify_host'   => FALSE
+));
+
 $url = $request->getUrl();
 $url->setQueryVariables(array(
 
