@@ -479,8 +479,81 @@ foreach($placevariables as $place){
   
 }
 
+//Onto conditionals!
+
+//Get all if statements
+
+//{if +help=rain, -help=blue|yes|no}
+
+preg_match_all("/\{if([^\]]*)\}/", $output, $conditionals);
+
+$conditionals = $conditionals[1];
+
+if(count($conditionals) > 0){
+ 
+  foreach($conditionals as $conditional){
+       
+    $variable = '{if'.$conditional.'}';
+    $yestext = explode("|",$conditional)[1];
+    
+    //Strip out whitespace
+    
+    $logic = explode("|",$conditional)[0];
+    $logic = preg_replace('/\s+/', '', $logic);
+    $logic = str_replace("if","",$logic);
+    
+    $logic = explode(",",$logic);
+    
+    $rules = array();
+    
+    //Split rules into truth values
+    
+    foreach($logic as $rule){
+      
+      if(!isset($rules[$rule[0]])){
+        
+        $rules[$rule[0]] = array();
+      }
+      
+      $rules[$rule[0]][] = substr($rule, 1);
+      
+    };
+    
+    //Positive rules first
+    
+    foreach($rules["+"] as $positive){
+           
+     //Equals rules
+      
+      if (strpos($positive,'==') !== false) {
+    
+        $positive = explode("==",$positive);
+        
+        $left = $positive[0];
+        $right = $positive[1];
+        
+        if($left == $right){
+          
+         print "Yes"; 
+          
+        } else {
+         
+          print "No";
+          
+        }
+        
+      }
+      
+    }
+    
+//      $output = str_replace($variable, $yestext, $output);
+    
+  }
+  
+}
+
 //Finally print the output
 
-print $output;
+//print $output;
 
 ?>

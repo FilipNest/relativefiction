@@ -20,7 +20,7 @@ var localise = function (selector) {
       url: "story.php",
       data: data,
       success: function (result) {
-
+  
         $(selector).html($.parseHTML(result));
 
       },
