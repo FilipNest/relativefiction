@@ -485,6 +485,10 @@ foreach($placevariables as $place){
 
 //{if +help=rain, -help=blue|yes|no}
 
+//logic functions
+
+// ==
+
 preg_match_all("/\{if([^\]]*)\}/", $output, $conditionals);
 
 $conditionals = $conditionals[1];
@@ -495,6 +499,8 @@ if(count($conditionals) > 0){
        
     $variable = '{if'.$conditional.'}';
     $yestext = explode("|",$conditional)[1];
+    $notext = explode("|",$conditional)[2];
+    
     
     //Strip out whitespace
     
@@ -509,44 +515,80 @@ if(count($conditionals) > 0){
     //Split rules into truth values
     
     foreach($logic as $rule){
-      
-      if(!isset($rules[$rule[0]])){
         
-        $rules[$rule[0]] = array();
-      }
+      $rules[] = array(
       
-      $rules[$rule[0]][] = substr($rule, 1);
+        "truth" => $rule[0],
+        "rule" => substr($rule, 1),
+      
+      );
       
     };
     
-    //Positive rules first
+    $pass = false;
     
-    foreach($rules["+"] as $positive){
-           
-     //Equals rules
-      
-      if (strpos($positive,'==') !== false) {
-    
-        $positive = explode("==",$positive);
-        
-        $left = $positive[0];
-        $right = $positive[1];
-        
-        if($left == $right){
+    foreach($rules as $rule){
+     
+      //Check
+            
+      if (strpos($rule['rule'],'==') !== false) {
+                
+        $left = explode("==",$rule['rule'])[0];
+        $right = explode("==",$rule['rule'])[1];
           
-         print "Yes"; 
-          
+        if($rule['truth'] == "+"){
+          $pass = ($left == $right);
         } else {
-         
-          print "No";
-          
+          $pass = ($left != $right); 
         }
+                
+      }
+      
+      if (strpos($rule['rule'],'&gt;') !== false) {
+        
+        $left = explode("&gt;",$rule['rule'])[0];
+        $right = explode("&gt;",$rule['rule'])[1];
+
+        if($rule['truth'] == "+"){
+          $pass = ($left > $right);
+        } else {
+          $pass = ($left < $right); 
+        }
+
+        
+      }
+      
+      if (strpos($rule['rule'],'&lt;') !== false) {
+        
+        $left = explode("&lt;",$rule['rule'])[0];
+        $right = explode("&lt;",$rule['rule'])[1];
+
+        if($rule['truth'] == "+"){
+          $pass = ($left < $right);
+        } else {
+          $pass = ($left > $right); 
+        }
+
+        
+      }
+            
+      if($pass == false){
+       
+        break;
         
       }
       
     }
     
-//      $output = str_replace($variable, $yestext, $output);
+    if($pass == false){
+      
+       $output = str_replace($variable, $notext, $output);
+      
+    } else {
+      
+       $output = str_replace($variable, $yestext, $output);
+      
+    };
     
   }
   
@@ -554,6 +596,6 @@ if(count($conditionals) > 0){
 
 //Finally print the output
 
-//print $output;
+print $output;
 
 ?>
