@@ -1,14 +1,24 @@
 <!doctype HTML>
 <html>
+<title>Local Stories</title>
 
 <head>
 
   <link rel="stylesheet" href="style.css" />
 
   <body>
-    <article>
-      {if +4<6, -[weather]==cloudy|Hooray! Going to [zoo|1]|Too cloudy.}
-    </article>
+
+    <h1>Local Stories</h1>
+    <h2>A markup library for making dynamic, localised stories</h2>
+    <p>Hello! This is a tool for making stories local to your reader.</p>
+
+    <textarea id="input" placeholder="Insert your story markup here, then click localise and it will get translated for you below."></textarea>
+
+    <button id="localise">Go</button>
+
+    <div id="output">
+
+    </div>
   </body>
 
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

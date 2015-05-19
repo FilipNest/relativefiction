@@ -1,2 +1,3 @@
 h1 {text-align: center;}
 body {width:500px; font-family: georgia; font-size:20px; margin: auto;}
+textarea {width:100%; height:300px;}

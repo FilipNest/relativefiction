@@ -1,10 +1,12 @@
-var localise = function (selector) {
+$("#localise").click(function () {
+    
+  var selector = "#input";
 
   data = {};
 
   //Get text
 
-  data.text = JSON.stringify($(selector).html());
+  data.text = JSON.stringify($(selector).val());
   
   //Get date/time (strip out milliseconds for PHP)
   
@@ -20,11 +22,13 @@ var localise = function (selector) {
       url: "story.php",
       data: data,
       success: function (result) {
+        
+        console.log(result);
   
-        $(selector).html($.parseHTML(result));
+        $("#output").html($.parseHTML(result));
 
       },
     });
 
   })
-}("article");
+});
