@@ -1,20 +1,56 @@
 <!doctype HTML>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Local Stories</title>
 
 <head>
-
+  <script src="//use.typekit.net/vct1gvu.js"></script>
+  <script>
+    try {
+      Typekit.load();
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="style.css" />
 
   <body>
 
     <h1>Local Stories</h1>
     <h2>A markup library for making dynamic, localised stories</h2>
-    <p>Hello! This is a tool for making stories local to your reader.</p>
+    <h3>Demo introduction</h3>
+    <p>Hello! This is the beta demo page for writers wanting to use the library to write some amazing localised stories. Thank you for showing interest. Hopefully this page will help you work out how the library works (and how it doesn't as it's still in development and no doubt buggy).</p>
+    <p>The library is made to be very straightforward to write into text and hopefully won't get in the way of your good story. Here's how it works.</p>
+    <ul>
+    <li>You write a story</li>
+    <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one an ID number rather. These are called variables.</li>
+    <li>You put in other types of variables such as the date and time of the user.</li>
+      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, conditionals.</li>
+      <li>The system detects a reader's location and automatically replaces these variables with dynamic, localised information.</li>
+      <li>The story is then unique to every reader but keeps its essense.</li>
+    </ul>
+    <h3>Types of variable (syntax)</h3>
+    <h4>Places</h4>
+    <p>Places are pulled in from Foursquare. A place-based social network and place listing.</p>
+    <p>To put a place in your story, a zoo for example, first look up the name on <a href="https://developer.foursquare.com/categorytree">this list from Foursquare to make sure it's available</a>. The list is updated live from Foursquare so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future.</p>
+    <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
+    <p>Example: [zoo|1]<br />
+    <small>Every instance of [zoo|1] would be replaced by the nearest zoo to a reader automatically. [zoo|2] would be another zoo.</small>
+    </p>
+    <h4>Other variables</h4>
+    <p>It's not just places you can swap into text, here are some other variables you can use. Unlike places, you don't need to put in the | and an ID number. These always print out the same result for a reader.</p>
+    <ul>
+    <li>[dayofweek] - prints out Monday, Tuesday... etc</li>
+    <li>[hours24] - Hour in day in 24 hour time. So 13 for 1pm</li>
+    <li>[hours12] - Hour in day in 12 hour time. So 1 for 1pm</li>
+    <li>[minutes] - Minutes past the hour</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li  
+    </ul>
 
     <textarea id="input" placeholder="Insert your story markup here, then click localise and it will get translated for you below."></textarea>
 
-    <button id="localise">Go</button>
+    <button id="localise">Localise</button>
 
     <div id="output">
 
