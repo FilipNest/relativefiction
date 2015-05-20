@@ -15,24 +15,24 @@
   <body>
 
     <h1>Local Stories</h1>
-    <h2>A markup library for making dynamic, localised stories (demo page for launch writers)</h2>
+    <h2>A markup library for making dynamic, localised stories</h2>
     <h3>Introduction</h3>
-    <p>Thank you for showing interest in taking part in this little project. Hopefully this page will explain more about what it is. It also contains a demo that you can try out at the bottom. Please note that things are still in very active development so bugs/features may come and go.</p>
-    <p>Here's what it is and how it works.</p>
+    <p>Thank you for showing interest in taking part in this little project. Hopefully this page will explain more about what it is. It also contains a demo that you can try out at the bottom to test out ideas for stories. Please note that things are still in very active development so bugs/features will come and go.</p>
+    <p>Here's what it is and how it works:</p>
     <ul>
       <li>You write a story</li>
-      <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one a unique ID number. Places are one type of variable, tags that get swapped out depending on the reader's location in space and time. <em>[Skate park|1]</em> for example.</li>
-      <li>You put in other types of variables such as the date and time of the user. Also in square brackets, without an ID number. <em>[dayofweek]</em> for example.</li>
-      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, conditionals. The syntax for these is slightly more complicated but looks a bit like <em>{if +[weather]==clear, -[hour24]<18|It was a perfect day for going outside|It wasn't a good day to go outside}</em>
+      <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one a unique ID number. Places are one type of <em>variable</em>, tags that get swapped out depending on the reader's location in space and time. <em>[Skate park|1]</em> for example.</li>
+      <li>You put in other types of variables such as the date and time of the user. Also in square brackets, without an ID number this time. <em>[dayofweek]</em> for example.</li>
+      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, <em>conditionals</em>. The syntax for these is slightly more complicated but looks a bit like <em>{if +[weather]==clear, -[hour24]<18|It was a perfect day for going outside|It wasn't a good day to go outside}</em>
       </li>
       <li>You put in as few or as many variables as you want. You could just write a story with a single place name or day of the week in it.</li>
       <li>The system detects a reader's time and location (if they agree to it) and automatically replaces these variables with dynamic, localised information.</li>
-      <li>The story is then unique to every reader but keeps its essense.</li>
+      <li>The resulting story is unique to every reader but keeps its essense between readers as it's just certain parts that change.</li>
     </ul>
     <h3>Types of variable (syntax)</h3>
     <h4>Places</h4>
     <p>Places are pulled in from Foursquare (a place-based social network and place listing).</p>
-    <p>To put a place in your story, a zoo for example, first look up the name on <a href="https://developer.foursquare.com/categorytree">this list from Foursquare to make sure it's available</a>. The list is updated live from Foursquare so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future.</p>
+    <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list from Foursquare to make sure it's available</a>. The list is updated live from Foursquare so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future.</p>
     <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
     <p>Example: [zoo|1]
       <br />
@@ -56,14 +56,14 @@
       <li>[sunrisehour] - Hour when the sun sets in 24 hour time (06 for 6am)</li>
     </ul>
 
-    <p>More variables will come in the future but that should hopefully give you a nice start.</p>
+    <p>More variables will come in the future but that should hopefully give you a nice start. Please feel free to suggest some before and after the project launches.</p>
 
     <h4>Other variables</h4>
 
-    <p>Conditionals are the most complex (and probably most buggy) part of the system but hopefully not so complex that you don't try them out.</p>
-    <p>They're enclosed in curly brackets with the word if followed by a space after the opening bracket.</p>
-    <p>After this space and before the second bracket, you can put logic in that should either be true or false. First decide if it should be true or false and put in a + or a - sign. Then put in the name of the value you wish to compare to something (this can be static such as the number 5 or dynamic such as [sunsethour]). Then put in an operator from either == (equals (two == signs)), > (greater than) or < (less than).</p>
-      <p>Then put the name of the value you want to use this operator to compare the first value to, again, static or a dynamic variable.</p>
+    <p>Conditionals are the most complex (and probably most buggy at the moment) part of the system but hopefully not so complex that you don't try them out.</p>
+    <p>They're enclosed in curly brackets with the word <em>if</em> followed by a space after the opening bracket.</p>
+    <p>After this space and before the second bracket, you can put in statements that should either be true or false. First decide if a statement should be true or false and put in a + or a - sign. Then put in the name of the value you wish to compare to something (this can be static such as the number 5 or dynamic such as [sunsethour]). Then put in an operator from either == (equals (two == signs)), > (greater than) or < (less than).</p>
+      <p>Then put the name of the value you want to use this operator to compare the first value to. This can be static text or a dynamic variable.</p>
         <p>Put in as many of these rules as you want seperated by commas.</p>
         <p>Then put in a pipe character | followed by what you want to write if this set of rules passes.</p>
         <p>Then put in another pipe character | followed by what to write if the rule does not pass.</p>
@@ -72,12 +72,12 @@
         <em>{if +[sunsethour]>[hours24],+[dayofweek]==Wednesday|You can still catch sunset on Wednesday|You missed Wednesday's sunset}</em>
         <p>This logic is prone to error so give me a shout if it doesn't work and/or tweak and try until it does. Which brings us on to...</p>
         <h4>What to write about and how long to make it</h4>
-        <p>Anything you want.</p>
+        <p>Anything you want. Try new things.</p>
         <p>However long you want (although if it takes a reader long to read it they may have moved time and location by the time they finish, thereby changing the story!).</p>
         <h4>The demo</h4>
         <p>Use the following text area to try out text and variables. Once you've put them all in, hit localise and (if you have given your browser permission to use your location) the results should appear above the textarea.</p>
-        <p>Sorry about any scary error messages you receive, they're going to be made less scary and less common in the coming week.</p>
-        <p>THANK YOU for getting this far.</p>
+        <p><em>Sorry about any scary error messages you receive, they're going to be made less scary and less common in the coming week.</em></p>
+        <p>THANK YOU for getting this far and for considering contributing a story for the launch of the project.</p>
         
         <h4>Your story</h4>
         
