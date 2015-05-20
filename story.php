@@ -477,7 +477,7 @@ $places = json_decode($places)->response->venues;
 $fetchedvenues = array();
 
 foreach ($places as $place){
-  
+    
   foreach ($place->categories as $category){
       
   if(!isset($fetchedvenues[$category->id])){
@@ -492,6 +492,15 @@ foreach ($places as $place){
   
 };
 
+
+function cmp($a, $b)
+{
+    if ($a->location->distance == $b->location->distance) {
+        return 0;
+    }
+    return ($a->location->distance < $b->location->distance) ? -1 : 1;
+}
+
 //Loop over variables to swap in places
 
 foreach($placevariables as $place){
@@ -501,6 +510,8 @@ foreach($placevariables as $place){
   $id = $place["id"] - 1;
    
   if(isset($fetchedvenues[$place["category"]]) && isset($fetchedvenues[$place["category"]][$id])){
+    
+    usort($fetchedvenues[$place["category"]], "cmp");
    
     $venue = $fetchedvenues[$place["category"]][$id]->name;
     
