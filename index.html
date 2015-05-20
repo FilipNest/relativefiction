@@ -15,40 +15,70 @@
   <body>
 
     <h1>Local Stories</h1>
-    <h2>A markup library for making dynamic, localised stories</h2>
-    <h3>Demo introduction</h3>
-    <p>Hello! This is the beta demo page for writers wanting to use the library to write some amazing localised stories. Thank you for showing interest. Hopefully this page will help you work out how the library works (and how it doesn't as it's still in development and no doubt buggy).</p>
-    <p>The library is made to be very straightforward to write into text and hopefully won't get in the way of your good story. Here's how it works.</p>
+    <h2>A markup library for making dynamic, localised stories (demo page for launch writers)</h2>
+    <h3>Introduction</h3>
+    <p>Thank you for showing interest in taking part in this little project. Hopefully this page will explain more about what it is. It also contains a demo that you can try out at the bottom. Please note that things are still in very active development so bugs/features may come and go.</p>
+    <p>Here's what it is and how it works.</p>
     <ul>
-    <li>You write a story</li>
-    <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one an ID number rather. These are called variables.</li>
-    <li>You put in other types of variables such as the date and time of the user.</li>
-      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, conditionals.</li>
-      <li>The system detects a reader's location and automatically replaces these variables with dynamic, localised information.</li>
+      <li>You write a story</li>
+      <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one a unique ID number. Places are one type of variable, tags that get swapped out depending on the reader's location in space and time. <em>[Skate park|1]</em> for example.</li>
+      <li>You put in other types of variables such as the date and time of the user. Also in square brackets, without an ID number. <em>[dayofweek]</em> for example.</li>
+      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, conditionals. The syntax for these is slightly more complicated but looks a bit like <em>{if +[weather]==clear, -[hour24]<18|It was a perfect day for going outside|It wasn't a good day to go outside}</em>
+      </li>
+      <li>You put in as few or as many variables as you want. You could just write a story with a single place name or day of the week in it.</li>
+      <li>The system detects a reader's time and location (if they agree to it) and automatically replaces these variables with dynamic, localised information.</li>
       <li>The story is then unique to every reader but keeps its essense.</li>
     </ul>
     <h3>Types of variable (syntax)</h3>
     <h4>Places</h4>
-    <p>Places are pulled in from Foursquare. A place-based social network and place listing.</p>
+    <p>Places are pulled in from Foursquare (a place-based social network and place listing).</p>
     <p>To put a place in your story, a zoo for example, first look up the name on <a href="https://developer.foursquare.com/categorytree">this list from Foursquare to make sure it's available</a>. The list is updated live from Foursquare so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future.</p>
     <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
-    <p>Example: [zoo|1]<br />
-    <small>Every instance of [zoo|1] would be replaced by the nearest zoo to a reader automatically. [zoo|2] would be another zoo.</small>
+    <p>Example: [zoo|1]
+      <br />
+      <small>Every instance of [zoo|1] would be replaced by the nearest zoo to a reader automatically. [zoo|2] would be another zoo.</small>
     </p>
     <h4>Other variables</h4>
     <p>It's not just places you can swap into text, here are some other variables you can use. Unlike places, you don't need to put in the | and an ID number. These always print out the same result for a reader.</p>
     <ul>
-    <li>[dayofweek] - prints out Monday, Tuesday... etc</li>
-    <li>[hours24] - Hour in day in 24 hour time. So 13 for 1pm</li>
-    <li>[hours12] - Hour in day in 12 hour time. So 1 for 1pm</li>
-    <li>[minutes] - Minutes past the hour</li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li  
+      <li>[dayofweek] - Monday, Tuesday... etc</li>
+      <li>[hours24] - Hour in day in 24 hour time. So 13 for 1pm</li>
+      <li>[hours12] - Hour in day in 12 hour time. So 1 for 1pm</li>
+      <li>[minutes] - Minutes past the hour</li>
+      <li>[hoursampm] - AM or PM depending on time of day.</li>
+      <li>[monthofyear] - January, February... etc</li>
+      <li>[longitude] - A reader's longitude</li>
+      <li>[latitude] - A reader's latitude</li>
+      <li>[country] - A country name from (<a href="https://gist.github.com/vxnick/380904">this handy PHP array mapping country codes to names.</a>
+      </li>
+      <li>[weather] - One of the following: thunderstorm, rain, snow, clear, cloudy, calm, windy, extremeheat, extremecold.</li>
+      <li>[sunsethour] - Hour when the sun sets in 24 hour time (21 for 9pm)</li>
+      <li>[sunrisehour] - Hour when the sun sets in 24 hour time (06 for 6am)</li>
     </ul>
 
-    <textarea id="input" placeholder="Insert your story markup here, then click localise and it will get translated for you below."></textarea>
+    <p>More variables will come in the future but that should hopefully give you a nice start.</p>
+
+    <h4>Other variables</h4>
+
+    <p>Conditionals are the most complex (and probably most buggy) part of the system but hopefully not so complex that you don't try them out.</p>
+    <p>They're enclosed in curly brackets with the word if followed by a space after the opening bracket.</p>
+    <p>After this space and before the second bracket, you can put logic in that should either be true or false. First decide if it should be true or false and put in a + or a - sign. Then put in the name of the value you wish to compare to something (this can be static such as the number 5 or dynamic such as [sunsethour]). Then put in an operator from either == (equals (two == signs)), > (greater than) or < (less than).</p>
+      <p>Then put the name of the value you want to use this operator to compare the first value to, again, static or a dynamic variable.</p>
+        <p>Put in as many of these rules as you want seperated by commas.</p>
+        <p>Then put in a pipe character | followed by what you want to write if this set of rules passes.</p>
+        <p>Then put in another pipe character | followed by what to write if the rule does not pass.</p>
+        <p>Finally, close the curly bracket.</p>
+        <p>Here's an example that checks if the reader has missed Wednesday's sunset.</p>
+        <em>{if +[sunsethour]>[hours24],+[dayofweek]==Wednesday|You can still catch sunset on Wednesday|You missed Wednesday's sunset}</em>
+        <p>This logic is prone to error so give me a shout if it doesn't work and/or tweak and try until it does. Which brings us on to...</p>
+        <h4>What to write about and how long to make it</h4>
+        <p>Anything you want.</p>
+        <p>However long you want (although if it takes a reader long to read it they may have moved time and location by the time they finish, thereby changing the story!).</p>
+        <h4>The demo</h4>
+        <p>Use the following text area to try out text and variables. Once you've put them all in, hit localise and (if you have given your browser permission to use your location) the results should appear below.</p>
+        <p>Sorry about any scary error messages you receive, they're going to be made less scary and less common in the coming week.</p>
+        <p>THANK YOU for getting this far.</p>
+      <textarea id="input" placeholder="It was [dayofweek]. I went to [aquarium|1] to see Charlotte. She frightened me."></textarea>
 
     <button id="localise">Localise</button>
 

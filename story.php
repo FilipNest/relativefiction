@@ -76,13 +76,18 @@ $static = array();
 
 //Create date elements
 
-$static["day"] = date("l",$time);
-$static["month"] = date("F",$time);
+$static["dayofweek"] = date("l",$time);
+$static["monthofyear"] = date("F",$time);
 $static["year"] = date("Y", $time);
 $static["hours12"] = date("h", $time);
 $static["hours24"] = date("H", $time);
 $static["hoursampm"] = date("A", $time);
 $static["minutes"] = date("i", $time);
+
+
+$static['longitude'] = $location["longitude"];
+$static['latitude'] = $location["latitude"];
+
 
 //Get weather data for location
 
@@ -105,6 +110,12 @@ $url->setQueryVariables(array(
 $weather = $request->send()->getBody();
 
 $weather = json_decode($weather);
+
+$sunrise = $weather->sys->sunrise;
+$sunset = $weather->sys->sunset;
+
+$static["sunrisehour"] = date("H",$sunrise);
+$static["sunsethour"] = date("H",$sunset);
 
 $weathercode = $weather->weather[0]->id;
 
@@ -417,6 +428,8 @@ foreach($variables as $variable){
   $id = explode("|",$variable)[1];
   }
   
+  $name = strtolower($name);
+  
   if(isset($foursquare['venuecategories']->$name)){
     
     $placevariables[] = array(
@@ -499,14 +512,6 @@ foreach($placevariables as $place){
 
 //Onto conditionals!
 
-//Get all if statements
-
-//{if +help=rain, -help=blue|yes|no}
-
-//logic functions
-
-// ==
-
 preg_match_all("/\{if([^\]]*)\}/", $output, $conditionals);
 
 $conditionals = $conditionals[1];
@@ -546,6 +551,9 @@ if(count($conditionals) > 0){
     $pass = false;
     
     foreach($rules as $rule){
+      
+      $rule['rule'] = str_replace("&gt;",">",$rule['rule']);
+            $rule['rule'] = str_replace("&lt;","<",$rule['rule']);
      
       //Check
             
@@ -562,10 +570,10 @@ if(count($conditionals) > 0){
                 
       }
       
-      if (strpos($rule['rule'],'&gt;') !== false) {
+      if (strpos($rule['rule'],'>') !== false) {
         
-        $left = explode("&gt;",$rule['rule'])[0];
-        $right = explode("&gt;",$rule['rule'])[1];
+        $left = explode(">",$rule['rule'])[0];
+        $right = explode(">",$rule['rule'])[1];
 
         if($rule['truth'] == "+"){
           $pass = ($left > $right);
@@ -576,10 +584,10 @@ if(count($conditionals) > 0){
         
       }
       
-      if (strpos($rule['rule'],'&lt;') !== false) {
+      if (strpos($rule['rule'],'<') !== false) {
         
-        $left = explode("&lt;",$rule['rule'])[0];
-        $right = explode("&lt;",$rule['rule'])[1];
+        $left = explode("<",$rule['rule'])[0];
+        $right = explode("<",$rule['rule'])[1];
 
         if($rule['truth'] == "+"){
           $pass = ($left < $right);
