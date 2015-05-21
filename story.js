@@ -8,6 +8,12 @@ $("#localise").click(function () {
 
   data.text = JSON.stringify($(selector).val());
   
+  if($(selector).val().length < 1){
+    
+    data.text = JSON.stringify($(selector).attr("placeholder"));
+    
+  }
+  
   //Get date/time (strip out milliseconds for PHP)
   
    data.time = (new Date().getTime()/1000).toFixed();
@@ -22,8 +28,6 @@ $("#localise").click(function () {
       url: "story.php",
       data: data,
       success: function (result) {
-        
-        console.log(result);
   
         $("#output").html($.parseHTML(result));
 

@@ -459,7 +459,7 @@ foreach($variables as $variable){
   $id = explode("|",$variable)[1];
   }
   
-  if(count(explode("|",$variable)) > 1){
+  if(count(explode("|",$variable)) > 2){
   $extra = strtolower(explode("|",$variable)[2]);
   } else {
   $extra = null; 
