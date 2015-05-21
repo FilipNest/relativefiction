@@ -102,6 +102,7 @@ $request->setConfig(array(
 $url = $request->getUrl();
 $url->setQueryVariables(array(
 
+    "APPID" => $openweathermap,
     "lat" => $location["latitude"],
     "lon" => $location["longitude"]
 
