@@ -38,6 +38,15 @@
       <br />
       <small>Every instance of [zoo|1] would be replaced by the nearest zoo to a reader automatically. [zoo|2] would be another zoo.</small>
     </p>
+      <h4>Other information about places</h4>
+        <p>You might want to use other information about a place, like the street it's on or how far away it is from the person.</p>
+        <p>If you've got how places work this bit should be easy as it's just another pipe character after the ID.</p>
+        <ul>
+        <li>[park|1|street] - Gets the street the park (example) is on. Numbers are stripped out. This could format strangely for some places but give it a go. Might be nice for providing a general street for things to happen in.</li>
+          <li>[beach|1|distance] - Distance in meters. Useful for conditionals like if you want to find out how far someone is from the sea.</li>
+          <li>[aquarium|1|city] - The city or town a location is in. Probably quite useful generally regardless of the place.</li>
+        </ul>
+        
     <h4>Other variables</h4>
     <p>It's not just places you can swap into text, here are some other variables you can use. Unlike places, you don't need to put in the | and an ID number. These always print out the same result for a reader.</p>
     <ul>

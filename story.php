@@ -428,6 +428,12 @@ foreach($variables as $variable){
   $id = explode("|",$variable)[1];
   }
   
+  if(count(explode("|",$variable)) > 1){
+  $extra = strtolower(explode("|",$variable)[2]);
+  } else {
+  $extra = null; 
+  }
+  
   $name = strtolower($name);
   
   if(isset($foursquare['venuecategories']->$name)){
@@ -435,7 +441,8 @@ foreach($variables as $variable){
     $placevariables[] = array(
       "tag" => $variable,
       "category" => $foursquare['venuecategories']->$name,
-      "id" => $id
+      "id" => $id,
+      "extra" => $extra
     );
     
     //Get category id
@@ -508,12 +515,41 @@ foreach($placevariables as $place){
   $tag = $place["tag"];
   $category = $place["category"];
   $id = $place["id"] - 1;
+  $extra = $place["extra"];
    
   if(isset($fetchedvenues[$place["category"]]) && isset($fetchedvenues[$place["category"]][$id])){
     
     usort($fetchedvenues[$place["category"]], "cmp");
-   
+    
     $venue = $fetchedvenues[$place["category"]][$id]->name;
+    
+    //Rewrite to extra if needed
+    
+    if($extra == "distance"){
+      
+      $venue = $fetchedvenues[$place["category"]][$id]->location->distance;
+      
+    }
+    
+    if($extra == "street"){
+      
+      $venue = $fetchedvenues[$place["category"]][$id]->location->address;
+      
+      //Strip out numbers
+      
+      $venue = preg_replace('/\d/', '', $venue );
+      
+      //Trim
+      
+      $venue = trim($venue);
+      
+    }
+    
+    if($extra == "city"){
+      
+      $venue = $fetchedvenues[$place["category"]][$id]->location->city;
+      
+    }
     
     $output = str_replace("[".$tag."]", $venue, $output);
     
