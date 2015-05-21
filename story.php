@@ -79,9 +79,9 @@ $static = array();
 $static["dayofweek"] = date("l",$time);
 $static["monthofyear"] = date("F",$time);
 $static["year"] = date("Y", $time);
-$static["hours12"] = date("h", $time);
+$static["hours12"] = ltrim(date("h", $time), '0');
 $static["hours24"] = date("H", $time);
-$static["hoursampm"] = date("A", $time);
+$static["hoursampm"] = date("a", $time);
 $static["minutes"] = date("i", $time);
 
 
