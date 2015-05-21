@@ -116,7 +116,37 @@ $sunrise = $weather->sys->sunrise;
 $sunset = $weather->sys->sunset;
 
 $static["sunrisehour"] = date("H",$sunrise);
+
 $static["sunsethour"] = date("H",$sunset);
+
+$current = new DateTime();
+$current->setTimestamp($time);
+
+$sunrisetime = new DateTime();
+$sunrisetime->setTimestamp($sunrise);
+
+$sunsettime = new DateTime();
+$sunsettime->setTimestamp($sunset);
+
+  $static["hourstosunrise"] = date_diff($current,$sunrisetime)->format('%r%H');
+
+if($static["hourstosunrise"] < 0){
+  
+  $static["hourstosunrise"] += 24;
+    
+}
+
+$static["hourstosunrise"] = ltrim($static["hourstosunrise"],'0');
+
+  $static["hourstosunset"] = date_diff($current,$sunsettime)->format('%r%H');
+
+if($static["hourstosunset"] < 0){
+  
+  $static["hourstosunset"] += 24;
+    
+}
+
+$static["hourstosunset"] = ltrim($static["hourstosunset"],'0');
 
 $weathercode = $weather->weather[0]->id;
 
