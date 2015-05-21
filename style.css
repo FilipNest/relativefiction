@@ -35,7 +35,8 @@ button {
   height: 30px;
   margin: auto;
   border: none;
-  display: block
+  display: block;
+  margin-bottom: 10px;
 }
 
 button:hover {
