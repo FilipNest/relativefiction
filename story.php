@@ -533,7 +533,15 @@ foreach($placevariables as $place){
     
     if($extra == "street"){
       
+      if(isset($fetchedvenues[$place["category"]][$id]->location->address)){
+      
       $venue = $fetchedvenues[$place["category"]][$id]->location->address;
+        
+      } else {
+       
+        $venue = "the street";
+        
+      }
       
       //Strip out numbers
       
@@ -547,7 +555,15 @@ foreach($placevariables as $place){
     
     if($extra == "city"){
       
+      if(isset($fetchedvenues[$place["category"]][$id]->location->city)){
+      
       $venue = $fetchedvenues[$place["category"]][$id]->location->city;
+      
+      } else {
+       
+        $venue = "the city";
+        
+      }
       
     }
     
