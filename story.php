@@ -619,7 +619,13 @@ if(count($conditionals) > 0){
     $variable = '{if'.$conditional.'}';
     $yestext = explode("|",$conditional)[1];
   
+    if(count(explode("|",$conditional)) > 2){
     $notext = explode("|",$conditional)[2];  
+    } else {
+    
+      $notext = null;
+      
+    }
     
     //Strip out whitespace
     
