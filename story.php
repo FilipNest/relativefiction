@@ -2,22 +2,11 @@
 error_reporting(0);
 ini_set('display_errors', 0);
 
-include "errors.php";
-
 require_once 'HTTP/Request2.php';
 
 //Include API keys
 
 include "secrets.php";
-
-//Include country list
-
-include "countrycodes.php";
-
-//Include foursquare venue categories
-include "venuecategories.php";
-
-$foursquare['venuecategories'] = getvenuecategories();
 
 //Include foursquare venue fetching function
 
@@ -37,11 +26,11 @@ $time = $_POST["time"];
 $location = $_POST["location"];
 $output = json_decode($_POST["text"]);
 
-//Static variables first
+//Static variables container
 
 $static = array();
 
-//Create date elements
+//Create static elements
 
 $static["dayofweek"] = date("l",$time);
 $static["monthofyear"] = date("F",$time);
@@ -53,11 +42,11 @@ $static["minutes"] = date("i", $time);
 $static['longitude'] = $location["longitude"];
 $static['latitude'] = $location["latitude"];
 
-//Get weather data;
+//Get weather data and import into $static array;
 
 weather();
 
-//Swap out static variables
+//Swap out all static variables in text
 
 foreach($static as $name => $value){
  
@@ -69,56 +58,23 @@ foreach($static as $name => $value){
   
 preg_match_all("/\[([^\]]*)\]/", $output, $matches);
 
-//Store matches in array
+//Store matches in an array
 
 $variables = $matches[1];
 
-$categoryids = array();
+//Get Foursquare venue data and replace relevant tags
 
-$placevariables = array();
-
-foreach($variables as $variable){
- 
-  $name = explode("|",$variable)[0];
+foursquare($variables);
   
-  if(count(explode("|",$variable)) > 0){
-  $id = explode("|",$variable)[1];
-  }
-  
-  if(count(explode("|",$variable)) > 2){
-  $extra = strtolower(explode("|",$variable)[2]);
-  } else {
-  $extra = null; 
-  }
-  
-  $name = strtolower($name);
-  
-  if(isset($foursquare['venuecategories']->$name)){
-    
-    $placevariables[] = array(
-      "tag" => $variable,
-      "category" => $foursquare['venuecategories']->$name,
-      "id" => $id,
-      "extra" => $extra
-    );
-    
-    //Get category id
-    
-    $categoryids[] = $foursquare['venuecategories']->$name;
-    
-  }
-  
-}
-
-//Request all Foursquare categories in text
-
-parselocations();
-  
-//Onto conditionals!
+//Worth through any conditional tags and convert them to the calculated value
 
 conditionals();
 
-//Finally print the output
+//Log any errors
+
+include "errors.php";
+
+//Finally return the output
 
 print $output;
 

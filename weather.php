@@ -2,6 +2,10 @@
 
 //Get weather data for location
 
+//Include country list
+
+include "countrycodes.php";
+
 function weather(){
   
   global $openweathermap;

@@ -1,6 +1,63 @@
 <?php
 
-$extraplaces = array();
+//Include foursquare venue categories
+include "venuecategories.php";
+
+$foursquare['venuecategories'] = getvenuecategories();
+
+function foursquare($variables){
+  
+    global $location;
+    global $output;
+    global $foursquare;
+
+    $categoryids = array();
+
+    $placevariables = array();
+
+    foreach($variables as $variable){
+
+    $name = explode("|",$variable)[0];
+
+    if(count(explode("|",$variable)) > 0){
+    $id = explode("|",$variable)[1];
+    }
+
+    if(count(explode("|",$variable)) > 2){
+    $extra = strtolower(explode("|",$variable)[2]);
+    } else {
+    $extra = null; 
+    }
+
+    $name = strtolower($name);
+
+    if(isset($foursquare['venuecategories']->$name)){
+
+      $placevariables[] = array(
+        "tag" => $variable,
+        "category" => $foursquare['venuecategories']->$name,
+        "id" => $id,
+        "extra" => $extra
+      );
+
+      //Get category id
+
+      $categoryids[] = $foursquare['venuecategories']->$name;
+
+    }
+
+  }
+  
+  $extraplaces = array();
+  parselocations($categoryids,$placevariables,$foursquare,$extraplaces);
+  
+};
+
+
+/////////////////
+
+
+
 
 //Compare venue distances for sort;
 
@@ -12,14 +69,10 @@ function cmp($a, $b)
       return ($a->location->distance < $b->location->distance) ? -1 : 1;
   }
 
-function parselocations(){
+function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
 
-  global $extraplaces;
-  global $foursquare;
   global $location;
   global $output;
-  global $categoryids;
-  global $placevariables;
   
   $request = new HTTP_Request2('https://api.foursquare.com/v2/venues/search',
                                HTTP_Request2::METHOD_GET, array('use_brackets' => true));
@@ -150,7 +203,7 @@ function parselocations(){
     
   }
   
-  parselocations();
+    parselocations($categoryids,$placevariables,$foursquare,$extraplaces);
   
 }
 
