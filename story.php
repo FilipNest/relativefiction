@@ -574,10 +574,10 @@ foreach($placevariables as $place){
         
       }
       
-      //Strip out numbers
-      
-      $venue = preg_replace('/\d/', '', $venue );
-      
+      //Strip out words containing numbers
+       preg_match_all("/(^[\D]+\s|\s[\D]+\s|\s[\D]+$|^[\D]+$)+/",$venue,$result);
+$venue = implode('',$result[0]);
+       
       //Trim
       
       $venue = trim($venue);
