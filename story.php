@@ -1,4 +1,6 @@
 <?php
+error_reporting(0);
+ini_set('display_errors', 0);
 
 require_once 'HTTP/Request2.php';
 
@@ -616,8 +618,8 @@ if(count($conditionals) > 0){
        
     $variable = '{if'.$conditional.'}';
     $yestext = explode("|",$conditional)[1];
-    $notext = explode("|",$conditional)[2];
-    
+  
+    $notext = explode("|",$conditional)[2];  
     
     //Strip out whitespace
     
@@ -713,6 +715,26 @@ if(count($conditionals) > 0){
   }
   
 }
+
+//Catch errors
+
+function shutdown() {
+  
+  global $output;
+  
+    $isError = false;
+
+    if ($error = error_get_last()){
+    $isError = true;
+    }
+
+    if ($isError){
+      
+      print ("<b><small><br/><p>Something went wrong in the parsing of this story. If it looks OK it could be something minor. If not, the error was: ".$error['message'].". Does that help?</p></small></b>");
+    }
+}
+
+register_shutdown_function('shutdown');
 
 //Finally print the output
 
