@@ -1,9 +1,31 @@
 <?php
 
 //Get Foursquare categories list once a day of if not set
+
+$venues = array();
+
+function traverse($object){
+
+    global $venues;
+
+    $venues[strtolower($object['name'])] = $object["id"];
+
+    if(isset($object["categories"]) && count($object["categories"] > 0)){
+
+      foreach($object["categories"] as $subcategory){
+
+        traverse($subcategory);
+
+      }
+
+    }
+
+  };
+
 function getvenuecategories(){
   
   global $foursquare;
+  global $venues;
   
   if(!file_exists("venuecategories.json") || time() - filemtime("venuecategories.json") >= 86400){
 
@@ -29,26 +51,6 @@ function getvenuecategories(){
   $response = $request->send()->getBody();
 
   $response = json_decode($response, true)['response']['categories'];
-
-  $venues = array();
-
-  function traverse($object){
-
-    global $venues;
-
-    $venues[strtolower($object['name'])] = $object["id"];
-
-    if(isset($object["categories"]) && count($object["categories"] > 0)){
-
-      foreach($object["categories"] as $subcategory){
-
-        traverse($subcategory);
-
-      }
-
-    }
-
-  };
 
   foreach($response as $category){
 
