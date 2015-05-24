@@ -2,6 +2,9 @@
 
 //Get Foursquare categories list once a day of if not set
 function getvenuecategories(){
+  
+  global $foursquare;
+  
   if(!file_exists("venuecategories.json") || time() - filemtime("venuecategories.json") >= 86400){
 
     //Check if venue file exists;

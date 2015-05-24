@@ -30,7 +30,7 @@ $weather = json_decode($weather);
 $sunrise = $weather->sys->sunrise;
 $sunset = $weather->sys->sunset;
 
-register('sunrisehour', function($variable) use($sunrise){
+register('Sunrisehour', function($variable) use($sunrise){
 
 return date("H",$sunrise); 
 

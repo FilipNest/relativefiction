@@ -21,6 +21,10 @@ $translations = array();
 function register($name, $action){
   
   global $translations;
+  
+  //Force lowercase (don't shoot me, makes it simpler for the writer).
+  
+  $name = strtolower($name);
 
   $translations[$name] = function($variable) use ($action){
     
