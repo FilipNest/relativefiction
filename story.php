@@ -18,12 +18,7 @@ $output = json_decode($_POST["text"]);
 
 $static = array();
 
-//Create static elements
-
-$static['longitude'] = $location["longitude"];
-$static['latitude'] = $location["latitude"];
-
-//Create array of static functions
+//Create array of translating functions
 
 $translators = array();
 
@@ -42,6 +37,24 @@ function register($name, $action){
   };
   
 }
+
+//Register longitude and latitude variables in case anyone needs them
+
+register('longitude', function($variable){
+  
+  global $location;
+  
+  return $location["longitude"];
+  
+});
+ 
+register('latitude', function($variable){
+  
+  global $location;
+  
+  return $location["latitude"];
+  
+});
 
 include "includes.php";
 
