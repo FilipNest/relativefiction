@@ -16,13 +16,13 @@ $output = json_decode($_POST["text"]);
 
 //Create array of translating functions
 
-$translators = array();
+$translations = array();
 
 function register($name, $action){
   
-  global $translators;
+  global $translations;
 
-  $translators[$name] = function($variable) use ($action){
+  $translations[$name] = function($variable) use ($action){
     
     global $output;
     
@@ -34,31 +34,25 @@ function register($name, $action){
   
 }
 
-//Register longitude and latitude variables in case anyone needs them
+//Include all translators
 
-register('longitude', function($variable){
-  
-  global $location;
+include "translators.php";
+
+//Register longitude and latitude variables
+
+register('longitude', function($variable) use($location){
   
   return $location["longitude"];
   
 });
  
-register('latitude', function($variable){
-  
-  global $location;
+register('latitude', function($variable) use($location){
   
   return $location["latitude"];
   
 });
 
-include "includes.php";
-
-//Get weather data and import into $static array;
-
-weather();
-
-//Get list of remaining variables in the text
+//Get list of variables in the text
   
 preg_match_all("/\[([^\]]*)\]/", $output, $matches);
 
@@ -66,15 +60,15 @@ preg_match_all("/\[([^\]]*)\]/", $output, $matches);
 
 $variables = $matches[1];
 
-//Check if there are any functions defined for these results
+//Check if there are any translation functions registered for these results and use them
 
 foreach ($variables as $key => $variable){
   
-  $start = explode("|",$variable)[0];
+  $start = strtolower(explode("|",$variable)[0]);
   
-  if(isset($translators[$start])){
+  if(isset($translations[$start])){
     
-    call_user_func($translators[$start],$variable);
+    call_user_func($translations[$start],$variable);
     
     unset($variables[$key]);
     
@@ -88,9 +82,11 @@ foursquare($variables);
   
 //Worth through any conditional tags and convert them to the calculated value
 
+include "conditionals.php";
+
 conditionals();
 
-//Log any errors
+//Report errors
 
 include "errors.php";
 
