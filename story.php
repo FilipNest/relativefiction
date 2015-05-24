@@ -14,10 +14,6 @@ $time = $_POST["time"];
 $location = $_POST["location"];
 $output = json_decode($_POST["text"]);
 
-//Static variables container
-
-$static = array();
-
 //Create array of translating functions
 
 $translators = array();
