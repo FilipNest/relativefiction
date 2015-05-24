@@ -10,7 +10,6 @@ function weather(){
   
   global $openweathermap;
   global $countries;
-  global $static;
   global $time;
   global $location;
 
@@ -37,10 +36,18 @@ function weather(){
 
   $sunrise = $weather->sys->sunrise;
   $sunset = $weather->sys->sunset;
-
-  $static["sunrisehour"] = date("H",$sunrise);
-
-  $static["sunsethour"] = date("H",$sunset);
+      
+  register('sunrisehour', function($variable) use($sunrise){
+  
+  return date("H",$sunrise); 
+  
+  });
+  
+  register('sunsethour', function($variable) use($sunset){
+  
+  return date("H",$sunset); 
+  
+  });
 
   $current = new DateTime();
   $current->setTimestamp($time);
@@ -50,26 +57,34 @@ function weather(){
 
   $sunsettime = new DateTime();
   $sunsettime->setTimestamp($sunset);
+  
+  register('hourstosunrise', function($variable) use($sunrisetime,$current){
+  
+  $time = date_diff($current,$sunrisetime)->format('%r%H');
+    
+    if($time < 0){
 
-    $static["hourstosunrise"] = date_diff($current,$sunrisetime)->format('%r%H');
+    $time += 24;
 
-  if($static["hourstosunrise"] < 0){
+    }
+    
+    return ltrim($time,'0');
+    
+  });
+  
+  register('hourstosunset', function($variable) use($sunsettime,$current){
+  
+  $time = date_diff($current,$sunsettime)->format('%r%H');
+    
+    if($time < 0){
 
-    $static["hourstosunrise"] += 24;
+    $time += 24;
 
-  }
-
-  $static["hourstosunrise"] = ltrim($static["hourstosunrise"],'0');
-
-    $static["hourstosunset"] = date_diff($current,$sunsettime)->format('%r%H');
-
-  if($static["hourstosunset"] < 0){
-
-    $static["hourstosunset"] += 24;
-
-  }
-
-  $static["hourstosunset"] = ltrim($static["hourstosunset"],'0');
+    }
+    
+    return ltrim($time,'0');
+    
+  });
 
   $weathercode = $weather->weather[0]->id;
 
@@ -88,16 +103,25 @@ function weather(){
   "freezing" => [906]
 
   );
-
-
-  $static["country"] = $countries[$weather->sys->country];
+  
+  $country = $countries[$weather->sys->country];
+  
+  register('country', function($variable) use($country){
+  
+    return $country;  
+  
+  });
 
   foreach ($forecast as $name => $condition){
 
     if(in_array($weathercode,$condition)){
 
-    $static["weather"] = $name;
-
+       register('weather', function($variable) use($name){
+  
+    return $name;  
+  
+    });
+      
     }
 
   }

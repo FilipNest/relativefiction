@@ -62,14 +62,6 @@ include "includes.php";
 
 weather();
 
-//Swap out all static variables in text
-
-foreach($static as $name => $value){
- 
-  $output = str_replace("[".$name."]", $value, $output);
-  
-}
-
 //Get list of remaining variables in the text
   
 preg_match_all("/\[([^\]]*)\]/", $output, $matches);
