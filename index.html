@@ -39,18 +39,22 @@
 
       </div>
         <small>You'll probably find conditionals are most useful for things like the weather, time of day, country or the distance to the nearest beach.</small>
+        
+        <p>Once a reader starts reading a story and agrees to share their location (picked up through their web browser), all relevant data is collected and swapped out to make a story that is unique to that reader but still keeps the original essense of the story.</p> 
       
         <p>Data for the places is pulled in from <a href="http://foursquare.com">Foursquare</a>, a wonderful place-based social network and directory. Data for weather and sunset and sunrise times is brought in from the kind people who run <a href="http://openweathermap.org">OpenWeatherMap</a>.</p>
+        
+        <p>As mentioned, the tool can be used for more than just fiction, it should work on HTML so you might even be able to use it in your application to show pictures, video or other data relevant to a viewer/reader.</p>
 
       <h3>Types of variable</h3>
       <h4>Places</h4>
-      <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list used to match place categories in text is updated live from this Foursquare list so if squirrel cafes (or jetpack factories) suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them for less specific variables.</p>
+      <p>To put a place in your story, a zoo or japanese restaurant for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list used to match place categories in text is updated live from this Foursquare list so if squirrel cafes (or jetpack factories) suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them to get less specific variables.</p>
       <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique number for that place. The number is there in case you want to re-use the same place in multiple parts of the story or have multiple places of the same category.</p>
 
       <div class="codeblock">
         We went out for a few drinks at <span class="code">[nightclub|1]</span> and somehow ened up naked and shivering in the waters of the <span class="code">[river|1]</span>
       </div>
-      <small>The locations will get swapped out by the location nearest to the reader. The word "the" is stripped out if a place starts with it.</small>
+      <small>The locations will get swapped out by the location of that category nearest to the reader. The word "the" is stripped out if a place starts with it.</small>
       </p>
       <h4>Other information about places</h4>
       <p>You might want to use other information about a place, like the street it's on or how far away it is from the reader.</p>
@@ -65,7 +69,7 @@
       <small>Distance in meters from a reader's location to a place. Useful for conditionals like if you want to find out how far someone is from the sea.</small>
 
       <div class="codeblock">
-        I love coming back to the smell of <span class="code">[park|1|city]</span>. It reminds me of that night in <span class="code">[park|1]</span> all those years ago.
+        I love coming back to the smell of <span class="code">[park|1|city]</span>. It reminds me of that night in <span class="code">[chinese restaurant|1]</span> all those years ago.
       </div>
       <small>The city or town the venue is in. Defaults to "the city" if the venue doesn't have one set.</small>
 
@@ -77,7 +81,7 @@
       </div>
       <small>The day of the week. Monday, Tuesday... etc. Add a pipe character followed by a positive or negative number to add or substract days.</small>
       <div class="codeblock">
-        <span class="code">[hours12][hoursampm]</span>. If only I had set the timer to <span class="code">[hours12|-2]</span>:<span class="code">[minutes|+30][hoursampm|-1]</span>. It may have saved my life. The dial read <span class="code">[hours24]</span>:<span class="code">[minutes]</span> and it was over.
+        <span class="code">[hours12][hoursampm]</span>. If only I had set my alarm to <span class="code">[hours12|-2]</span>:<span class="code">[minutes|+30][hoursampm|-1]</span>. It may have saved my life. The dial read <span class="code">[hours24]</span>:<span class="code">[minutes]</span> and it was over.
       </div>
       <small>Various ways of getting times of day. <b>hoursampm</b> returns am if it's before noon and pm if after. It can be offset by adding positive or negative hours after a pipe character. <b>hours24</b> and <b>hours12</b> return the current hour in either 24 hour time or 12 hour time. They can also be offset by positive or negative hours. <b>minutes</b> returns the current time in minutes. Add positive or negative minutes after a pipe to add or subtract minutes from the time.</small>
       <div class="codeblock">
@@ -126,16 +130,12 @@
             <span class="code">{if +[sunsethour]>[hours24],+[dayofweek]==Wednesday|You can still catch sunset on Wednesday|You missed Wednesday's sunset}</span>
           </div>
 
-          <h4>What to write about and how long to make it</h4>
-          <p>Anything you want. Try new things.</p>
-          <p>However long you want (although if it takes a reader long to read it they may have moved time and location by the time they finish, thereby changing the story!).</p>
-          <h3>Try out a story (The demo)</h3>
+          <h3>Live demo</h3>
           <p>Use the following text area to try out text and variables. Once you've put them all in, hit localise and (if you have given your browser permission to use your location) the results should appear above the textarea.</p>
           <p>If you receive any error messages, please tweak and keep trying. If you keep getting error messages and can't see why, get in touch. You may have found a bug.</p>
-          <p>THANK YOU for getting this far and for considering contributing a story for the launch of the project.</p>
           <p>Don't hesitate to get in touch if you run into any issues or have any questions.</p>
 
-          <h4>Story</h4>
+          <h4>Output</h4>
 
           <div id="output">
             ---
