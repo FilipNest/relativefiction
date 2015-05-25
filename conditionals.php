@@ -3,16 +3,16 @@
 function conditionals(){
   
   global $output;
-
-  preg_match_all("/\{if([^\]]*)\}/", $output, $conditionals);
+  
+  preg_match_all("/{if (.*?)}/", $output, $conditionals);
 
   $conditionals = $conditionals[1];
-
+  
   if(count($conditionals) > 0){
 
     foreach($conditionals as $conditional){
 
-      $variable = '{if'.$conditional.'}';
+      $variable = '{if '.$conditional.'}';
       $yestext = explode("|",$conditional)[1];
 
       if(count(explode("|",$conditional)) > 2){
