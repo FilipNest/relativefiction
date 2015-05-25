@@ -149,7 +149,7 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
 
         } else {
 
-          $venue = "the street";
+          $venue = "The Street";
 
         }
 
@@ -171,12 +171,12 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
 
         } else {
 
-          $venue = "the city";
+          $venue = "The City";
 
         }
 
       }
-          
+                
       // Strip out any characters after a |
             
       $venue = explode("|",$venue)[0];
@@ -184,6 +184,10 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
       //Strip out any text in brackets
       
       $venue = preg_replace('/\s*\([^)]*\)/', '', $venue);
+      
+      //Strip out leading "The" if present
+      
+      $venue = ltrim($venue, "The");
       
       //Trim
       
