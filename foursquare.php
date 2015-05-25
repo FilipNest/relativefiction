@@ -142,7 +142,7 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
       }
 
       if($extra == "street"){
-
+        
         if(isset($fetchedvenues[$place["category"]][$id]->location->address)){
 
         $venue = $fetchedvenues[$place["category"]][$id]->location->address;
@@ -154,8 +154,9 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
         }
 
         //Strip out words containing numbers
-         preg_match_all("/(^[\D]+\s|\s[\D]+\s|\s[\D]+$|^[\D]+$)+/",$venue,$result);
-
+                
+        $venue = preg_replace('/\s+[\w-]*\d[\w-]*|[\w-]*\d[\w-]*\s*/', '', $venue);
+        
         //Trim
 
         $venue = trim($venue);
