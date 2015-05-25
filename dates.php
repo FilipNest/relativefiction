@@ -11,9 +11,7 @@ register('dayofweek', function($variable){
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' days'));
     
   }
@@ -33,9 +31,7 @@ global $time;
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' minutes'));
     
   }
@@ -55,9 +51,7 @@ register('monthofyear', function($variable){
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' months'));
     
   }
@@ -77,9 +71,7 @@ register('year', function($variable){
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' years'));
     
   }
@@ -100,8 +92,6 @@ register('hours12', function($variable){
    
     $offset = explode("|",$variable)[1];
     
-    intval($offset);
-    
     date_add($date, date_interval_create_from_date_string($offset.' hours'));
     
   }
@@ -121,9 +111,7 @@ register('hours24', function($variable){
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' hours'));
     
   }
@@ -143,9 +131,7 @@ register('hoursampm', function($variable){
   if(count(explode("|",$variable)) > 1){
    
     $offset = explode("|",$variable)[1];
-    
-    intval($offset);
-    
+        
     date_add($date, date_interval_create_from_date_string($offset.' hours'));
     
   }

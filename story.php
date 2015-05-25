@@ -83,6 +83,32 @@ foreach ($variables as $key => $variable){
 //Get Foursquare venue data and replace relevant tags
 
 foursquare($variables);
+
+//Loop over any remaining variables
+
+foreach ($variables as $variable){
+  
+  $segments = explode("|",$variable);
+  
+  if(count($segments)>2 && $segments[2] == "distance"){
+   
+        $output = str_replace("[".$variable."]", "99999999999999", $output);
+    
+  } else if (count($segments)>2 && $segments[2] == "street"){
+    
+    $output = str_replace("[".$variable."]", "Unknown Street", $output);
+    
+  } else if (count($segments)>2 && $segments[2] == "city"){
+    
+    $output = str_replace("[".$variable."]", "Unknown City", $output);
+    
+  } else {
+    
+     $output = str_replace("[".$variable."]", $segments[0], $output);
+    
+  }
+  
+};
   
 //Worth through any conditional tags and convert them to the calculated value
 

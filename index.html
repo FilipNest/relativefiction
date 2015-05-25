@@ -13,105 +13,139 @@
   <link rel="stylesheet" href="style.css" />
 
   <body>
-<section>
-    <h1>Local Stories</h1>
-    <h2>A markup library for making dynamic, localised stories</h2>
-    <h3>Introduction</h3>
-    <p>Thank you for showing interest in taking part in this little project. Hopefully this page will explain more about what it is. It also contains a demo that you can try out at the bottom to test out ideas for stories. Please note that things are still in very active development so bugs/features will come and go.</p>
-    <p>Here's what it is and how it works:</p>
-    <ul>
-      <li>You write a story</li>
-      <li>You enclose place types (aquarium, train station, Japanese restaurant...) in square brackets and asign each one a unique ID number. Places are one type of <em>variable</em>, tags that get swapped out depending on the reader's location in space and time. <em>[Skate park|1]</em> for example.</li>
-      <li>You put in other types of variables such as the date and time of the user. Also in square brackets, without an ID number this time. <em>[dayofweek]</em> for example.</li>
-      <li>You decide that certain bits of the story should only take place if say, it is a Tuesday and it's snowing, in June and the reader is in Newcastle. You enclose these parts in a final set of variables, <em>conditionals</em>. The syntax for these is slightly more complicated but looks a bit like <em>{if +[weather]==clear, -[hour24]<18|It was a perfect day for going outside|It wasn't a good day to go outside}</em>
-      </li>
-      <li>You put in as few or as many variables as you want. You could just write a story with a single place name or day of the week in it or a complex conditional megabeast of fiction.</li>
-      <li>The system detects a reader's time and location (if they agree to it) and automatically replaces these variables with dynamic, localised information.</li>
-      <li>The resulting story is unique to every reader but keeps its essense between readers as it's just certain parts that change.</li>
-    </ul>
-    <h3>Types of variable (syntax)</h3>
-    <h4>Places</h4>
-    <p>Places are pulled in from Foursquare (a place-based social network and place listing).</p>
-        <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list this library uses is updated live from this Foursquare list so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them for less specific variables.</p>
-    <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
-    <p>Example: [zoo|1]
-      <br />
-      <small>Every instance of [zoo|1] would be replaced by the nearest zoo to a reader automatically. [zoo|2] would be another zoo.</small>
-    </p>
+    <section>
+      <h1>Local Stories</h1>
+      <h2>A markup library for making dynamic stories relative to a reader's place, time location and weather.</h2>
+      <h3>Introduction</h3>
+      <p>Local Stories is a tool created by Filip Hn&#237;zdo to localise text for its reader. It was created for making relative fiction that changes depending on where a reader is, what the weather is like and what time of day or year it is.</p>
+      <p>It can hopefully be used for many other things.</p>
+      <p>Here's how it works:</p>
+
+      <p>A writer writes a story and at certain points, replaces static words like days of the week and place names with special placeholders or <em>variables</em>.</p>
+      <p>What kinds of variables can be used and how they work is covered below but here is an example.</p>
+      
+      <div class="codeblock">
+      
+        I love <span class="code">[dayofweek]</span>s. It was around <span class="code">[hours12][hoursampm]</span> on a <span class="code">[dayofweek]</span> when I first saw its outlines. I was sitting in <span class="code">[park|1]</span> and looking out at the sky. It was a <span class="code">[weather]</span> day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards <span class="code">[supermarket|1|street]</span> as if going about their everyday business. This month is even more special. It happened in <span class="code">[monthofyear]</span>. So I walk over to <span class="code">[park|1]</span> and look out. But there's never anything anymore...
+      
+      </div>
+      
+      <p>Alongside custom variables you can put in logic to show text if some statements are true and some other text if they are not.</p>
+      <p>Say you're writing a piece of science fiction and you get frustrated by the future catching up too quickly making the at the time of writing year futuristic year you chose laughabily ancient.</p>
+      <p>You hope they'll have jetpack factories in 2035 but don't know for sure so you write a conditional statement that sets the story 30 years in the future, unless there's already a jetpack factory around the corner from where the reader is.</p>
+      <div class="codeblock">
+        
+        It was <span class="code">{if +[jetpack factory|1|distance]<5000|[year]|[year|+30]}</span>AD. I returned the jetpack I'd borrowed. I never got on with those things.
+
+      </div>
+        <small>You'll probably find conditionals are most useful for things like the weather, time of day, country or the distance to the nearest beach.</small>
+      
+
+      <h3>Types of variable (syntax)</h3>
+      <h4>Places</h4>
+      <p>Places are pulled in from Foursquare (a place-based social network and place listing).</p>
+      <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list this library uses is updated live from this Foursquare list so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them for less specific variables.</p>
+      <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
+
+      <div class="codeblock">
+        We went out for a few drinks at <span class="code">[bar|1]</span> and somehow ened up naked and shivering in the waters of the <span class="code">[river|1]</span>
+      </div>
+      <small>The locations will get swapped out by the location nearest to the reader. The word "the" is stripped out if a place starts with it.</small>
+      </p>
       <h4>Other information about places</h4>
-        <p>You might want to use other information about a place, like the street it's on or how far away it is from the reader.</p>
-        <p>If you've got how places work this bit should be easy as it's just another pipe character after the ID.</p>
-        <ul>
-        <li>[park|1|street] - Gets the street the park (for example) is on. Parts of street names containing numbers are stripped out (11,33b...). This field could format strangely for some places and some won't have it set (defaults to "the street") but give it a go. Might be nice for providing a general street for things to happen in.</li>
-          <li>[beach|1|distance] - Distance in meters from a reader's location to a place. Useful for conditionals like if you want to find out how far someone is from the sea.</li>
-          <li>[aquarium|1|city] - The city or town a location is in. Probably quite useful generally regardless of the place.</li>
-        </ul>
-        
-    <h4>Other variables</h4>
-    <p>It's not just places you can swap into text, here are some other variables you can use.</p>
-    <ul>
-      <li>[dayofweek] - Monday, Tuesday... etc</li>
-      <li>[hours24] - Hour in day in 24 hour time. So 13 for 1pm</li>
-      <li>[hours12] - Hour in day in 12 hour time. So 1 for 1pm</li>
-      <li>[minutes] - Minutes past the hour</li>
-      <li>[hoursampm] - am or pm depending on time of day.</li>
-      <li>[monthofyear] - January, February... etc</li>
-      <li>[longitude] - A reader's longitude</li>
-      <li>[latitude] - A reader's latitude</li>
-      <li>[country] - A country name from (<a href="https://gist.github.com/vxnick/380904">this handy PHP array mapping country codes to names.</a>
-      </li>
-      <li>[weather] - One of the following: stormy, rainy, snowy, clear, cloudy, calm, windy, scorching, freezing.</li>
-      <li>[sunsethour] - Hour when the sun sets in 24 hour time (21 for 9pm)</li>
-      <li>[sunrisehour] - Hour when the sun rises in 24 hour time (06 for 6am)</li>
-        <li>[hourstosunset] - Hours until the sun sets (22, 4...).</li>
-        <li>[hourstosunrise] - Hours until the sun rises (22, 4...).</li>
-    </ul>
-        
-        <p>Most of the time based variables can be increased or decresed by a number to get times and dates in the past or in the future.</p>
-        <p>To do this simply add a | followed by a + or a - sign and the number to add to them.</p>
-        <ul>
-        <li>[dayofweek|+1] - shows the day of the week tomorrow. -1 would show what day it was yesterday.</li>
-          <li>[hours24|+1] or [hours12|+1] - increases the amount of time returned by 1 hour, -4 would be four hours ago.</li>
-          <li>[year|+1] - increases the returned year. - would decrease it.</li>
-           <li>[minutes|+30] - increases the amount of time returned by 30 minutes, -20 would be 20 minutes ago.</li>
-          <li>[ampm|+1] - An offset of hours to pass to am or pm.  If it's noon and you pass -1, it'll return am for example.</li>
-        </ul>
+      <p>You might want to use other information about a place, like the street it's on or how far away it is from the reader.</p>
+      <p>If you've got how places work this bit should be easy as it's just another pipe character after the ID.</p>
+      <div class="codeblock">
+        He lived on <span class="code">[park|1|street]</span>. I never liked that part of town after what happened to Emily.</div>
+      <small>Putting the word "street" after the pipe will get translated to the street the venue is on. Parts of street names containing numbers are stripped out (11,33b...). If there's no street set it defaults to "the street". Might be useful for providing a general street for things to happen in.</small>
 
-    <p>More variables will come in the future but that should hopefully give you a nice start. Please feel free to suggest some before and after the project launches.</p>
+      <div class="codeblock">
+        She arranged to meet me at <span class="code">[zoo|1]</span>. For some reason she never wanted to see me more than <span class="code">[zoo|1|distance]</span> meters from an animal park.
+      </div>
+      <small>Distance in meters from a reader's location to a place. Useful for conditionals like if you want to find out how far someone is from the sea.</small>
 
-    <h4>Conditionals</h4>
+      <div class="codeblock">
+        I love coming back to the smell of <span class="code">[park|1|city]</span>. It reminds me of that night in <span class="code">[park|1]</span> all those years ago.
+      </div>
+      <small>The city or town the venue is in. Defaults to "the city" if the venue doesn't have one set.</small>
 
-    <p>Conditionals are the most complex (and probably most buggy at the moment) part of the system but hopefully not so complex that you don't try them out.</p>
-    <p>They're enclosed in curly brackets with the word <em>if</em> followed by a space after the opening bracket.</p>
-    <p>After this space and before the second bracket, you can put in statements that should either be true or false. First decide if a statement should be true or false and put in a + or a - sign. Then put in the name of the value you wish to compare to something (this can be static such as the number 5 or dynamic such as [sunsethour]). Then put in an operator from either == (equals (two == signs)), > (greater than) or < (less than).</p>
-      <p>Then put the name of the value you want to use this operator to compare the first value to. This can be static text or a dynamic variable.</p>
-        <p>Put in as many of these rules as you want seperated by commas.</p>
-        <p>Then put in a pipe character | followed by what you want to write if this set of rules passes.</p>
-        <p>Then put in another pipe character | followed by what to write if the rule does not pass.</p>
-        <p>Finally, close the curly bracket.</p>
-        <p>Here's an example that checks if the reader has missed Wednesday's sunset.</p>
-        <em>{if +[sunsethour]>[hours24],+[dayofweek]==Wednesday|You can still catch sunset on Wednesday|You missed Wednesday's sunset}</em>
-        <p>This logic is prone to error so give me a shout if it doesn't work and/or tweak and try until it does. Which brings us on to...</p>
-        <h4>What to write about and how long to make it</h4>
-        <p>Anything you want. Try new things.</p>
-        <p>However long you want (although if it takes a reader long to read it they may have moved time and location by the time they finish, thereby changing the story!).</p>
-        <h3>Try out a story (The demo)</h3>
-        <p>Use the following text area to try out text and variables. Once you've put them all in, hit localise and (if you have given your browser permission to use your location) the results should appear above the textarea.</p>
-        <p>If you receive any error messages, please tweak and keep trying. If you keep getting error messages and can't see why, get in touch. You may have found a bug.</p>
-        <p>THANK YOU for getting this far and for considering contributing a story for the launch of the project.</p>
-        <p>Don't hesitate to get in touch if you run into any issues or have any questions.</p>
-        
-        <h4>Story</h4>
-        
-        <div id="output">
-          ---
-    </div>
-        <br />
-        
-      <textarea id="input" placeholder="I love [dayofweek]s. It was around [hours12][hoursampm] on a [dayofweek] when I first saw its outlines. I was sitting in [park|1] and looking out at the sky. It was a [weather] day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards [supermarket|1|street] as if going about their everyday business. This month is even more special. It happened in [monthofyear]. So I walk over to [park|1] and look out. But there's never anything anymore..."></textarea>
+      <h4>Other variables</h4>
+      <p>It's not just places you can swap into text, here are some other variables you can use.</p>
 
-    <button id="localise">Localise</button>
-</section>
+      <div class="codeblock">
+        It was <span class="code">[dayofweek]</span>. She always came round on <span class="code">[dayofweek]</span>s. Yesterday would have been better. <span class="code">[dayofweek|-1]</span>s were always better than <span class="code">[dayofweek]</span>s.
+      </div>
+      <small>The day of the week. Monday, Tuesday... etc. Add a pipe character followed by a positive or negative number to add or substract days.</small>
+      <div class="codeblock">
+        <span class="code">[hours12][hoursampm]</span>. If only I had set the timer to <span class="code">[hours12|-2]</span>:<span class="code">[minutes|+30][hoursampm|-1]</span>. It may have saved my life. The dial read <span class="code">[hours24]</span>:<span class="code">[minutes]</span> and it was over.
+      </div>
+      <small>Various ways of getting times of day. <b>hoursampm</b> returns am if it's before noon and pm if after. It can be offset by adding positive or negative hours after a pipe character. <b>hours24</b> and <b>hours12</b> return the current hour in either 24 hour time or 12 hour time. They can also be offset by positive or negative hours. <b>minutes</b> returns the current time in minutes. Add positive or negative minutes after a pipe to add or subtract minutes from the time.</small>
+      <div class="codeblock">
+        It was <span class="code">[monthofyear]</span>. Five years after they caught the fish. I still have the newspaper cuttings from <span class="code">[monthofyear]</span>, <span class="code">[year|-5]</span>.
+      </div>
+      <small>Get the current month or current year. You can add a pipe followed by a positive/negative count of months/years to set it forward or back in time.</small>
+      <div class="codeblock">
+        <span class="code">[longitude]</span>,<span class="code">[latitude]</span> said the screen. This was the right place. It's what it said on the paper. But my instinct told me <span class="code">[country]</span> wasn't even the right part of the world.
+      </div>
+      <small>Longitude and latitude for those who need it. Niche but why not? Also a country name from <a href="https://gist.github.com/vxnick/380904">this handy PHP array mapping country codes to names.</a></small>
+
+      <div class="codeblock">
+
+        It was a <span class="code">[weather]</span> day like this one when my ears stopped working.
+
+      </div>
+      <small>The reader's current weather. This can return one of the following values: stormy, rainy, snowy, clear, cloudy, calm, windy, scorching, freezing. You can re-write them using conditionals.</small>
+
+      <div class="codeblock">
+
+        It could only happen exactly at sunset. <span class="code">[sunsethour]</span> hundred hours. That was <span class="code">[hourstosunset]</span> hours away.
+
+      </div>
+      <small>Hour (in 24 hour time) of the next sunset. You can also use <b>hourstosunset</b> to get how much time until the next sunset. Both useful in conditionals.</small>
+      <div class="codeblock">
+
+        It could only happen exactly at sunset. <span class="code">[sunrisehour]</span> hundred hours. That was <span class="code">[hourstosunrise]</span> hours away.
+      </div>
+      <small>Same as sunset but for sunrise. See above.</small>
+
+      <p>More variables will come in the future but that should hopefully give you a nice start. Please feel free to suggest some before and after the project launches.</p>
+
+      <h4>Conditionals</h4>
+
+      <p>Conditionals are the most complex (and probably most buggy at the moment) part of the system but hopefully not so complex that you don't try them out.</p>
+      <p>They're enclosed in curly brackets with the word <em>if</em> followed by a space after the opening bracket.</p>
+      <p>After this space and before the second bracket, you can put in statements that should either be true or false. First decide if a statement should be true or false and put in a + or a - sign. Then put in the name of the value you wish to compare to something (this can be static such as the number 5 or dynamic such as [sunsethour]). Then put in an operator from either == (equals (two == signs)), > (greater than) or
+        < (less than).</p>
+          <p>Then put the name of the value you want to use this operator to compare the first value to. This can be static text or a dynamic variable.</p>
+          <p>Put in as many of these rules as you want seperated by commas.</p>
+          <p>Then put in a pipe character | followed by what you want to write if this set of rules passes.</p>
+          <p>Then put in another pipe character | followed by what to write if the rule does not pass.</p>
+          <p>Finally, close the curly bracket.</p>
+          <p>Here's an example that checks if the reader has missed Wednesday's sunset.</p>
+          <div class="codeblock">
+            <span class="code">{if +[sunsethour]>[hours24],+[dayofweek]==Wednesday|You can still catch sunset on Wednesday|You missed Wednesday's sunset}</span>
+          </div>
+
+          <h4>What to write about and how long to make it</h4>
+          <p>Anything you want. Try new things.</p>
+          <p>However long you want (although if it takes a reader long to read it they may have moved time and location by the time they finish, thereby changing the story!).</p>
+          <h3>Try out a story (The demo)</h3>
+          <p>Use the following text area to try out text and variables. Once you've put them all in, hit localise and (if you have given your browser permission to use your location) the results should appear above the textarea.</p>
+          <p>If you receive any error messages, please tweak and keep trying. If you keep getting error messages and can't see why, get in touch. You may have found a bug.</p>
+          <p>THANK YOU for getting this far and for considering contributing a story for the launch of the project.</p>
+          <p>Don't hesitate to get in touch if you run into any issues or have any questions.</p>
+
+          <h4>Story</h4>
+
+          <div id="output">
+            ---
+          </div>
+          <br />
+
+          <textarea id="input" placeholder="I love [dayofweek]s. It was around [hours12][hoursampm] on a [dayofweek] when I first saw its outlines. I was sitting in [park|1] and looking out at the sky. It was a [weather] day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards [supermarket|1|street] as if going about their everyday business. This month is even more special. It happened in [monthofyear]. So I walk over to [park|1] and look out. But there's never anything anymore..."></textarea>
+
+          <button id="localise">Localise</button>
+    </section>
   </body>
 
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
