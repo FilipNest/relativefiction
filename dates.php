@@ -4,11 +4,30 @@ register('dayofweek', function($variable){
   
   global $time;
   
-  return date("l",$time); 
+  //Check if offset is set
+  
+  $offset = 0;
+  
+  if(count(explode("|",$variable)) > 1){
+   
+    $offset = explode("|",$variable)[1];
+    
+    
+    $offset = intval($offset*86400);
+    
+  }
+  
+  return date("l",$time + $offset); 
   
 });
  
-$static["minutes"] = date("i", $time);
+register('minutes', function(){
+  
+  global $time;
+  
+  return date("i",$time);
+  
+});
 
 register('monthofyear', function($variable){
   
