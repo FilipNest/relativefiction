@@ -96,6 +96,10 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
 
   $places = $request->send()->getBody();
 
+  if(json_decode($places)->meta->code === 403){
+  print("Foursquare quota exceeded for this hour. Please try again later.");
+  die;
+  }
   $places = json_decode($places)->response->venues;
 
   //Sort into array
