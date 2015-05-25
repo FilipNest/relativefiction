@@ -176,12 +176,19 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
         }
 
       }
-    
+          
       // Strip out any characters after a |
             
       $venue = explode("|",$venue)[0];
+      
+      //Strip out any text in brackets
+      
+      $venue = preg_replace('/\s*\([^)]*\)/', '', $venue);
+      
+      //Trim
+      
       $venue = trim($venue);
-
+      
       $output = str_replace("[".$tag."]", $venue, $output);
 
     } else {
