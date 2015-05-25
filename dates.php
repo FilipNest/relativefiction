@@ -40,6 +40,46 @@ global $time;
   
 });
 
+register('dayofmonth', function($variable){
+  
+global $time;
+  
+  $date = new DateTime("@$time"); 
+  
+  //Check if offset is set
+  
+  if(count(explode("|",$variable)) > 1){
+   
+    $offset = explode("|",$variable)[1];
+        
+    date_add($date, date_interval_create_from_date_string($offset.' days'));
+    
+  }
+  
+  return date_format($date, 'j'); 
+  
+});
+
+register('dayofmonthsuffix', function($variable){
+  
+global $time;
+  
+  $date = new DateTime("@$time"); 
+  
+  //Check if offset is set
+  
+  if(count(explode("|",$variable)) > 1){
+   
+    $offset = explode("|",$variable)[1];
+        
+    date_add($date, date_interval_create_from_date_string($offset.' days'));
+    
+  }
+  
+  return date_format($date, 'S'); 
+  
+});
+
 register('monthofyear', function($variable){
   
   global $time;
@@ -96,7 +136,7 @@ register('hours12', function($variable){
     
   }
   
-  return ltrim(date_format($date, 'h'), '0');
+  return date_format($date, 'g');
   
 });
 

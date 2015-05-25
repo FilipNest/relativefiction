@@ -85,9 +85,9 @@
       </div>
       <small>Various ways of getting times of day. <b>hoursampm</b> returns am if it's before noon and pm if after. It can be offset by adding positive or negative hours after a pipe character. <b>hours24</b> and <b>hours12</b> return the current hour in either 24 hour time or 12 hour time. They can also be offset by positive or negative hours. <b>minutes</b> returns the current time in minutes. Add positive or negative minutes after a pipe to add or subtract minutes from the time.</small>
       <div class="codeblock">
-        It was <span class="code">[monthofyear]</span>. Five years after they caught the fish. I still have the newspaper cuttings from <span class="code">[monthofyear]</span>, <span class="code">[year|-5]</span>.
+        It was <span class="code">[monthofyear]</span>. Five years after they caught the fish. I still have the newspaper cuttings from <span class="code">[monthofyear] [dayofmonth][dayofmonthsuffix]</span>, <span class="code">[year|-5]</span>.
       </div>
-      <small>Get the current month or current year. You can add a pipe followed by a positive/negative count of months/years to set it forward or back in time.</small>
+      <small>Get the current month or current year. You can add a pipe followed by a positive/negative count of months/years to set it forward or back in time. <b>dayofmonth</b> returns the day of the month in number form (you can offset this by days after a pipe character). <b>dayofmonthsuffix</b> gives you the English language suffix for that day "th","st","rd" or "nd". It also works with day offsets</small>
       <div class="codeblock">
         <span class="code">[longitude]</span>,<span class="code">[latitude]</span> said the screen. This was the right place. It's what it said on the paper. But my instinct told me <span class="code">[country]</span> wasn't even the right part of the world.
       </div>
