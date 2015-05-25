@@ -15,14 +15,14 @@
   <body>
     <section>
       <h1>Local Stories</h1>
-      <h2>A markup library for making dynamic stories relative to a reader's place, time location and weather.</h2>
+      <h2>A markup library for making dynamic stories relative to a reader's place, time, location and weather.</h2>
       <h3>Introduction</h3>
       <p>Local Stories is a tool created by Filip Hn&#237;zdo to localise text for its reader. It was created for making relative fiction that changes depending on where a reader is, what the weather is like and what time of day or year it is.</p>
       <p>It can hopefully be used for many other things.</p>
       <p>Here's how it works:</p>
 
       <p>A writer writes a story and at certain points, replaces static words like days of the week and place names with special placeholders or <em>variables</em>.</p>
-      <p>What kinds of variables can be used and how they work is covered below but here is an example.</p>
+      <p>What kinds of variables can be used and how they work is covered below. Here is an example of how a piece of text might look before it is converted for a reader:</p>
       
       <div class="codeblock">
       
@@ -30,9 +30,9 @@
       
       </div>
       
-      <p>Alongside custom variables you can put in logic to show text if some statements are true and some other text if they are not.</p>
-      <p>Say you're writing a piece of science fiction and you get frustrated by the future catching up too quickly making the at the time of writing year futuristic year you chose laughabily ancient.</p>
-      <p>You hope they'll have jetpack factories in 2035 but don't know for sure so you write a conditional statement that sets the story 30 years in the future, unless there's already a jetpack factory around the corner from where the reader is.</p>
+      <p>Alongside custom variables, writers can put in logic to show text if some statements are true and some other text if they are not.</p>
+      <p>Say you're writing a piece of science fiction and you get frustrated by the year you chose arriving too quickly, thereby making your choice of date laughabily ancient.</p>
+      <p>You hope they'll have jetpack factories in 2035 but don't know for sure, so you write a conditional statement that sets the story 30 years in the future, unless there's already a jetpack factory around the corner from where the reader is.</p>
       <div class="codeblock">
         
         It was <span class="code">{if +[jetpack factory|1|distance]<5000|[year]|[year|+30]}</span>AD. I returned the jetpack I'd borrowed. I never got on with those things.
@@ -40,15 +40,15 @@
       </div>
         <small>You'll probably find conditionals are most useful for things like the weather, time of day, country or the distance to the nearest beach.</small>
       
+        <p>Data for the places is pulled in from <a href="http://foursquare.com">Foursquare</a>, a wonderful place-based social network and directory. Data for weather and sunset and sunrise times is brought in from the kind people who run <a href="http://openweathermap.org">OpenWeatherMap</a>.</p>
 
-      <h3>Types of variable (syntax)</h3>
+      <h3>Types of variable</h3>
       <h4>Places</h4>
-      <p>Places are pulled in from Foursquare (a place-based social network and place listing).</p>
-      <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list this library uses is updated live from this Foursquare list so if squirrel cafes suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them for less specific variables.</p>
-      <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique identifier for that place (in case you want to re-use the same place in multiple parts of the story).</p>
+      <p>To put a place in your story, a zoo for example, first look up the name of the category of place on <a href="https://developer.foursquare.com/categorytree">this list of place categories from Foursquare</a> to make sure it's available. The list used to match place categories in text is updated live from this Foursquare list so if squirrel cafes (or jetpack factories) suddenly become a huge thing they might be a useable variable in the future. Parent categories contain everything below them so you can use them for less specific variables.</p>
+      <p>Next, enclose the name of the category in square brackets followed by a | (pipe) character and a unique number for that place. The number is there in case you want to re-use the same place in multiple parts of the story or have multiple places of the same category.</p>
 
       <div class="codeblock">
-        We went out for a few drinks at <span class="code">[bar|1]</span> and somehow ened up naked and shivering in the waters of the <span class="code">[river|1]</span>
+        We went out for a few drinks at <span class="code">[nightclub|1]</span> and somehow ened up naked and shivering in the waters of the <span class="code">[river|1]</span>
       </div>
       <small>The locations will get swapped out by the location nearest to the reader. The word "the" is stripped out if a place starts with it.</small>
       </p>
@@ -110,7 +110,7 @@
 
       <p>More variables will come in the future but that should hopefully give you a nice start. Please feel free to suggest some before and after the project launches.</p>
 
-      <h4>Conditionals</h4>
+      <h3>Conditionals</h3>
 
       <p>Conditionals are the most complex (and probably most buggy at the moment) part of the system but hopefully not so complex that you don't try them out.</p>
       <p>They're enclosed in curly brackets with the word <em>if</em> followed by a space after the opening bracket.</p>
