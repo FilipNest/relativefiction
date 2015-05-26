@@ -3,6 +3,8 @@
 //Include foursquare venue categories
 include "venuecategories.php";
 
+$apicalls = 0;
+
 $foursquare['venuecategories'] = getvenuecategories();
 
 function foursquare($variables){
@@ -70,6 +72,17 @@ function cmp($a, $b)
   }
 
 function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
+  
+  global $apicalls;
+  
+  $apicalls += 1;
+    
+  if($apicalls > 4){
+   
+    print "<p class='error'>Limit of 5 Foursquare API calls per story exceeded.</p>";
+    return false;
+    
+  }
 
   global $location;
   global $output;
