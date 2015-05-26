@@ -15,9 +15,12 @@ $("#localise").click(function () {
   }
   
   //Get date/time (strip out milliseconds for PHP)
-  
-   data.time = (new Date().getTime()/1000).toFixed();
 
+x = new Date()
+data.time = (x.getTime() - x.getTimezoneOffset()*60*1000)/1000;
+  
+  data.time = parseInt(data.time);
+  
   //Get location
   navigator.geolocation.getCurrentPosition(function (location) {
 
