@@ -32,5 +32,7 @@ html, body {margin:0px; padding:0px; font-family:"futura-pt";}
   #cover {margin:auto; float:none; width:80%; top:60px;}
   #intro {float:none; clear:both; width:95%; position:relative; top:80px; margin: auto; text-align: justify;}
   .front footer {border-style:solid; border-width:2px 0 0 0; text-align: center; padding:10px;}
+  #localstories {display: block; float:none;}
+  #story {max-width: 90%;}
   
 }
