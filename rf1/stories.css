@@ -1,12 +1,23 @@
 #story {margin:auto; width:600px; max-width:100%; font-size:30px; color:rgba(0,0,0,0.8); padding:10px; display: none;}
-header section {width:600px; padding:10px; margin:auto; max-width:100%;}
-header span {color:white; padding-left:10px;}
+header section {width:600px; padding:10px; margin:auto; max-width:90%;}
 #localstories {float:right;}
-header a:link, header a:visited {color:darkseagreen; text-decoration: none;}
+a:link, a:visited {color:inherit; text-decoration: none;}
+header a:link, header a:visited {color:darkseagreen;}
 header a:hover {text-decoration: underline;}
-#heading {border-style:solid; border-width:0 0 0 4px; margin-left:10px; margin-right:10px; margin-top:100px;}
+#heading {border-style:solid; border-width:0 0 0 4px; margin-right:10px; margin-top:100px;}
 h1 {margin:10px 0 10px 0; text-align: right;}
 h2 {font-size:120%; margin:0px; color:darkseagreen; text-align: right;}
-p:first-of-type:first-letter {float: left; color: darkseagreen; font-size: 80px; line-height: 60px; padding-top: 11px; padding-right: 4px; padding-left:4px; font-weight: bold;}
-header {width:100%; background-color:rgba(0,0,0,0.8); margin:0px; color:white; position: fixed;}
+#story p:first-of-type:first-letter {float: left; color: darkseagreen; font-size: 80px; line-height: 60px; padding-top: 11px; padding-right: 4px; padding-left:4px; font-weight: bold;}
+header {width:100%; background-color:rgba(0,0,0,0.8); margin:0px; color:white; position: fixed; z-index:2;}
 html, body {margin:0px; padding:0px; font-family:"futura-pt";}
+
+.front {background-color:darkseagreen;}
+#home {width:600px; margin:auto;}
+#intro {width:150px; float:right; top:75px; position:relative; color:white;}
+#intro p {padding: 0px; margin:0 0 10px 0px;}
+#cover {float:left; width:350px; padding:20px; position: relative; top:80px; color:white; border-style:solid; border-width:3px; border-color:white; cursor: pointer;}
+#cover h1 {font-size:80px;}
+#cover h2 {color:white; font-size:32px;}
+#cover h3 {color:white; font-size:20px;}
+#cover ul {font-size:16px;}
+#cover li {list-style:square;}
