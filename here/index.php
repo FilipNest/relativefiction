@@ -15,7 +15,7 @@
 <body class="front">
 
   <header>
-    <section><span><strong></strong>&nbsp;</span><span id="localstories">Made with <a href="http://filipnest.com/localstories">Local stories</a></span>
+    <section><span id="headertitle">&nbsp;</span><span id="localstories">Made with <a href="http://filipnest.com/localstories">Local stories</a></span>
     </section>
   </header>
   <section id="home">

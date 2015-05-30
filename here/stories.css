@@ -34,5 +34,5 @@ html, body {margin:0px; padding:0px; font-family:"futura-pt";}
   .front footer {border-style:solid; border-width:2px 0 0 0; text-align: center; padding:10px;}
   #localstories {display: block; float:none;}
   #story {max-width: 90%;}
-  
+  #headertitle {display: none;}
 }
