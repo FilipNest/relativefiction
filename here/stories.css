@@ -11,6 +11,8 @@ h2 {font-size:120%; margin:0px; color:darkseagreen; text-align: right;}
 header {width:100%; background-color:rgba(0,0,0,0.8); margin:0px; color:white; position: fixed; z-index:2;}
 html, body {margin:0px; padding:0px; font-family:"futura-pt";}
 
+.divider {text-align: center; display: block;}
+
 .front {background-color:darkseagreen;}
 .front footer {clear:both; position:relative; top:90px; color:white;}
 #home {width:600px; margin:auto; max-width: 100%;}
