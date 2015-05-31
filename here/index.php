@@ -32,7 +32,7 @@
     </ul>
     </section>
     <section id="intro">
-<p><b>Here</b> is a collection of short fiction written for the launch of <a href="http://filipnest.com/localstories/">Local stories</a>, a piece of (currently experimental) software that enables people to localise words to a reader's place, time and weather.</p>
+<p><b>Here</b> is a collection of short fiction written for the launch of <a href="http://relativefiction.com">Local stories</a>, a piece of (currently experimental) software that enables people to localise words to a reader's place, time and weather.</p>
       <p>Please select an author's name from the front of the book to explore the stories or select the title to explore from the beginning.</p>
       <p>You will need to have a web browser that allows you to share your location (most do) and give permission to the website to use this information. These geo-coordinates are not stored to any database and are anonymous.</p>
     </section>
