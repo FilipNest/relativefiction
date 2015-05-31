@@ -108,5 +108,8 @@
 
 <p>Doris, meanwhile, was making a mental note of the layout of this new flat and its resident. She still had some growing to do.</p>
 
+<hr />
+
+<b><a href="jasmine.php">Read the next story...</a></b>
     
 <?php include "footer.php" ?>
