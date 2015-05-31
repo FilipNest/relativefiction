@@ -16,7 +16,7 @@
 
 <p>To the left of the lost dog sign was a bright yellow piece of paper with a poorly printed picture on it. Even though the image had come out badly from a battle with a near empty toner cartridge Jane thought its subject looked magnificent. Her eyes drifted to the words below: 'Snake For Sale'. She took note of the number.</p>
 
-*
+<span class="divider">*</span>
 
 <p>'I am a snake owner,' thought Jane. 'I am the sort of person who owns a snake. A really, really big snake.'</p>
 
@@ -28,7 +28,7 @@
 
 <p>However, as soon as she saw Doris the deal was done. Doris was beautiful. More than five foot long and not done growing, her yellow green scales gave off a healthy gleam. Jane looked Doris in the eye and imagined she could see intellect as the snake stared back, her forked tongue delicately flicking in and out.</p>
 
-*
+<span class="divider">*</span>
 
 <p>A month later and Doris was settling in very well indeed. Initially Jane had mainly confined Doris to the sort of tank one expects to keep such a snake in. Reassured by Doris' former owner she let Doris out for short periods to explore her new abode - a reasonably sized two bedroom flat in [park|1|street]. Over time Jane began to greatly enjoy the company of her new friend and Doris' time outside the tank increased.</p>
 
@@ -38,7 +38,7 @@
 
 <p>'This is nice,' she thought, before returning to her work.</p>
 
-*
+<span class="divider">*</span>
 
 <p>On the days Doris needed feeding Jane would eat her own breakfast first. She found getting Doris her dinner ruined her own appetite otherwise. After breakfast Jane would prop open the hatch to Doris' tank before going and getting settled at her desk. After a bit Doris would come and curl up at Jane's feet.</p>
 
@@ -50,7 +50,7 @@
 
 <p>A quick Google search returned various videos of similarly massive snakes opening doors. Jane felt relieved to know that this wasn't an unheard of snake ability, while also disappointed at the thought that Doris could have become an online celebrity, had Jane only got in there first.</p>
 
-*
+<span class="divider">*</span>
 
 <p>'You're mad,' her brother Richard pronounced when he saw Jane's new [park|1|street] flatmate. 'Raving'.</p>
 
@@ -62,8 +62,7 @@
 
 <p>Jane was strangely touched by her pet's desire to be near her at night though, before rushing to the toilet due to a wave of hangover induced nausea.</p>
 
-
-*
+<span class="divider">*</span>
 
 <p>After a few more late night escapes, each ending with Doris taking up the other side of the bed, Jane gave in and just allowed her companion the continual run of the flat.</p>
 
@@ -71,7 +70,7 @@
 
 <p>Jane found the fact that Doris wanted to sleep next to her night after night charming, although she tried to remind herself that the snake probably just preferred the warmth under the covers.</p>
 
-*
+<span class="divider">*</span>
 
 <p>Doris drifted around the flat filled with anticipation. Finally her length comfortably surpassed the human's height.</p>
 
@@ -79,7 +78,7 @@
 
 <p>Uncomfortably full, Doris moved to her favourite spot, under the desk curled over the warm plugs, while she waited for the digestion process to be complete. She calculated that she had a few days before anyone would notice Jane's disappearance. The human very rarely had visitors or even left the flat. When the too-full feeling had subsided and Doris felt up to moving again, she slithered out from under the desk, leaving a shed skin among the electrics. Doris moved slowly towards the front door and began to wait.</p>
 
-*
+<span class="divider">*</span>
 
 <p>Richard was surprised to find two policemen on his front step. They were, they explained, 'the bearers of bad news'.</p>
 
@@ -101,7 +100,7 @@
 
 <p>'Gives us the creeps to be quite honest.'</p>
 
-*
+<span class="divider">*</span>
 
 <p>Later that evening, as Richard sat at a desk in his living room browsing the internet, he felt an unusual sensation. Doris had escaped her tank and was curling up by his feet.</p>
 
