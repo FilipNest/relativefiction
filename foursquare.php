@@ -108,9 +108,10 @@ function parselocations($categoryids,$placevariables,$foursquare,$extraplaces){
   ));
 
   $places = $request->send()->getBody();
-
-  if(json_decode($places)->meta->code === 403){
-  print("Foursquare quota exceeded for this hour. Please try again later.");
+  
+  if(json_decode($places)->meta->code === 403 || json_decode($places)->meta->code === 500){
+        
+  print "<span class='error'>Unfortunately there was a problem with the response from the Foursquare servers. Please try again later. Error is: ".json_decode($places)->meta->errorDetail."</span>";
   die;
   }
   $places = json_decode($places)->response->venues;

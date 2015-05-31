@@ -24,6 +24,8 @@ html, body {margin:0px; padding:0px; font-family:"futura-pt";}
 #cover ul {font-size:16px;}
 #cover li {list-style:square;}
 
+.error {position: relative; top:50px; color:red;}
+
 /*Mobile front cover*/
 
 @media (max-width:650px){
