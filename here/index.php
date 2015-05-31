@@ -28,7 +28,7 @@
       <a href="dangers.php"><li>Chloe Aust</li></a>
       <a href="jasmine.php"><li>Sam Davey</li></a>
       <a href="ideasabovestations.php"><li>Fiona Shipwright</li></a>
-      <li>And you? <a href="mailto:filip@bluejumpers.com">Get in touch.</a></li>
+      <li>And you? <a href="mailto:filip@bluejumpers.com"><b>Get in touch.</b></a></li>
     </ul>
     </section>
     <section id="intro">

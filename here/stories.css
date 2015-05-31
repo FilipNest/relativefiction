@@ -17,7 +17,7 @@ html, body {margin:0px; padding:0px; font-family:"futura-pt";}
 #intro {width:150px; float:right; top:75px; position:relative; color:white;}
 #intro a:link {text-decoration: underline;}
 #intro p {padding: 0px; margin:0 0 10px 0px;}
-#cover {float:left; width:350px; padding:20px; position: relative; top:80px; color:white; border-style:solid; border-width:3px; border-color:white;}
+#cover {float:left; width:350px; height:500px; padding:20px; position: relative; top:80px; color:white; border-style:solid; border-width:3px; border-color:white;}
 #cover h1 {font-size:80px;}
 #cover h2 {color:white; font-size:32px;}
 #cover h3 {color:white; font-size:20px;}
