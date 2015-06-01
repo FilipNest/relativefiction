@@ -71,3 +71,6 @@ button:hover {
 
 .code {color:red;}
 small {margin-bottom: 20px; display: block;}
+
+nav.landing a {display: block; text-decoration: none; margin-bottom:10px; background-color: white; color:darkseagreen; padding:10px;}
+nav.landing a:hover {color:black;}

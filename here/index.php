@@ -28,7 +28,7 @@
       <a href="dangers.php"><li>Chloe Aust</li></a>
       <a href="jasmine.php"><li>Sam Davey</li></a>
       <a href="ideasabovestations.php"><li>Fiona Shipwright</li></a>
-      <li>And you? <a href="mailto:filip@bluejumpers.com"><b>Submit a story.</b></a></li>
+      <li>And you? This is a new thing. Have a read of how the system works, write a story and <a href="mailto:filip@bluejumpers.com"><b>send it in.</b></a></li>
     </ul>
     </section>
     <section id="intro">
