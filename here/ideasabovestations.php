@@ -31,5 +31,9 @@
 <p>It took me a minute to diffuse my distraction and actually hear what she had just said. &ldquo;I, er… wait, extra… do you mean psychics? You mean the police use psychics and they draw maps and you have some and now… wait, what?&rdquo;. &ldquo;Yes. And the [museum|1] really wanted to do an exhibition on illustration and communication over the years and we were struggling for donations for material and we thought well if we have these, why not use them somehow. Plus then the exhibition was due to travel to [country], thereby solving the problem of embarrassment for the government. Taking them away. They would be framed as &lsquo;outsider art&rsquo;.&rdquo; I was one third intrigued, one third embarrassed (I&rsquo;m not even sure who far) with a final third comprising of mild offense and an ominous sense of foreboding. &ldquo;What um, do these maps and drawings of [museum|1|city] look like?&rdquo;</p>
 
 <p>&ldquo;Well all sorts, but the collection that has gone missing - well they would have particularly nice in the exhibition. They&rsquo;re drawn on top of subway maps.&rdquo;</p>
+
+<hr />
+
+<b><a href="againstme.php">Read the next story...</a></b>
     
 <?php include "footer.php" ?>
