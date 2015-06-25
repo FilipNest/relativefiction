@@ -29,6 +29,7 @@
       <a href="jasmine.php"><li>Sam Davey</li></a>
       <a href="ideasabovestations.php"><li>Fiona Shipwright</li></a>
       <a href="againstme.php"><li>Amy Gibb</li></a>
+      <a href="she.php"><li>Tanya Perdikou</li></a>
       <li>And you? This is a new thing. Have a read of how the system works, write a story and <a href="mailto:filip@bluejumpers.com"><b>send it in.</b></a></li>
     </ul>
     </section>
