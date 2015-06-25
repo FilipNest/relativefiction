@@ -56,7 +56,7 @@ He rang the bell, and resisted a sudden urge to leave the parcel and flee. A mom
 
 <p>The door swung open smoothly, and there she was. Her caramel coloured hair was draped over one shoulder and gleamed in the streetlight. She blinked, recognised him, saw the bag and then smiled widely.</p>
 
-<p>&ldquo;Thank you so much! I am such an imbecile sometimes and I was convinced I&rsquo;d left it on the bus.&rdquo; Her face changed slightly, her gaze became more intense. &ldquo;Come in? You&rdquo;ve come all this way, have a cup of coffee? Mark isn&rsquo;t it? I saw it on your name badge! Do come through to the lounge.&rdquo;</p>
+<p>&ldquo;Thank you so much! I am such an imbecile sometimes and I was convinced I&rsquo;d left it on the bus.&rdquo; Her face changed slightly, her gaze became more intense. &ldquo;Come in? You&rsquo;ve come all this way, have a cup of coffee? Mark isn&rsquo;t it? I saw it on your name badge! Do come through to the lounge.&rdquo;</p>
 
 <p>Crossing the threshold felt automatic. He would have done anything she asked. The door clicked shut behind him. Mark heard a key turn in the lock.</p>
 
