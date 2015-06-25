@@ -17,5 +17,7 @@
 <p>My heartbeat stops. He&rsquo;s there waiting.</p>
 
 <hr />
-    
+
+<b><a href="she.php">Read the next story...</a></b>
+
 <?php include "footer.php" ?>
