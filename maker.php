@@ -37,7 +37,7 @@ $title = "Local Stories - Home";
           <option value='misc'>Weather/Location</option>
         </select>
         <br />
-
+        
         <div ng-show="type == 'foursquare'">
           <label for="placelist">Place type</label>
           <select ng-model="foursquare" name="placelist">
@@ -45,7 +45,9 @@ $title = "Local Stories - Home";
 
             <?php
 
-$venues = json_decode(file_get_contents("api/venuecategories.json"));
+$venues = json_decode(file_get_contents("api/venuecategories.json"), TRUE);
+
+ksort($venues);
 
    foreach($venues as $key => $value) {
            print "<option>".$key."</option>";
@@ -112,7 +114,7 @@ $venues = json_decode(file_get_contents("api/venuecategories.json"));
 
       <span class="help" ng-show="type == 'date' && date">Note: You can add a pipe after the date variable (before the closing bracket with a +1 or -1 (other numbers work!) to offset most values. Previous years, months, days etc. Putting them all in a form would be silly.) </span>
 
-      <span class="help" ng-show="type == 'foursquare'">Note: Foursquare provides a LOT of locations. Not all of them will actually provide results anywhere near a reader's location. Perhaps stick to the more obvious ones.</span>
+      <span class="help" ng-show="type == 'foursquare'">Note: Foursquare provides a LOT of locations. Not all of them will actually provide results anywhere near a reader's location. Stick to the more obvious ones if you're getting errors or not finding results when previewing.</span>
 
       <br />
 
@@ -120,14 +122,14 @@ $venues = json_decode(file_get_contents("api/venuecategories.json"));
 
     <label for="story">Your story:</label>
     <textarea id="story" name="story"></textarea>
-    
+
     <button id="preview-button" onclick="window.preview()">Preview your story</button>
     <br />
 
   </form>
 
-<div id="preview"></div>
+  <div id="preview"></div>
 
-<br />
+  <br />
 
   <?php include "footer.php"; ?>
