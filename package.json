@@ -1,0 +1,22 @@
+{
+  "name": "localstories",
+  "version": "1.5.0",
+  "description": "A markup library for creating dynamic stories relative to a reader's place, time, location, weather and perhaps more.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilipNest/localstories.git"
+  },
+  "author": "FilipNest",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/FilipNest/localstories/issues"
+  },
+  "homepage": "https://github.com/FilipNest/localstories#readme",
+  "dependencies": {
+    "prosemirror": "0.0.0"
+  }
+}

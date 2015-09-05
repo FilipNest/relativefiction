@@ -1,0 +1,86 @@
+html {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.8);
+}
+h1 {
+  font-size: 150%;
+}
+h1,
+h2 {
+  color: darkseagreen;
+}
+input,
+textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 30px;
+}
+#story-name {
+  font-size: 80px;
+}
+#author-name {
+  font-size: 150%;
+}
+#story {
+  min-height: 400px;
+  border-style: solid;
+  border-width: 2px 0 2px 0;
+}
+.variable {
+  background-color: crimson;
+  color: white;
+  padding: 10px;
+  display: block;
+  margin-top: 10px;
+}
+.help {
+  color: crimson;
+  font-size: 80%;
+}
+button {
+  background-color: darkseagreen;
+  color: white;
+  padding: 10px;
+  font-size: 100%;
+  font-family: "futura-pt";
+  border-style: solid;
+  border-color: black;
+  cursor: pointer;
+  display: block;
+}
+#variables a:link,
+#variables a:visited {
+  color: crimson;
+}
+#preview h1 {
+  line-height: 88px;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 80px;
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#preview h2 {
+  text-align: right;
+  font-size: 36px;
+  margin: 0 0 20px 0;
+}
+#preview #heading {
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  margin-right: 10px;
+  margin-top: 100px;
+}
+#preview article:first-letter {
+  float: left;
+  color: darkseagreen;
+  font-size: 80px;
+  line-height: 60px;
+  padding-top: 8px;
+  padding-right: 4px;
+  padding-left: 4px;
+  font-weight: bold;
+}
+#preview article {
+  font-size: 30px;
+}
