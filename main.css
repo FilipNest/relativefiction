@@ -15,6 +15,7 @@ nav {
   z-index: 2;
   width: 100%;
   max-width: 100%;
+  line-height: 50px;
 }
 
 nav {
@@ -35,6 +36,7 @@ nav li {
   vertical-align: middle
 }
 nav li.github {
+  color:transparent;
   position: relative;
   top: 3px;
 }
@@ -45,6 +47,13 @@ nav a.home {
   position: relative;
   top: 70px;
 }
+
+@media (max-width:600px){
+  
+  #main {top:90px;}
+  
+}
+
 h1,
 h2,
 {

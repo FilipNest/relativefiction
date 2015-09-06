@@ -1,6 +1,6 @@
 <?php include "header.php"; 
 
-$title = "Local Stories - Home";
+$title = "Local Stories - Maker";
 
 ?>
 
@@ -15,18 +15,16 @@ $title = "Local Stories - Home";
   <form ng-controller="makerForm">
 
     <label for="title">Title of story:</label>
-    <textarea rows="4" id="story-name" name="title"></textarea>
+    <textarea required rows="4" id="story-name" name="title"></textarea>
 
     <label for="author">Author:</label>
-    <input id="author-name" name="author" />
+    <input required id="author-name" name="author" />
 
     <div id="variables" ng-controller="variableHelper" ng-cloak>
       <h3>Variable helper</h3>
       <p>Use this to create variables you can push in.</p>
       <p><small>Please note that it doesn't do conditionals as although the syntax is hopefully simple enough for humans to write, a form to create them on the fly is a bit of a nightmare. <a href="/">Read the documentation for help</a>.</small>
       </p>
-
-      <form>
 
         <label for="type">Type of variable</label>
 
@@ -109,7 +107,6 @@ ksort($venues);
           </select>
         </div>
 
-      </form>
       <span ng-if="output" class="variable">{{output}}</span>
 
       <span class="help" ng-show="type == 'date' && date">Note: You can add a pipe after the date variable (before the closing bracket with a +1 or -1 (other numbers work!) to offset most values. Previous years, months, days etc. Putting them all in a form would be silly.) </span>
@@ -121,15 +118,21 @@ ksort($venues);
     </div>
 
     <label for="story">Your story:</label>
-    <textarea id="story" name="story"></textarea>
+    <textarea required id="story" name="story"></textarea>
 
-    <button id="preview-button" onclick="window.preview()">Preview your story</button>
-    <br />
+    <button id="preview-button" ng-click="preview()">Preview your story</button>
 
-  </form>
-
+    
   <div id="preview"></div>
 
   <br />
+    
+    <br />
+    
+        <input ng-if='uploadAllow' id="upload" type="submit" ng-click="upload()" value="Upload when ready."/>
+
+  </form>
+
+<br />
 
   <?php include "footer.php"; ?>

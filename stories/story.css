@@ -1,0 +1,40 @@
+#heading {
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  margin-right: 10px;
+  margin-top: 100px;
+}
+#heading h1 {
+  line-height: 88px;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 80px;
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#heading h2 {
+  color:darkseagreen;
+  text-align: right;
+  font-size: 36px;
+  margin: 0 0 20px 0;
+}
+#heading h3 {
+  text-decoration: none;
+  font-size: 15px;
+  text-align:right;
+}
+article:first-letter {
+  float: left;
+  color: darkseagreen;
+  font-size: 80px;
+  line-height: 60px;
+  padding-top: 8px;
+  padding-right: 4px;
+  padding-left: 4px;
+  font-weight: bold;
+}
+article {
+  display: none;
+  font-size: 30px;
+  margin-bottom: 40px;
+}

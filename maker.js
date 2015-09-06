@@ -2,7 +2,7 @@ angular.element(document).ready(function () {
   angular.bootstrap(document, ['app']);
 });
 
-var variableHelper = function ($scope, $http, $sce, $rootScope) {
+var variableHelper = function ($scope, $http) {
 
   $scope.$watchGroup(['foursquare', 'placeid', 'placeextra', 'date', 'misc', 'type'], function (newValues, oldValues, scope) {
 
@@ -69,9 +69,29 @@ var variableHelper = function ($scope, $http, $sce, $rootScope) {
 
 };
 
-var makerForm = function ($scope, $http, $sce, $rootScope) {
+var makerForm = function ($scope, $http) {
 
-  window.preview = function () {
+  $scope.upload = function () {
+
+    //Prevent multiple upload
+
+    $scope.uploadAllow = false;
+
+    var data = {};
+
+    data.title = $("#story-name").val();
+    data.author = $("#author-name").val();
+    data.story = JSON.stringify($.trim($("#story").val()));
+
+    $.post("/upload.php", data, function (data) {
+
+      console.log(data);
+
+    })
+
+  };
+
+  $scope.preview = function () {
 
     var title = $("#story-name").val();
     var author = $("#author-name").val();
@@ -99,6 +119,11 @@ var makerForm = function ($scope, $http, $sce, $rootScope) {
         data: data,
         success: function (result) {
 
+          //Allow upload
+
+          $scope.uploadAllow = true;
+          $scope.$apply();
+
           //Clear preview
 
           $("#preview").html("");
@@ -106,7 +131,7 @@ var makerForm = function ($scope, $http, $sce, $rootScope) {
           //Add title
 
           $("#preview").append("<div id='heading'>");
-          
+
           $("#preview").append("<h1>" + title + "</h1>");
 
           if (author) {
@@ -114,7 +139,7 @@ var makerForm = function ($scope, $http, $sce, $rootScope) {
             $("#preview").append("<h2>by " + author + "</h2>");
 
           }
-          
+
           $("#preview").append("</div>");
 
           var output = $.parseHTML(result);
@@ -136,5 +161,5 @@ var makerForm = function ($scope, $http, $sce, $rootScope) {
 
 var app = angular.module("app", []);
 
-app.controller("variableHelper", ["$scope", "$attrs", "$http", "$sce", "$rootScope", variableHelper])
-app.controller("makerForm", ["$scope", "$attrs", "$http", "$sce", "$rootScope", makerForm])
+app.controller("variableHelper", ["$scope", variableHelper])
+app.controller("makerForm", ["$scope", "$http", makerForm])

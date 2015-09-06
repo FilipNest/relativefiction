@@ -2,6 +2,12 @@ html {
   background-color: white;
   color:rgba(0,0,0,0.8);
 }
-h1,h2 {
+
+h2 {
   color: darkseagreen;
 }
+
+#stories li {font-size:30px; text-align: left;}
+#stories li {line-height: 100%;}
+.date {font-size: 15px; display: block;}
+.author {color: darkseagreen;}
