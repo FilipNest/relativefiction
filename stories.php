@@ -8,6 +8,8 @@
 
 <p>Anyone can contribute so feel free to <a href="/maker.php"><b>head over to the Write section</b></a> to submit your own.</p>
 
+<p>Because the upload process is completely open, please email filip@bluejumpers.com or leave an issue in the GitHub issue queue if you notice something is overly spammy, pretending to be by someone it's not or such. Also, please don't take advantage of the open system by uploading bad content on purpose.</p>
+
 <?php
 
 include "secret.php";
