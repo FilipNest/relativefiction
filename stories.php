@@ -27,6 +27,7 @@ include "secret.php";
    
       $cursor = $collection->find();
       $cursor->limit(0);
+      $cursor->sort(array('_id' => 0));
       
    echo $cursor->count() . ' stories in library. <br/>';
    

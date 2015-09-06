@@ -56,7 +56,7 @@ include "../secret.php";
    print "<div id='heading'>";
    print "<h1>".$cursor['title']."</h1>";
    print "<h2>by ".$cursor['author']."</h2>";
-   print "<h3>" . "Published on the " . $date->format('mS \o\f F Y') . "</h3>";
+   print "<h3>" . "Published on the " . $date->format('dS \o\f F Y') . "</h3>";
    print "</div>";
    
    print "<article>";
