@@ -122,6 +122,6 @@ include "errors.php";
 
 //Finally return the output
 
-print $output;
+print nl2br($output);
 
 ?>

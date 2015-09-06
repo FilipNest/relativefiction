@@ -13,6 +13,7 @@ h2 {
 }
 input,
 textarea {
+  font-family: "futura-pt";
   display: block;
   width: 100%;
   margin-bottom: 20px;
@@ -41,7 +42,7 @@ textarea {
 }
 button {
   margin: auto;
-  width:200px;
+  width: 200px;
   background-color: darkseagreen;
   color: white;
   padding: 10px;
@@ -56,7 +57,7 @@ button {
 #variables a:visited {
   color: crimson;
 }
-#preview h1 {
+#preview h1, #saved h1 {
   line-height: 88px;
   color: rgba(0, 0, 0, 0.8);
   font-size: 80px;
@@ -64,12 +65,12 @@ button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#preview h2 {
+#preview h2, #saved h2 {
   text-align: right;
   font-size: 36px;
   margin: 0 0 20px 0;
 }
-#preview #heading {
+#preview .heading, #saved .heading {
   border-style: solid;
   border-width: 0 0 0 4px;
   margin-right: 10px;
@@ -99,3 +100,4 @@ button {
   cursor: pointer;
   display: block;
 }
+#saved a:link, #saved a:visited {color:darkseagreen; font-weight: bold;}

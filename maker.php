@@ -10,9 +10,9 @@ $title = "Local Stories - Maker";
 
   <link rel="stylesheet" href="maker.css" />
 
-  <h1>Write a story...</h1>
+  <form id="makerForm" ng-controller="makerForm">
 
-  <form ng-controller="makerForm">
+    <h1>Write a story...</h1>
 
     <label for="title">Title of story:</label>
     <textarea required rows="4" id="story-name" name="title"></textarea>
@@ -20,28 +20,31 @@ $title = "Local Stories - Maker";
     <label for="author">Author:</label>
     <input required id="author-name" name="author" />
 
+    <label for="email">Optional email address (<small>in case you forget the edit code you'll be sent when uploading</small>):</label>
+    <input type="email" rows="4" id="author-email" name="email" />
+
     <div id="variables" ng-controller="variableHelper" ng-cloak>
       <h3>Variable helper</h3>
       <p>Use this to create variables you can push in.</p>
       <p><small>Please note that it doesn't do conditionals as although the syntax is hopefully simple enough for humans to write, a form to create them on the fly is a bit of a nightmare. <a href="/">Read the documentation for help</a>.</small>
       </p>
 
-        <label for="type">Type of variable</label>
+      <label for="type">Type of variable</label>
 
-        <select ng-model="type" name="type">
-          <option value="" selected="selected">Pick a value</option>
-          <option value='date'>Date/Time</option>
-          <option value='foursquare'>Place</option>
-          <option value='misc'>Weather/Location</option>
-        </select>
-        <br />
-        
-        <div ng-show="type == 'foursquare'">
-          <label for="placelist">Place type</label>
-          <select ng-model="foursquare" name="placelist">
-            <option value="" selected="selected">Pick a place category</option>
+      <select ng-model="type" name="type">
+        <option value="" selected="selected">Pick a value</option>
+        <option value='date'>Date/Time</option>
+        <option value='foursquare'>Place</option>
+        <option value='misc'>Weather/Location</option>
+      </select>
+      <br />
 
-            <?php
+      <div ng-show="type == 'foursquare'">
+        <label for="placelist">Place type</label>
+        <select ng-model="foursquare" name="placelist">
+          <option value="" selected="selected">Pick a place category</option>
+
+          <?php
 
 $venues = json_decode(file_get_contents("api/venuecategories.json"), TRUE);
 
@@ -52,60 +55,60 @@ ksort($venues);
        }
 
           ?>
-          </select>
-          <br />
-          <label for="place-id">Place id</label>
-          <select ng-model="placeid" name="place-id">
-            <option value="" selected="selected">Pick an id</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-          <br />
-          <label for="place-extra">Place information</label>
-          <select ng-model="placeextra" name="place-id">
-            <option value="" selected="selected">Name</option>
-            <option value="distance">Distance</option>
-            <option value="street">Street</option>
-          </select>
-          <br />
-        </div>
+        </select>
+        <br />
+        <label for="place-id">Place id</label>
+        <select ng-model="placeid" name="place-id">
+          <option value="" selected="selected">Pick an id</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <br />
+        <label for="place-extra">Place information</label>
+        <select ng-model="placeextra" name="place-id">
+          <option value="" selected="selected">Name</option>
+          <option value="distance">Distance</option>
+          <option value="street">Street</option>
+        </select>
+        <br />
+      </div>
 
-        <div ng-show="type == 'date'">
+      <div ng-show="type == 'date'">
 
-          <label for="date-time">Date/time</label>
+        <label for="date-time">Date/time</label>
 
-          <select ng-model="date" name="date-time">
-            <option value="" selected="selected">Pick an variable</option>
-            <option value='dayofweek'>Day of week</option>
-            <option value='monthofyear'>Month of year</option>
-            <option value='dayofmonth'>Day of month</option>
-            <option value='dayofmonthsuffix'>Day of month suffix</option>
-            <option value="year">Year</option>
-            <option value="sunsethour">Sunset hour</option>
-            <option value="hourstosunset">Hours to sunset</option>
-            <option value="sunrisehour">Sunrise hour</option>
-            <option value="hourstosunrise">Hours to sunrise</option>
+        <select ng-model="date" name="date-time">
+          <option value="" selected="selected">Pick an variable</option>
+          <option value='dayofweek'>Day of week</option>
+          <option value='monthofyear'>Month of year</option>
+          <option value='dayofmonth'>Day of month</option>
+          <option value='dayofmonthsuffix'>Day of month suffix</option>
+          <option value="year">Year</option>
+          <option value="sunsethour">Sunset hour</option>
+          <option value="hourstosunset">Hours to sunset</option>
+          <option value="sunrisehour">Sunrise hour</option>
+          <option value="hourstosunrise">Hours to sunrise</option>
 
-          </select>
-          <br />
+        </select>
+        <br />
 
-        </div>
+      </div>
 
-        <div ng-show="type == 'misc'">
-          <label for="weather-location">Weather/location</label>
+      <div ng-show="type == 'misc'">
+        <label for="weather-location">Weather/location</label>
 
-          <select ng-model="misc" name="weather-location">
-            <option value="" selected="selected">Pick an variable</option>
-            <option value='weather'>Weather</option>
-            <option value='longitude'>Longitude</option>
-            <option value='latitude'>Latitude</option>
-            <option value='country'>Country</option>
+        <select ng-model="misc" name="weather-location">
+          <option value="" selected="selected">Pick an variable</option>
+          <option value='weather'>Weather</option>
+          <option value='longitude'>Longitude</option>
+          <option value='latitude'>Latitude</option>
+          <option value='country'>Country</option>
 
-          </select>
-        </div>
+        </select>
+      </div>
 
       <span ng-if="output" class="variable">{{output}}</span>
 
@@ -122,17 +125,17 @@ ksort($venues);
 
     <button id="preview-button" ng-click="preview()">Preview your story</button>
 
-    
-  <div id="preview"></div>
 
-  <br />
-    
+    <div id="preview"></div>
+
     <br />
-    
-        <input ng-if='uploadAllow' id="upload" type="submit" ng-click="upload()" value="Upload when ready."/>
+
+    <br />
+
+    <input ng-if='uploadAllow' id="upload" type="submit" ng-click="upload()" value="Upload when ready." />
 
   </form>
 
-<br />
+  <br />
 
   <?php include "footer.php"; ?>

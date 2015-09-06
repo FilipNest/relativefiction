@@ -46,7 +46,7 @@ $date = getDateTimeFromMongoId($doc['_id']);
      print "<li><a href='/stories/".(string) $doc['_id']."'>";
      print $doc['title'];
      print " by " . "<span class='author'>" . $doc['author'] . "</a></span>";
-     print "<span class='date'>Published on the " . $date->format('mS \o\f F Y') . "</span>";
+     print "<span class='date'>Published on the " . $date->format('dS \o\f F Y') . "</span>";
      print "</li>"; 
      
       }

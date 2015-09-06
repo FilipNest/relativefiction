@@ -28,16 +28,24 @@ $text = json_decode($_POST["story"]);
       "author" => $author,
       "title" => $title,
       "text" => $text,
-      "editkey" => editkey($text)
+      "editkey" => editkey($text) 
       
     );
+    
+    if(isset($_POST["email"])){
+     
+      $data['email'] = $_POST["email"];
+      
+    };
     
 $collection->insert($data);
     
     // disconnect from server
     $m->close();
     
-    print (string) $data['_id'];
+    $data['_id'] = (string) $data['_id'];
+    
+    echo json_encode($data);
     
   } catch ( MongoConnectionException $e ) {
     http_response_code (500);
