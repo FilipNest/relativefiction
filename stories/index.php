@@ -63,6 +63,10 @@ include "../secret.php";
    print $cursor['text'];
    print "</article>";
    
+   print "<hr /><br />";
+   
+   print '<a class="edit-link" href="/stories/edit/'.$id.'">Edit/view unprocesed text.</a><br />';
+
     // disconnect from server
     $m->close();
   } catch ( MongoConnectionException $e ) {

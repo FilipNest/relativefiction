@@ -71,6 +71,33 @@ var variableHelper = function ($scope, $http) {
 
 var makerForm = function ($scope, $http) {
 
+  $scope.edit = function (id) {
+
+    var data = {};
+
+    data.id = id;
+    data.title = $("#story-name").val();
+    data.author = $("#author-name").val();
+    data.story = JSON.stringify($.trim($("#story").val()));
+    data.email = JSON.stringify($.trim($("#author-email").val()));
+    data.editkey = $("#editkey").val();
+
+    $.post("/stories/edit/edit.php", data, function (data) {
+
+      if (data) {
+
+        window.location.href = "../"+id;
+
+      }
+
+    }).fail(function (e) {
+
+      alert(e.responseText);
+
+    });
+
+  }
+
   $scope.upload = function () {
 
     //Prevent multiple upload
@@ -85,15 +112,15 @@ var makerForm = function ($scope, $http) {
     data.email = JSON.stringify($.trim($("#author-email").val()));
 
     $.post("/upload.php", data, function (data) {
-      
+
       data = JSON.parse(data);
-      
-      if(data._id){
-              
+
+      if (data._id) {
+
         //Add saved story data
-        
-        $("#makerForm").html("<section id='saved'><div class='heading'><h1>"+data.title+"</h2><h2>by "+data.author+"</h3></div><h4>Has been successfully saved.</h4><p><a href='/stories/"+data._id+"'>The story can be viewed here.</a></p><p>Please take note of edit key <b>"+data.editkey+"</b> for when if you need to make any changes.</p><p>Thank you for supporting the project.</p></section>");
-        
+
+        $("#makerForm").html("<section id='saved'><div class='heading'><h1>" + data.title + "</h2><h2>by " + data.author + "</h3></div><h4>Has been successfully saved.</h4><p><a href='/stories/" + data._id + "'>The story can be viewed here.</a></p><p>Please take note of edit key <b>" + data.editkey + "</b> for when if you need to make any changes.</p><p>Thank you for supporting the project.</p></section>");
+
       };
 
     })
@@ -108,7 +135,7 @@ var makerForm = function ($scope, $http) {
     var data = {};
 
     data.text = JSON.stringify($.trim($("#story").val()));
-    
+
     //Get date/time (strip out milliseconds for PHP)
 
     x = new Date()

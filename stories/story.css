@@ -38,3 +38,5 @@ article {
   font-size: 30px;
   margin-bottom: 40px;
 }
+
+a.edit-link {background-color: darkseagreen; color:white; display: none; padding:5px; margin-bottom: 10px;}
