@@ -8,6 +8,7 @@ h2 {
 }
 
 #stories li {font-size:30px; text-align: left; margin-bottom: 20px;}
-#stories li {line-height: 100%;}
+#stories li {line-height: 100%; max-width: 400px;}
 .date {font-size: 15px; display: block;}
 .author {color: darkseagreen;}
+.title {font-weight: bold;}

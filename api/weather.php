@@ -27,6 +27,12 @@ $weather = $request->send()->getBody();
 
 $weather = json_decode($weather);
 
+if($weather->cod !== 200){
+  
+//  return false;
+  
+};
+
 $sunrise = $weather->sys->sunrise;
 $sunset = $weather->sys->sunset;
 

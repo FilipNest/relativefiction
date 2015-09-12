@@ -28,7 +28,8 @@ $text = json_decode($_POST["story"]);
       "author" => $author,
       "title" => $title,
       "text" => $text,
-      "editkey" => editkey($text) 
+      "editkey" => editkey($text),
+      "date" => time()
       
     );
     

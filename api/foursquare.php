@@ -22,7 +22,13 @@ function foursquare($variables){
     $name = explode("|",$variable)[0];
 
     if(count(explode("|",$variable)) > 0){
-    $id = explode("|",$variable)[1];
+      
+      if(!isset(explode("|",$variable)[1])){
+       
+        return false;
+        
+      }
+      $id = explode("|",$variable)[1];
     }
 
     if(count(explode("|",$variable)) > 2){

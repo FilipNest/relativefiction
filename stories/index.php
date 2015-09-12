@@ -42,21 +42,14 @@ include "../secret.php";
         )
     );
    
-   function getDateTimeFromMongoId(MongoId $mongoId)
-{
-    $dateTime = new DateTime('@'.$mongoId->getTimestamp());
-    $dateTime->setTimezone(new DateTimeZone(date_default_timezone_get()));
-    return $dateTime;
-}
-   
-   $date = getDateTimeFromMongoId($cursor['_id']);
+   $date = date("dS \o\\f F Y", $cursor['date']);
    
    $title = "Local Stories -" . $cursor['title'] . " by " . $cursor['author'];
    
    print "<div id='heading'>";
    print "<h1>".$cursor['title']."</h1>";
    print "<h2>by ".$cursor['author']."</h2>";
-   print "<h3>" . "Published on the " . $date->format('dS \o\f F Y') . "</h3>";
+   print "<h3>" . "Published on the " . $date . "</h3>";
    print "</div>";
    
    print "<article>";

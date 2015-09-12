@@ -29,27 +29,20 @@ include "secret.php";
    
       $cursor = $collection->find();
       $cursor->limit(0);
-      $cursor->sort(array('_id' => 0));
+      $cursor->sort(array('date' => 0));
       
    echo $cursor->count() . ' stories in library. <br/>';
    
    print "<ul id='stories'>";
    
-   function getDateTimeFromMongoId(MongoId $mongoId)
-{
-    $dateTime = new DateTime('@'.$mongoId->getTimestamp());
-    $dateTime->setTimezone(new DateTimeZone(date_default_timezone_get()));
-    return $dateTime;
-}
-   
    foreach($cursor as $doc) {
      
-$date = getDateTimeFromMongoId($doc['_id']);
+     $date = date("dS \o\\f F Y", $doc['date']);
      
      print "<li><a href='/stories/".(string) $doc['_id']."'>";
-     print $doc['title'];
-     print " by " . "<span class='author'>" . $doc['author'] . "</a></span>";
-     print "<span class='date'>Published on the " . $date->format('dS \o\f F Y') . "</span>";
+     print "<span class='title'>" . $doc['title'] . "</span><br />";
+     print "<small> by </small>" . "<span class='author'>" . $doc['author'] . "</a></span>";
+     print "<span class='date'>Published on the " . $date . "</span>";
      print "</li>"; 
      
       }
