@@ -26,10 +26,11 @@ data.time = (x.getTime() - x.getTimezoneOffset()*60*1000)/1000;
       data: data,
       success: function (result) {
   
+        $("#main").show();
         $("article").html($.parseHTML(result));
         $("article").fadeIn();
         $(".edit-link").css("display","inline-block");
-
+        
       },
     });
 

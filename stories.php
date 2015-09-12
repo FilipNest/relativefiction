@@ -41,7 +41,7 @@ include "secret.php";
      
      print "<li><a href='/stories/".(string) $doc['_id']."'>";
      print "<span class='title'>" . $doc['title'] . "</span><br />";
-     print "<small> by </small>" . "<span class='author'>" . $doc['author'] . "</a></span>";
+     print "<small> by </small>" . "<span class='author'>" . htmlspecialchars($doc['author']) . "</a></span>";
      print "<span class='date'>Published on the " . $date . "</span>";
      print "</li>"; 
      
