@@ -1,3 +1,6 @@
+#main {
+  display: none;
+}
 #heading {
   border-style: solid;
   border-width: 0 0 0 4px;
@@ -5,6 +8,7 @@
   margin-top: 100px;
 }
 #heading h1 {
+  word-wrap: break-word;
   line-height: 88px;
   color: rgba(0, 0, 0, 0.8);
   font-size: 80px;
@@ -13,7 +17,7 @@
   margin-bottom: 10px;
 }
 #heading h2 {
-  color:darkseagreen;
+  color: darkseagreen;
   text-align: right;
   font-size: 36px;
   margin: 0 0 20px 0;
@@ -21,7 +25,7 @@
 #heading h3 {
   text-decoration: none;
   font-size: 15px;
-  text-align:right;
+  text-align: right;
 }
 article:first-letter {
   float: left;
@@ -38,5 +42,16 @@ article {
   font-size: 30px;
   margin-bottom: 40px;
 }
-
-a.edit-link {background-color: darkseagreen; color:white; display: none; padding:5px; margin-bottom: 10px;}
+a.edit-link {
+  background-color: darkseagreen;
+  color: white;
+  display: none;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+@media (max-width: 400px) {
+  #heading h1 {
+    font-size: 50px;
+    line-height: 55px;
+  }
+}

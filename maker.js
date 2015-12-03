@@ -86,7 +86,7 @@ var makerForm = function ($scope, $http) {
 
       if (data) {
 
-        window.location.href = "../"+id;
+        window.location.href = "../" + id;
 
       }
 
@@ -129,6 +129,18 @@ var makerForm = function ($scope, $http) {
 
   $scope.preview = function () {
 
+    $.blockUI({
+      css: {
+        border: 'none',
+        padding: '15px',
+        backgroundColor: '#000',
+        'border-radius': '10px',
+        opacity: .5,
+        color: '#fff',
+      },
+      message: "Localising, please wait..."
+    });
+
     var title = $("#story-name").val();
     var author = $("#author-name").val();
 
@@ -154,6 +166,8 @@ var makerForm = function ($scope, $http) {
         url: "/api/story.php",
         data: data,
         success: function (result) {
+
+          $.unblockUI(500);
 
           //Allow upload
 

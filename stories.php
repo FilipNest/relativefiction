@@ -10,6 +10,8 @@
 
 <p>Because the upload process is completely open, please email filip@bluejumpers.com or leave an issue in the GitHub issue queue if you notice something is overly spammy, pretending to be by someone it's not or such. Also, please don't take advantage of the open system by uploading bad content on purpose.</p>
 
+<p><em>Thank you to the first set of wrtiers who contributed to the project. Their stories are available together in a little virtual book. <b><a title="Here - A collection of relative fiction" href="/here/">Read it here</a></b>.</em></p>
+
 <?php
 
 include "secret.php";
@@ -41,7 +43,7 @@ include "secret.php";
      
      print "<li><a href='/stories/".(string) $doc['_id']."'>";
      print "<span class='title'>" . $doc['title'] . "</span><br />";
-     print "<small> by </small>" . "<span class='author'>" . $doc['author'] . "</a></span>";
+     print "<small> by </small>" . "<span class='author'>" . htmlspecialchars($doc['author']) . "</a></span>";
      print "<span class='date'>Published on the " . $date . "</span>";
      print "</li>"; 
      

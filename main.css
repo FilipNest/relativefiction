@@ -46,6 +46,8 @@ nav a.home {
 #main {
   position: relative;
   top: 70px;
+  max-width: 90%;
+  margin: auto;
 }
 
 @media (max-width:600px){

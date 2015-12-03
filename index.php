@@ -10,7 +10,7 @@ $title = "Local Stories - Home";
 
   <h1>Local Stories</h1>
 
-<h2>A tool by for creating dynamic stories relative to a reader's place, time, location, weather and perhaps more*</h2>
+<h2>A tool for creating dynamic stories relative to a reader's place, time, location, weather and perhaps more*</h2>
 
   <small>*This first launch is focused on places (using the Foursquare API), times/dates, and weather (using the OpenWeatherMap API) but adding related music (via the Last.fm API), names of a reader's friends (via Facebook) and more could certainly be possible in the future. Any suggestions would be very welcome. Tap the request button in the top right to suggest ideas.</small>
 

@@ -65,7 +65,7 @@ include "../../secret.php";
     <label for="author">Author:</label>
     <input required id="author-name" name="author" value="<?php print $cursor['author'];?>" />
 
-    <label for="email">Optional email address (<small>in case you forget the edit code you'll be sent when uploading</small>):</label>
+    <label for="email">Optional email address (<small>in case you forget the edit code you'll be given after uploading</small>):</label>
     <input type="email" rows="4" id="author-email" name="email" value=<?php if(isset($cursor['email'])){print $cursor["email"];}?>>
 
     <div id="variables" ng-controller="variableHelper" ng-cloak>

@@ -15,22 +15,21 @@
 <body class="front">
 
   <header>
-    <section><span>&nbsp;</span><span id="localstories">Made with <a href="http://filipnest.com/localstories">Local stories</a></span>
+    <section><span>&nbsp;</span><span id="localstories">Made with <a href="http://relativefiction.com">Local stories</a></span>
     </section>
   </header>
   <section id="home">
     <section id="cover">
-      <a href="oldlight.php"><h1>Here.</h1></a>
+      <h1>Here.</h1>
     <h2>A collection of relative fiction</h2>
     <h3>Featuring stories by:</h3>
     <ul>
-      <a href="oldlight.php"><li>Filip Hn&#237;zdo</li></a>
-      <a href="dangers.php"><li>Chloe Aust</li></a>
-      <a href="jasmine.php"><li>Sam Davey</li></a>
-      <a href="ideasabovestations.php"><li>Fiona Shipwright</li></a>
-      <a href="againstme.php"><li>Amy Gibb</li></a>
-      <a href="she.php"><li>Tanya Perdikou</li></a>
-      <li>And you? This is a new thing. Have a read of how the system works, write a story and <a href="mailto:filip@bluejumpers.com"><b>send it in.</b></a></li>
+      <a href="/stories/55f413ddd8e79e1019000029"><li>Filip Hn&#237;zdo</li></a>
+      <a href="/stories/55f416f2d8e79e101900002a"><li>Chloe Aust</li></a>
+      <a href="/stories/55f418a1d8e79e101900002e"><li>Sam Davey</li></a>
+      <a href="/stories/55f41868d8e79e101900002d"><li>Fiona Shipwright</li></a>
+      <a href="/stories/55f417edd8e79e101900002b"><li>Amy Gibb</li></a>
+      <a href="/stories/55f41833d8e79e101900002c"><li>Tanya Perdikou</li></a>
     </ul>
     </section>
     <section id="intro">

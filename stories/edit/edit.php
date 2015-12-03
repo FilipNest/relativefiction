@@ -59,7 +59,7 @@ if(isset($_POST["author"]) && isset($_POST["title"]) && isset($_POST["story"]) &
     // disconnect from server
     $m->close();
         
-    echo $updated;
+    echo "Updated";
     
   } catch ( MongoConnectionException $e ) {
     http_response_code (500);

@@ -20,7 +20,7 @@ $title = "Local Stories - Maker";
     <label for="author">Author:</label>
     <input required id="author-name" name="author" />
 
-    <label for="email">Optional email address (<small>in case you forget the edit code you'll be sent when uploading</small>):</label>
+    <label for="email">Optional email address (<small>in case you forget the edit code you'll be given after uploading</small>):</label>
     <input type="email" rows="4" id="author-email" name="email" />
 
     <div id="variables" ng-controller="variableHelper" ng-cloak>

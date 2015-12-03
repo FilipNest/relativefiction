@@ -67,13 +67,27 @@ $(document).ready(function () {
     navigator.geolocation.getCurrentPosition(function (location) {
 
       data.location = location.coords;
-      
+
+      $.blockUI({
+        css: {
+          border: 'none',
+          padding: '15px',
+          backgroundColor: '#000',
+          'border-radius': '10px',
+          opacity: .5,
+          color: '#fff',
+        },
+        message: "Localising, please wait..."
+      });
+
       $.ajax({
         type: "POST",
         url: "/api/story.php",
         data: data,
         success: function (result) {
-          
+      
+          $.unblockUI(500);
+
           // Put in result
 
           $(block).attr("data-raw", rawtext);
