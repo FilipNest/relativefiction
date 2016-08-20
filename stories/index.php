@@ -6,7 +6,7 @@ include "../header.php";
 
   <?php
 
- $id = explode("/", $_SERVER['REQUEST_URI'])[2];
+ $id = $_GET["story"];
       
    if(!isset($id) || empty($id)){
 

@@ -41,7 +41,7 @@ include "secret.php";
      
      $date = date("dS \o\\f F Y", $doc['date']);
      
-     print "<li><a href='/stories/".(string) $doc['_id']."'>";
+     print "<li><a href='?story=".(string) $doc['_id']."'>";
      print "<span class='title'>" . $doc['title'] . "</span><br />";
      print "<small> by </small>" . "<span class='author'>" . htmlspecialchars($doc['author']) . "</a></span>";
      print "<span class='date'>Published on the " . $date . "</span>";
