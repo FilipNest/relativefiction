@@ -6,7 +6,14 @@ include "../header.php";
 
   <?php
 
- $id = $_GET["story"];
+  $id = "";
+
+  if(isset($_GET["story"])){
+    
+  $id = $_GET["story"];
+    
+  }
+
       
    if(!isset($id) || empty($id)){
 
