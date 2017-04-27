@@ -7,7 +7,7 @@ require("./time");
 rf.process({
   longitude: "55",
   latitude: "1000",
-  "text": `hello world the time is {hours12 - 1 hour}:{minutes - 20 minute}{ampm} {year + 3000 years}`,
+  "text": `hello world the time is {hours12 - 1 hour}:{minutes - 20 minute}{ampm} {year + 3000 years} {dayofmonth} {dayofweek}`,
   time: Date.now()
 }).then(function (output) {
 

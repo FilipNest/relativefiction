@@ -1,18 +1,8 @@
 var moment = require("moment");
 
-// Create moment object for later parsing
-
-rf.alter(function (output, next) {
-
-  output.moment = moment(output.time);
-
-  next();
-
-});
-
 rf.tag(function (tagParms, output) {
 
-  var time = output.moment;
+  var time = moment(output.time);
 
   if (tagParms[1] === "+") {
 
@@ -37,6 +27,10 @@ rf.tag(function (tagParms, output) {
       return time.format("s");
     case "ampm":
       return time.format("a");
+    case "dayofweek":
+      return time.format("dddd");
+    case "dayofmonth":
+      return time.format("Do")
   }
 
 }, 2)
