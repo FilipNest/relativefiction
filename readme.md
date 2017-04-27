@@ -32,8 +32,6 @@ General
 
 {{dayofweek "offset"}}
 
-longitude
-latitude
 country
 weather
 sunsethour
