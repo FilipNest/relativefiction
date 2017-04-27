@@ -30,7 +30,9 @@ rf.tag(function (tagParms, output) {
     case "dayofweek":
       return time.format("dddd");
     case "dayofmonth":
-      return time.format("Do")
+      return time.format("D")
+    case "dayofmonthsuffix":
+      return time.format("Do");
   }
 
 }, 2)
