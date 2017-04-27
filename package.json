@@ -1,8 +1,8 @@
 {
-  "name": "localstories",
-  "version": "1.5.0",
-  "description": "A markup library for creating dynamic stories relative to a reader's place, time, location, weather and perhaps more.",
-  "main": "index.html",
+  "name": "relativefiction",
+  "version": "2.0.0",
+  "description": "Localised storytelling",
+  "main": "relativefiction.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/FilipNest/localstories.git"
   },
+  "keywords": [
+    "fictioh",
+    "geolocation"
+  ],
   "author": "FilipNest",
-  "license": "Apache-2.0",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/FilipNest/localstories/issues"
   },
   "homepage": "https://github.com/FilipNest/localstories#readme",
   "dependencies": {
-    "prosemirror": "0.0.0"
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "handlebars": "^4.0.6",
+    "moment": "^2.18.1",
+    "request": "^2.81.0"
   }
 }
