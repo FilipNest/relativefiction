@@ -3,11 +3,12 @@
 global.rf = require("./relativefiction");
 
 require("./time");
+require("./misc");
 
 rf.process({
   longitude: "55",
   latitude: "1000",
-  "text": `hello world the time is {hours12 - 1 hour}:{minutes - 20 minute}{ampm} {year + 3000 years} {dayofmonth} {dayofweek}`,
+  "text": `hello world the time is {hours12 - 1 hour}:{minutes - 20 minute}{ampm} {year + 3000 years} {dayofmonth} {dayofweek} {dayofmonth} {dayofmonthsuffix} {latitude} {longitude}`,
   time: Date.now()
 }).then(function (output) {
 

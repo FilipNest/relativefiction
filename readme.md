@@ -16,7 +16,11 @@ Time
 * dayofmonth
 * dayofmonthsuffix
 
+General
+-------
 
+* longitude
+* latitude
 
 ```
 
