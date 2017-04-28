@@ -167,23 +167,27 @@ module.exports = {
 
               var tagPromise = new Promise(function (passTag, failTag) {
 
-                var result = tagHook.processor(tag.params, output, function (parsed) {
-
-                  if (parsed) {
-
-                    output.result = output.result.split(tag.tag).join(parsed);
-
-                  }
-
-                  passTag();
-
-                })
+                var result = tagHook.processor(tag.params, output);
 
                 if (result) {
 
-                  output.result = output.result.split(tag.tag).join(result);
+                  if (result.then) {
 
-                  passTag();
+                    result.then(function (parsed) {
+
+                      output.result = output.result.split(tag.tag).join(parsed);
+
+                      passTag();
+
+                    })
+
+                  } else {
+
+                    output.result = output.result.split(tag.tag).join(result);
+
+                    passTag();
+
+                  }
 
                 } else if (typeof result === "undefined") {
 
