@@ -64,6 +64,12 @@ function getProperty(title, property, callback) {
 
     var result = {};
 
+    if (!properties.length) {
+
+      return callback(false);
+
+    }
+
     request(wdk.getEntities(properties), function (error, response, body) {
 
       var propertyEntities = JSON.parse(body).entities;
@@ -123,12 +129,12 @@ function getProperty(title, property, callback) {
 
         // Get similarity of top. Discard if less than 0.7.
 
-        if (similarity(best[0], property) >= 0.7) {
+        if (similarity(best[0], property) >= 0.5) {
 
           callback(result[best[0]]);
 
         } else {
-
+          
           callback(false);
 
         }
@@ -149,7 +155,7 @@ rf.tag(function (tagParams, output, callack) {
     return new Promise(function (resolve, reject) {
 
       getProperty(tagParams[1], tagParams[2], function (output) {
-        
+
         resolve(output);
 
       })
