@@ -4,6 +4,50 @@ var wdk = require("wikidata-sdk");
 
 var util = require("util");
 
+// Levenshtein distance for properties on Stackoverflow by David and overlord1234
+
+function editDistance(s1, s2) {
+  s1 = s1.toLowerCase();
+  s2 = s2.toLowerCase();
+
+  var costs = new Array();
+  for (var i = 0; i <= s1.length; i++) {
+    var lastValue = i;
+    for (var j = 0; j <= s2.length; j++) {
+      if (i == 0)
+        costs[j] = j;
+      else {
+        if (j > 0) {
+          var newValue = costs[j - 1];
+          if (s1.charAt(i - 1) != s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue),
+              costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+    }
+    if (i > 0)
+      costs[s2.length] = lastValue;
+  }
+  return costs[s2.length];
+}
+
+function similarity(s1, s2) {
+  var longer = s1;
+  var shorter = s2;
+  if (s1.length < s2.length) {
+    longer = s2;
+    shorter = s1;
+  }
+  var longerLength = longer.length;
+  if (longerLength == 0) {
+    return 1.0;
+  }
+  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+
+
 function getProperty(title, property, callback) {
 
   request(wdk.getWikidataIdsFromWikipediaTitles(title), function (error, response, body) {
@@ -57,7 +101,37 @@ function getProperty(title, property, callback) {
 
         })
 
-        callback(result[property]);
+        // Sort keys by similarity to searched for property
+
+        var best = Object.keys(result).sort(function (a, b) {
+
+          if (similarity(a, property) > similarity(b, property)) {
+
+            return -1
+
+          } else if (similarity(a, property) < similarity(b, property)) {
+
+            return 1
+
+          } else {
+
+            return 0;
+
+          }
+
+        });
+
+        // Get similarity of top. Discard if less than 0.7.
+
+        if (similarity(best[0], property) >= 0.7) {
+
+          callback(result[best[0]]);
+
+        } else {
+
+          callback(false);
+
+        }
 
       })
 
@@ -72,13 +146,15 @@ rf.tag(function (tagParams, output, callack) {
 
   if (tagParams[0] === "wiki") {
 
-    getProperty(tagParams[1], tagParams[2], function (output) {
+    return new Promise(function (resolve, reject) {
 
-      console.log(output);
-      return output;
+      getProperty(tagParams[1], tagParams[2], function (output) {
+        
+        resolve(output);
+
+      })
 
     })
-    
   }
 
 })
