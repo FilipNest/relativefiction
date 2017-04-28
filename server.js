@@ -1,24 +1,6 @@
 // Require main RF code
 
-global.rf = require("./relativefiction");
-
-require("./time");
-require("./misc");
-
-rf.process({
-  longitude: "55",
-  latitude: "1000",
-  "text": `hello world the time is {hours12 - 1 hour}:{minutes - 20 minute}{ampm} {year + 3000 years} {dayofmonth} {dayofweek} {dayofmonth} {dayofmonthsuffix} {latitude} {longitude}`,
-  time: Date.now()
-}).then(function (output) {
-
-  console.log(output);
-
-}, function (error) {
-
-  console.error(error);
-
-})
+require("./relativefiction");
 
 // Setup server
 
@@ -45,7 +27,7 @@ server.listen(port);
 
 server.post("/", (req, res) => {
 
-  rf(req.body).then((output) => {
+  rf.process(req.body).then((output) => {
 
     // Returns Object {result: String, errors:[String], longitude:String, latitude:String, original:String, time: Date}
 
