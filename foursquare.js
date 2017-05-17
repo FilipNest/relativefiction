@@ -128,11 +128,25 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       rf.tag(category, function (tagParams, output) {
 
+        var number;
+
+        if (!isNaN(parseInt(tagParams[1]))) {
+
+          number = parseInt(tagParams[1]) - 1;
+
+        }
+
+        if (!number || number < 0) {
+
+          number = 0;
+
+        }
+
         if (output.foursquare[category]) {
 
           var venues = output.foursquare[category];
-                    
-          return venues[0].name;
+
+          return venues[number].name;
 
         } else {
 
