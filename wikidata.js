@@ -48,12 +48,30 @@ function similarity(s1, s2) {
 }
 
 
-function getProperty(title, property, callback) {
+function getProperty(title, property, callback, optional = " ") {
 
-  request(wdk.getWikidataIdsFromWikipediaTitles(title), function (error, response, body) {
+  var query = `SELECT ?id WHERE {
+  ?item ?label "${title}"@en .
+  ?item schema:description ?itemdesc.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en"}
+  OPTIONAL {
+  FILTER(CONTAINS(LCASE(?itemdesc), "${optional}"@en))
+  }
+}
+LIMIT 1`
+
+  request(wdk.sparqlQuery(query), function (error, response, body) {
 
     var body = JSON.parse(body);
-
+    
+    if(!body.results.bindings.length){
+      
+      return callback(false);
+      
+    }
+    
+    console.log(body.results.bindings);
+    
     var entity = body.entities[Object.keys(body.entities)[0]];
 
     // Get properties
@@ -134,7 +152,7 @@ function getProperty(title, property, callback) {
           callback(result[best[0]]);
 
         } else {
-          
+
           callback(false);
 
         }

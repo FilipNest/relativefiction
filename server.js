@@ -1,57 +1,65 @@
 // Require main RF code
 
-require("./relativefiction");
+module.exports = function (config = {}) {
 
-// Setup server
+  require("./relativefiction");
+  
+  rf.config = config;
 
-const express = require('express');
-const bodyParser = require('body-parser');
+  // Setup server
 
-var server = express();
-var port = 3000;
+  const express = require('express');
+  const bodyParser = require('body-parser');
 
-// parse application/x-www-form-urlencoded
-server.use(bodyParser.urlencoded({
-  extended: false
-}))
+  var server = express();
+  var port = rf.config.port || 80;
 
-// parse application/json
-server.use(bodyParser.json())
+  // parse application/x-www-form-urlencoded
+  server.use(bodyParser.urlencoded({
+    extended: false
+  }))
 
-// serve static files
-server.use(express.static('static'));
+  // parse application/json
+  server.use(bodyParser.json())
 
-// Start server
+  // serve static files
+  server.use(express.static('static'));
 
-server.listen(port);
+  // Start server
 
-server.post("/", (req, res) => {
+  server.listen(port);
 
-  rf.process(req.body).then((output) => {
+  server.post("/", (req, res) => {
 
-    // Returns Object {result: String, errors:[String], longitude:String, latitude:String, original:String, time: Date}
+    rf.process(req.body).then((output) => {
 
-    res.status(200);
-    res.json(output);
+      // Returns Object {result: String, errors:[String], longitude:String, latitude:String, original:String, time: Date}
 
-  }, (output) => {
+      res.status(200);
+      res.json(output);
 
-    // Called if any fatal errors. Returns output Object (see above) but deletes result if set but changes status to 400 Bad Request.
+    }, (output) => {
 
-    delete output.result;
+      // Called if any fatal errors. Returns output Object (see above) but deletes result if set but changes status to 400 Bad Request.
 
-    res.status(400);
-    res.json(output);
+      delete output.result;
+
+      res.status(400);
+      res.json(output);
+
+    })
 
   })
 
-})
+  // Handle 404s
 
-// Handle 404s
+  server.use((req, res) => {
 
-server.use((req, res) => {
+    res.status(404);
+    res.send("404");
 
-  res.status(404);
-  res.send("404");
+  })
 
-})
+  return rf;
+
+}
