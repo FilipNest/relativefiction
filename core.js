@@ -126,7 +126,9 @@ module.exports = {
         var promiseChain = function (tasks, parameters, success, fail) {
 
           tasks.reduce(function (cur, next) {
+
             return cur.then(next);
+
           }, Promise.resolve(parameters)).then(success, fail);
 
         };
@@ -137,15 +139,19 @@ module.exports = {
 
         alterHooks.sort(sortByWeight).forEach(function (alterHook) {
 
-          var promise = new Promise(function (resolve) {
+          var promise = function () {
 
-            alterHook.processor(output, function (processed) {
+            return new Promise(function (resolve) {
 
-              resolve(processed);
+              alterHook.processor(output, function (processed) {
 
-            });
+                resolve(processed);
 
-          })
+              });
+
+            })
+
+          }
 
           preprocessors.push(promise);
 
