@@ -1,4 +1,4 @@
-var tagHooks = [];
+var tagHooks = {};
 var alterHooks = [];
 
 module.exports = {
@@ -161,7 +161,13 @@ module.exports = {
 
           output.tags.forEach(function (tag) {
 
-            tagHooks.sort(sortByWeight).forEach(function (tagHook) {
+            if (!tagHooks[tag.params[0]]) {
+
+              return false;
+
+            }
+
+            tagHooks[tag.params[0]].sort(sortByWeight).forEach(function (tagHook) {
 
               // Check if promise or simple
 
@@ -247,7 +253,7 @@ module.exports = {
 
   // Alter function gets a tag and changes its contents.
 
-  tag: function (processor, weight) {
+  tag: function (tagName, processor, weight) {
 
     if (typeof processor !== "function") {
 
@@ -255,9 +261,15 @@ module.exports = {
 
     } else {
 
-      tagHooks.push({
-        weight: weight,
-        processor: processor
+      if (!tagHooks[tagName]) {
+
+        tagHooks[tagName] = [];
+
+      }
+
+      tagHooks[tagName].push({
+        processor: processor,
+        weight: weight
       });
 
     }

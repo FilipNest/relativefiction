@@ -1,38 +1,102 @@
 var moment = require("moment");
 
-rf.tag(function (tagParms, output) {
+var alter = function (time, operator, first, second) {
+  
+  if (operator !== "-" && operator !== "+") {
 
-  var time = moment(output.time);
-
-  if (tagParms[1] === "+") {
-
-    time = time.add(tagParms[2], tagParms[3]);
-
-  } else if (tagParms[1] === "-") {
-
-    time = time.subtract(tagParms[2], tagParms[3]);
+    return time;
 
   }
 
-  switch (tagParms[0]) {
-    case "hours24":
-      return time.format("H");
-    case "hours12":
-      return time.format("h");
-    case "minutes":
-      return time.format("m");
-    case "year":
-      return time.format("Y");
-    case "seconds":
-      return time.format("s");
-    case "ampm":
-      return time.format("a");
-    case "dayofweek":
-      return time.format("dddd");
-    case "dayofmonth":
-      return time.format("D")
-    case "dayofmonthsuffix":
-      return time.format("Do");
+  if (operator === "+") {
+
+    return time.add(first, second);
+
+  } else if (operator === "-") {
+
+    return time.subtract(first, second);
   }
 
-}, 2)
+}
+
+rf.tag("hours24", function (tagParams, session) {
+
+  var time = moment(session.time);
+
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("H");
+
+})
+
+rf.tag("hours12", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("h");
+
+})
+
+rf.tag("hours12", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("m");
+
+})
+
+rf.tag("year", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("Y");
+
+})
+
+rf.tag("seconds", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("s");
+
+})
+
+rf.tag("ampm", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("a");
+
+})
+
+rf.tag("dayofweek", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("dddd");
+
+})
+
+rf.tag("dayofmonth", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("D");
+
+})
+
+rf.tag("dayofmonthsuffix", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("Do");
+
+})

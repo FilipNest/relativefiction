@@ -1,15 +1,11 @@
-rf.tag(function (tagParams, output) {
+rf.tag("latitude", function (tagParams, output) {
 
-  if (tagParams[0] === "longitude") {
+  return output.latitude;
 
-    return output.longitude;
+});
 
-  }
+rf.tag("longitude", function (tagParams, output) {
 
-  if (tagParams[0] === "latitude") {
+  return output.longitude;
 
-    return output.latitude;
-
-  }
-
-})
+});
