@@ -2,9 +2,13 @@
 
 module.exports = function (config = {}) {
 
-  require("./relativefiction");
-  
+  global.rf = require("./core");
+
   rf.config = config;
+
+  require("./time");
+  require("./misc");
+  require("./foursquare");
 
   // Setup server
 
