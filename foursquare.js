@@ -134,6 +134,10 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
           number = parseInt(tagParams[1]) - 1;
 
+          // Shift back params
+
+          tagParams[1] = tagParams[2];
+
         }
 
         if (!number || number < 0) {
@@ -142,17 +146,25 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         }
 
-        if (output.foursquare[category]) {
+        var venue;
 
-          var venues = output.foursquare[category];
+        var param = tagParams[1];
 
-          return venues[number].name;
+        if (output.foursquare[category] && output.foursquare[category][number]) {
 
-        } else {
-
-          return "the " + category;
+          venue = output.foursquare[category][number];
 
         }
+        
+        switch (param) {
+          case "street":
+            return venue.location.address || "a street";
+          case "distance":
+            return venue.location.distance || "some distance";
+          default:
+            return venue.name || "the " + category
+        }
+
 
       })
 
