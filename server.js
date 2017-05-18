@@ -18,6 +18,14 @@ module.exports = function (config = {}) {
 
   var server = express();
   var port = rf.config.port || 80;
+  
+  // Set static directory if one set
+  
+  if(rf.config.static){
+    
+    rf.server.use(express.static(rf.config.static));
+    
+  }
 
   // parse application/x-www-form-urlencoded
   server.use(bodyParser.urlencoded({
