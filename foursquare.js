@@ -61,9 +61,8 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
         // Make request to get venues
 
         var newParams = {
-          intent: "browse",
-          ll: output.latitude + "," + output.longitude,
-          radius: 800
+          limit: 50,
+          ll: output.latitude + "," + output.longitude
         };
 
         // Get category ids
@@ -155,14 +154,44 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
           venue = output.foursquare[category][number];
 
         }
-        
+
         switch (param) {
           case "street":
-            return venue.location.address || "a street";
+
+            if (venue && venue.location.address) {
+              
+              // Strip out numbers thanks to http://stackoverflow.com/questions/1012883/stripping-street-numbers-from-street-addresses by Pesto
+
+              return venue.location.address.replace(/^((\d[a-zA-Z])|[^a-zA-Z])*/, '');
+
+            } else {
+
+              return "a street";
+
+            }
+
           case "distance":
-            return venue.location.distance || "some distance";
+
+            if (venue && venue.location.distance) {
+
+              return venue.location.distance
+
+            } else {
+
+              return "some distance";
+
+            }
+
           default:
-            return venue.name || "the " + category
+            if (venue && venue.name) {
+
+              return venue.name
+
+            } else {
+
+              return "the " + category;
+
+            }
         }
 
 
