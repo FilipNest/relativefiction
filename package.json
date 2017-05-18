@@ -2,16 +2,13 @@
   "name": "relativefiction",
   "version": "2.0.0",
   "description": "Localised storytelling",
-  "main": "start.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FilipNest/relativefiction.git"
-  },
-  "bin": {
-    "relativefiction": "launch.js"
   },
   "keywords": [
     "fictioh",
