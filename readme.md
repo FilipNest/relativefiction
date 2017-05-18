@@ -16,6 +16,10 @@ Stories look something like:
 I was sitting in {park} and looking out at the sky. It was a {weather} day much like this one. 
 Wings. Clearly a pair of wings. Floating somewhere towards {supermarket street} as if going about their everyday business. This month is even more special. It happened in {monthofyear}. So I walk over to {park} and look out. But there's never anything anymore...
 
+Which localises into something like:
+
+>I love Thursdays. It was around 9pm on a Thursday when I first saw its outlines. I was sitting in Russell Square and looking out at the sky. It was a rainy day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards St. John St as if going about their everyday business. This month is even more special. It happened in May. So I walk over to Russell Square and look out. But there's never anything anymore...
+
 ## Tags
 
 ### Time
