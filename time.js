@@ -100,3 +100,12 @@ rf.tag("dayofmonthsuffix", function (tagParams, session) {
   return time.format("Do");
 
 })
+
+rf.tag("monthofyear", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("MMMM");
+
+})
