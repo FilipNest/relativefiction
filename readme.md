@@ -106,7 +106,7 @@ If you wish to roll your own version of this, require the `server.js` file in a 
 
 Here's an example:
 
-```JavaScript
+```javaScript
 
 var config = {
   port: 3000,
@@ -132,7 +132,7 @@ The function gets two parameters:
 
 Here's an example:
 
-```
+```javascript
 
 rf.tag("longitude", function (tagParams, context) {
 
