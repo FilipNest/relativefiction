@@ -34,6 +34,14 @@ module.exports = function (config = {}) {
 
   server.listen(port);
 
+  // Get info on tags
+  
+  server.get("/taghelp", function (req, res) {
+
+    res.json(rf.tagsInfo());
+
+  })
+
   server.post("/", (req, res) => {
 
     rf.process(req.body).then((output) => {

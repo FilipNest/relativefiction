@@ -3,6 +3,34 @@ var alterHooks = [];
 
 module.exports = {
 
+  tagsInfo: function () {
+
+    var output = [];
+
+    Object.keys(tagHooks).forEach(function (tag) {
+
+      var description = "";
+
+      tagHooks[tag].forEach(function (hook) {
+
+        if (hook.description) {
+
+          description = hook.description;
+
+        }
+
+      })
+
+      output.push({
+        name: tag,
+        description: description
+      })
+
+    });
+
+    return output;
+
+  },
   process: function ({
     longitude,
     latitude,
@@ -259,7 +287,7 @@ module.exports = {
 
   // Alter function gets a tag and changes its contents.
 
-  tag: function (tagName, processor, weight) {
+  tag: function (tagName, processor, description, weight) {
 
     if (typeof processor !== "function") {
 
@@ -274,6 +302,7 @@ module.exports = {
       }
 
       tagHooks[tagName].push({
+        description: description,
         processor: processor,
         weight: weight
       });
