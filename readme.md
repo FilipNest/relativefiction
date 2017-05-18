@@ -17,51 +17,135 @@ I love {dayofweek}s. It was around {hours12}{ampm} on a {dayofweek} when I first
 
 ```
 
+## Tags
 
-Time
-----
+### Time
 
-* hours24
-* hours12
-* minutes
-* seconds
-* year
-* ampm
-* dayofweek
-* dayofmonth
-* dayofmonthsuffix
-* monthofyear
+* hour24 - current hour in 24 hour time.
+* hour12 - current hour in 12 hour time.
+* minutes - number of minutes past the current hour
+* seconds - number of seconds past the current minute
+* year - current year
+* ampm - am or pm (useful for 12 hour time)
+* dayofweek - current day (Monday to Sunday)
+* dayofmonth - Day of the month (1 to 31)
+* dayofmonthsuffix - st or th depending on the day of month
+* monthofyear - Current month (January to December)
 
-The date can be offset by adding an offset parameter for example `{dayofweek + 1 day}`
+#### Offsetting dates
 
-General
--------
+The date can be offset by adding an offset parameter for example `{dayofweek + 1 day}` or `{year - 50 years}`
 
-* longitude
-* latitude
+### Foursquare
 
-Foursquare
-----------
+Pulls in information about local venues. To see which you can use, go to https://developer.foursquare.com/categorytree to get relevant category names.
 
-* categoryname - Get a list of the names you can use at https://developer.foursquare.com/categorytree
+The basic formula for these is to put in the category name, such as `{park}`
 
-Instead of a venue you can get additional information about it.
+If you have multiple locations in your story of the same type, use `{park 1}` etc with numbers for each unique location.
 
-* `{park distance}` gives you the distance in meters from the park.
-* `{park street}` gives you the street the park is on.
+If you want to show information about a venue rather than the venue itself you can use `{park distance}` to get the distance in meters and `{park street}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out.
 
-If dealing with multiple venues of the same type, pass in a number to distinguish them and get different venues. `{park 1} was nearer. {park 2} was {park 2 distance} meters away on {park 2 street}`. Venues are ordered by distance.
+### Defaults
 
-Weather
--------
+If no suitable venues are found for a valid Foursquare category, the tag is replaced with something like `{the park}`, `{some distance}` and `{a street}`.
 
-* weather
-* temperature
-* humidity
-* windspeed
-* sunsethour24
-* sunsethour12
-* hourstosunset
-* sunrisehour24
-* sunrisehour12
-* hourstosunrise
+### Weather
+
+Information about local weather.
+
+* weather - one of: stormy, rainy, snowy, hailing, clear, cloudy, calm, windy, scorching, freezing, misty, hazy
+* temperature in celcius
+* humidity - in %
+* windspeed - in m/s
+* sunsethour24 - hour of sunset in 24 hour time
+* sunsethour12 - hour of sunset in 12 hour time
+* sunrisehour24 - hour of sunrise in 24 hour time
+* sunrisehour12 - hour of sunrise in 12 hour time
+* hourstosunset - hours to next sunset
+* hourstosunrise - hours to next sunrise 
+
+### Misc
+
+* longitude - current longitude
+* latitude - current latitude
+
+## API
+
+All return JSON.
+
+### Get a categorised list of available tags
+
+https://relativefiction.com/taghelp
+
+### Parse a story
+
+Send the following parameters to https://relativefiction.com as an HTTP POST.
+
+* longitude (number)
+* latitude (number)
+* text (your text, complete with tags)
+
+You'll get back an object with the following parameters:
+
+* result - your parsed story
+* errors - any errors (an array)
+* original - the text you sent
+
+## Extending with new tags
+
+If you wish to roll your own version of this, require the `server.js` file in a node.js script (run `npm install` to get dependencies) and pass in the following options:
+
+* port - where you want the server to run
+* foursquareKey - your Foursquare API key
+* foursquareSecret - your Foursquare API secret
+* openWeatherKey - Open Weather Map API key 
+
+Here's an example:
+
+```JavaScript
+
+var config = {
+  port: 3000,
+  foursquareKey: "1234",
+  foursquareSecret: "abcd",
+  openWeatherKey: "!?#@"
+};
+
+var rf = require("./server.js")(config);
+
+```
+
+### Defining new tags
+
+The `rf` object then allows you to define new tags with the `rf.tag` function.
+
+This takes a tag name (the first parameter of the tag, a function and an options object for weight and category).
+
+The function gets two parameters:
+
+* the tag parameters in an array
+* the current context for the whole story including the user's latitude, longitude and time, all the tags in the story and more.
+
+Here's an example:
+
+```
+
+rf.tag("longitude", function (tagParams, context) {
+
+  return context.longitude;
+
+}, {
+  category: "general"
+});
+
+
+```
+
+You can either return a value directly, or if you want to do some async work, you can return a JavaScript Promise. The system should detect you've returned a promise and wait for it to finish.
+
+### Altering the context
+
+If you want to add to the context or do a bulk action before any of the tags are parsed (used in both the Foursquare and OpenWeatherMap tags to load everything at once rather than making several calls) you can use the `rf.alter` function.
+
+This takes a function with two parameters, the current context (as above) and a callback function you call when done, passing in a new, altered context object.
