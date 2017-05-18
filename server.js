@@ -29,6 +29,8 @@ module.exports = function (config = {}) {
 
   // serve static files
   server.use(express.static('static'));
+  
+  rf.server = server;
 
   // Start server
 
