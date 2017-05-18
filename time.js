@@ -1,7 +1,7 @@
 var moment = require("moment");
 
 var alter = function (time, operator, first, second) {
-  
+
   if (operator !== "-" && operator !== "+") {
 
     return time;
@@ -19,7 +19,7 @@ var alter = function (time, operator, first, second) {
 
 }
 
-rf.tag("hours24", function (tagParams, session) {
+rf.tag("hour24", function (tagParams, session) {
 
   var time = moment(session.time);
 
@@ -27,15 +27,19 @@ rf.tag("hours24", function (tagParams, session) {
 
   return time.format("H");
 
+}, {
+  category: "time"
 })
 
-rf.tag("hours12", function (tagParams, session) {
+rf.tag("hour12", function (tagParams, session) {
 
   var time = moment(session.time);
   time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
 
   return time.format("h");
 
+}, {
+  category: "time"
 })
 
 rf.tag("hours12", function (tagParams, session) {
@@ -45,6 +49,8 @@ rf.tag("hours12", function (tagParams, session) {
 
   return time.format("m");
 
+}, {
+  category: "time"
 })
 
 rf.tag("year", function (tagParams, session) {
@@ -54,6 +60,8 @@ rf.tag("year", function (tagParams, session) {
 
   return time.format("Y");
 
+}, {
+  category: "time"
 })
 
 rf.tag("seconds", function (tagParams, session) {
@@ -63,6 +71,8 @@ rf.tag("seconds", function (tagParams, session) {
 
   return time.format("s");
 
+}, {
+  category: "time"
 })
 
 rf.tag("ampm", function (tagParams, session) {
@@ -72,6 +82,8 @@ rf.tag("ampm", function (tagParams, session) {
 
   return time.format("a");
 
+}, {
+  category: "time"
 })
 
 rf.tag("dayofweek", function (tagParams, session) {
@@ -81,6 +93,8 @@ rf.tag("dayofweek", function (tagParams, session) {
 
   return time.format("dddd");
 
+}, {
+  category: "time"
 })
 
 rf.tag("dayofmonth", function (tagParams, session) {
@@ -90,6 +104,8 @@ rf.tag("dayofmonth", function (tagParams, session) {
 
   return time.format("D");
 
+}, {
+  category: "time"
 })
 
 rf.tag("dayofmonthsuffix", function (tagParams, session) {
@@ -99,6 +115,8 @@ rf.tag("dayofmonthsuffix", function (tagParams, session) {
 
   return time.format("Do");
 
+}, {
+  category: "time"
 })
 
 rf.tag("monthofyear", function (tagParams, session) {
@@ -108,4 +126,6 @@ rf.tag("monthofyear", function (tagParams, session) {
 
   return time.format("MMMM");
 
+}, {
+  category: "time"
 })

@@ -159,7 +159,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
           case "street":
 
             if (venue && venue.location.address) {
-              
+
               // Strip out numbers thanks to http://stackoverflow.com/questions/1012883/stripping-street-numbers-from-street-addresses by Pesto
 
               return venue.location.address.replace(/^((\d[a-zA-Z])|[^a-zA-Z])*/, '');
@@ -195,6 +195,8 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
         }
 
 
+      }, {
+        category: "foursquare"
       })
 
     })
