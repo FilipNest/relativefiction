@@ -5,25 +5,34 @@ module.exports = {
 
   tagsInfo: function () {
 
-    var output = [];
+    var output = {};
 
     Object.keys(tagHooks).forEach(function (tag) {
 
-      var description = "";
+      var category = "";
 
       tagHooks[tag].forEach(function (hook) {
 
-        if (hook.description) {
+        if (hook.category) {
 
-          description = hook.description;
+          category = hook.category;
+
+        } else {
+
+          category = "misc";
 
         }
 
       })
 
-      output.push({
-        name: tag,
-        description: description
+      if (!output[category]) {
+
+        output[category] = [];
+
+      }
+
+      output[category].push({
+        name: tag
       })
 
     });
@@ -287,7 +296,7 @@ module.exports = {
 
   // Alter function gets a tag and changes its contents.
 
-  tag: function (tagName, processor, description, weight) {
+  tag: function (tagName, processor, options = {}) {
 
     if (typeof processor !== "function") {
 
@@ -302,9 +311,9 @@ module.exports = {
       }
 
       tagHooks[tagName].push({
-        description: description,
+        category: options.category,
         processor: processor,
-        weight: weight
+        weight: options.weight
       });
 
     }
