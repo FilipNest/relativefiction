@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FilipNest/localstories.git"
+    "url": "git+https://github.com/FilipNest/relativefiction.git"
   },
   "bin": {
     "relativefiction": "launch.js"
@@ -20,9 +20,9 @@
   "author": "FilipNest",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/FilipNest/localstories/issues"
+    "url": "https://github.com/FilipNest/relativefiction/issues"
   },
-  "homepage": "https://github.com/FilipNest/localstories#readme",
+  "homepage": "https://github.com/FilipNest/relativefiction#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
