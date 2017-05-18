@@ -39,7 +39,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
       checkCategories(categories[id]);
 
     });
-
+    
     // Loop over each and create tag functions for it
 
     rf.alter(function (output, next) {
@@ -115,7 +115,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       } else {
 
-        next();
+        next(output);
 
       }
 
