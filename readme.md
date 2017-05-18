@@ -39,9 +39,13 @@ If dealing with multiple venues of the same type, pass in a number to distinguis
 Weather
 -------
 
-country
-weather
-sunsethour
-hourstosunset
-sunrisehour
-hourstosunrise
+* weather
+* temperature
+* humidity
+* windspeed
+* sunsethour24
+* sunsethour12
+* hourstosunset
+* sunrisehour24
+* sunrisehour12
+* hourstosunrise

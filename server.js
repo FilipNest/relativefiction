@@ -9,6 +9,7 @@ module.exports = function (config = {}) {
   require("./time");
   require("./misc");
   require("./foursquare");
+  require("./weather");
 
   // Setup server
 
