@@ -23,7 +23,7 @@ module.exports = function (config = {}) {
   
   if(rf.config.static){
     
-    rf.server.use(express.static(rf.config.static));
+    server.use(express.static(rf.config.static));
     
   }
 
