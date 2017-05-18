@@ -5,12 +5,15 @@ A tool for creating dynamic stories relative to a reader's place, time, location
 
 https://relativefiction.com
 
+* [Story Syntax](#story-syntax)
+* [API](#api)
+
+
 ## Story syntax
 
 Dynamic parts of stories are written in tags surrounded by a pair of single curly brackets. Some of these take additional parameters which you can seperate within the brackets with a space.
 
 Stories look something like:
-
 
 >I love {dayofweek}s. It was around {hours12}{ampm} on a {dayofweek} when I first saw its outlines. 
 I was sitting in {park} and looking out at the sky. It was a {weather} day much like this one. 
