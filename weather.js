@@ -28,8 +28,6 @@ var moment = require("moment");
 
 rf.tag("weather", function (tagParams, context) {
 
-
-
   var values = [
     {
       "stormy": [200, 201, 202, 210, 211, 212, 221, 230, 231, 232, 960, 961, 962, 900, 901, 902, 781, 731]
@@ -91,6 +89,8 @@ rf.tag("weather", function (tagParams, context) {
 
   return weatherType;
 
+}, {
+  category: "weather"
 })
 
 rf.tag("temperature", function (tagParams, context) {
@@ -99,6 +99,8 @@ rf.tag("temperature", function (tagParams, context) {
 
   return Math.floor(temp);
 
+}, {
+  category: "weather"
 })
 
 rf.tag("humidity", function (tagParams, context) {
@@ -107,6 +109,8 @@ rf.tag("humidity", function (tagParams, context) {
 
   return math.floor(humidity);
 
+}, {
+  category: "weather"
 })
 
 rf.tag("windspeed", function (tagParams, context) {
@@ -115,6 +119,8 @@ rf.tag("windspeed", function (tagParams, context) {
 
   return math.floor(windspeed);
 
+}, {
+  category: "weather"
 })
 
 rf.tag("hourstosunrise", function (tagParams, context) {
@@ -133,6 +139,8 @@ rf.tag("hourstosunrise", function (tagParams, context) {
 
   return diff;
 
+}, {
+  category: "weather"
 })
 
 rf.tag("hourstosunset", function (tagParams, context) {
@@ -151,6 +159,8 @@ rf.tag("hourstosunset", function (tagParams, context) {
 
   return diff;
 
+}, {
+  category: "weather"
 })
 
 rf.tag("sunrisehour24", function (tagParams, context) {
@@ -159,6 +169,8 @@ rf.tag("sunrisehour24", function (tagParams, context) {
 
   return sunrise.format("H");
 
+}, {
+  category: "weather"
 })
 
 
@@ -168,6 +180,8 @@ rf.tag("sunsethour24", function (tagParams, context) {
 
   return sunset.format("H");
 
+}, {
+  category: "weather"
 })
 
 rf.tag("sunrisehour12", function (tagParams, context) {
@@ -176,6 +190,8 @@ rf.tag("sunrisehour12", function (tagParams, context) {
 
   return sunrise.format("h");
 
+}, {
+  category: "weather"
 })
 
 
@@ -185,4 +201,6 @@ rf.tag("sunsethour12", function (tagParams, context) {
 
   return sunset.format("h");
 
+}, {
+  category: "weather"
 })
