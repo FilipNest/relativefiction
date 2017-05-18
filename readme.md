@@ -48,7 +48,9 @@ The date can be offset by adding an offset parameter for example `{dayofweek + 1
 
 Pulls in information about local venues. To see which you can use, go to https://developer.foursquare.com/categorytree to get relevant category names.
 
-The basic formula for these is to put in the category name, such as `{park}`
+The basic formula for these is to put in the category name, such as `{park}`.
+
+If the venue category has spaces in it, pass it in with speech marks. Like `{"chinese restaurant" distance}`.
 
 If you have multiple locations in your story of the same type, use `{park 1}` etc with numbers for each unique location.
 
