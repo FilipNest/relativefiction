@@ -19,6 +19,17 @@ var alter = function (time, operator, first, second) {
 
 }
 
+rf.tag("minutes", function (tagParams, session) {
+
+  var time = moment(session.time);
+  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+
+  return time.format("m");
+
+}, {
+  category: "time"
+})
+
 rf.tag("hour24", function (tagParams, session) {
 
   var time = moment(session.time);
