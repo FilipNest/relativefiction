@@ -76,15 +76,6 @@ module.exports = function (config = {}) {
 
   })
 
-  // Handle 404s
-
-  server.use((req, res) => {
-
-    res.status(404);
-    res.send("404");
-
-  })
-
   return rf;
 
 }
