@@ -141,13 +141,13 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         var number;
 
-        if (!isNaN(parseInt(tagParams[1]))) {
+        if (!isNaN(parseInt(tagParams[0]))) {
 
-          number = parseInt(tagParams[1]) - 1;
+          number = parseInt(tagParams[0]) - 1;
 
           // Shift back params
 
-          tagParams[1] = tagParams[2];
+          tagParams[0] = tagParams[1];
 
         }
 
@@ -159,7 +159,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         var venue;
 
-        var param = tagParams[1];
+        var param = tagParams[0];
 
         if (output.foursquare[category] && output.foursquare[category][number]) {
 
