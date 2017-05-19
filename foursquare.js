@@ -115,6 +115,30 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
             })
 
+            // sort by distance
+
+            Object.keys(output.foursquare).forEach(function (category) {
+
+              output.foursquare[category] = output.foursquare[category].sort(function (a, b) {
+
+                if (a.location.distance > b.location.distance) {
+
+                  return 1;
+
+                } else if (a.location < b.location.distance) {
+
+                  return -1;
+
+                } else {
+
+                  return 0;
+
+                }
+
+              })
+
+            })
+
             next(output);
 
           } else {
