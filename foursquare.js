@@ -12,6 +12,12 @@ var params = {
   client_secret: rf.config.foursquareSecret
 }
 
+var safeString = function (input) {
+
+  return input.toLowerCase().split(" ").join("-");
+
+}
+
 var request = require('request');
 
 // Get list of Foursquare category types
@@ -28,7 +34,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
     var checkCategories = function (category) {
 
-      categoryList[category.name.toLowerCase()] = category.id;
+      categoryList[safeString(category.name)] = category.id;
 
       category.categories.forEach(function (innerCategory) {
 
@@ -52,9 +58,11 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       output.tags.forEach(function (tag, index) {
 
-        if (categoryList[tag.params[0].toLowerCase()]) {
+        var safeTag = safeString(tag.params[0]);
 
-          textVenues[tag.params[0].toLowerCase()] = categoryList[tag.params[0].toLowerCase()];
+        if (categoryList[safeTag]) {
+
+          textVenues[safeTag] = categoryList[safeTag];
 
         }
 
@@ -95,13 +103,13 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
               venue.categories.forEach(function (category) {
 
-                if (!output.foursquare[category.name.toLowerCase()]) {
+                if (!output.foursquare[safeString(category.name)]) {
 
-                  output.foursquare[category.name.toLowerCase()] = [];
+                  output.foursquare[safeString(category.name)] = [];
 
                 }
 
-                output.foursquare[category.name.toLowerCase()].push(venue);
+                output.foursquare[safeString(category.name)].push(venue);
 
               })
 
