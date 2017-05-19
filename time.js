@@ -1,18 +1,20 @@
 var moment = require("moment");
 
-var alter = function (time, operator, first, second) {
+rf.registerGlobals(["add", "minus", "days", "years", "months", "minutes", "seconds", "hours", "second", "minute", "hour", "day", "month", "year"]);
 
-  if (operator !== "-" && operator !== "+") {
+var alter = function (time, operator, first, second) {
+    
+  if (operator !== "add" && operator !== "minus") {
 
     return time;
 
   }
-
-  if (operator === "+") {
+  
+  if (operator === "add") {
 
     return time.add(first, second);
 
-  } else if (operator === "-") {
+  } else if (operator === "minus") {
 
     return time.subtract(first, second);
   }
@@ -22,7 +24,7 @@ var alter = function (time, operator, first, second) {
 rf.tag("minutes", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("m");
 
@@ -34,7 +36,7 @@ rf.tag("hour24", function (tagParams, session) {
 
   var time = moment(session.time);
 
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("H");
 
@@ -45,7 +47,7 @@ rf.tag("hour24", function (tagParams, session) {
 rf.tag("hour12", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("h");
 
@@ -56,7 +58,7 @@ rf.tag("hour12", function (tagParams, session) {
 rf.tag("hours12", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("m");
 
@@ -67,7 +69,7 @@ rf.tag("hours12", function (tagParams, session) {
 rf.tag("year", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("Y");
 
@@ -78,7 +80,7 @@ rf.tag("year", function (tagParams, session) {
 rf.tag("seconds", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("s");
 
@@ -89,7 +91,7 @@ rf.tag("seconds", function (tagParams, session) {
 rf.tag("ampm", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("a");
 
@@ -100,7 +102,7 @@ rf.tag("ampm", function (tagParams, session) {
 rf.tag("dayofweek", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("dddd");
 
@@ -111,7 +113,7 @@ rf.tag("dayofweek", function (tagParams, session) {
 rf.tag("dayofmonth", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("D");
 
@@ -122,7 +124,7 @@ rf.tag("dayofmonth", function (tagParams, session) {
 rf.tag("dayofmonthsuffix", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("Do");
 
@@ -133,7 +135,7 @@ rf.tag("dayofmonthsuffix", function (tagParams, session) {
 rf.tag("monthofyear", function (tagParams, session) {
 
   var time = moment(session.time);
-  time = alter(time, tagParams[1], tagParams[2], tagParams[3]);
+  time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
   return time.format("MMMM");
 

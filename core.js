@@ -1,5 +1,6 @@
 var tags = {};
 var alterHooks = [];
+var globals = {};
 
 var Handlebars = require("handlebars");
 
@@ -99,7 +100,7 @@ module.exports = {
           })
 
           output.tags.push({
-            tag: "{" + tag + "}",
+            tag: "{{" + tag + "}}",
             params: splitTags
           });
 
@@ -168,9 +169,11 @@ module.exports = {
           var source = output.result;
           var template = Handlebars.compile(source);
 
-          output.result = (template({
-            context: output
-          }));
+          var parameters = Object.assign(output, globals);
+
+          parameters.context = output;
+
+          output.result = (template(parameters));
 
           pass({
             result: output.result,
@@ -235,5 +238,14 @@ module.exports = {
     }
 
   },
+  registerGlobals: function (globalArray) {
+
+    globalArray.forEach(function (global) {
+
+      globals[global] = global;
+
+    })
+
+  }
 
 }

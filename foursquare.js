@@ -1,5 +1,9 @@
 // Get Foursquare API key and secret from config
 
+// Register globals so you don't have to wrap them in strings
+
+rf.registerGlobals(["street", "distance", "city"]);
+
 var querystring = require("querystring");
 
 var params = {
@@ -39,7 +43,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
       checkCategories(categories[id]);
 
     });
-    
+
     // Loop over each and create tag functions for it
 
     rf.alter(function (output, next) {
