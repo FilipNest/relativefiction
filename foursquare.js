@@ -70,14 +70,6 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       if (Object.keys(textVenues).length) {
 
-        // Make request to get venues
-
-        var newParams = {
-          limit: 50,
-          ll: output.latitude + "," + output.longitude,
-          intent: "browse",
-          radius: 1000
-        };
 
         // Get category ids
 
@@ -89,67 +81,95 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         })
 
-        newParams.categoryId = categoryIDs.join(",");
+        var venuePromises = [];
 
-        request('https://api.foursquare.com/v2/venues/search?' + querystring.stringify(Object.assign(params, newParams)), function (error, response, body) {
+        categoryIDs.forEach(function (id) {
 
-          body = JSON.parse(body);
-          
-          if (body.meta.code === 200) {
+          // Make request to get venues
 
-            // Got list of venues, now sort into category groups
+          var newParams = {
+            limit: 50,
+            ll: output.latitude + "," + output.longitude,
+            intent: "checkin"
+          };
 
-            output.foursquare = {};
+          newParams.categoryId = id;
 
-            body.response.venues.forEach(function (venue) {
+          var categoryPromise = new Promise(function (pass) {
 
-              venue.categories.forEach(function (category) {
+            request('https://api.foursquare.com/v2/venues/search?' + querystring.stringify(Object.assign(params, newParams)), function (error, response, body) {
 
-                if (!output.foursquare[safeString(category.name)]) {
+              body = JSON.parse(body);
 
-                  output.foursquare[safeString(category.name)] = [];
+              if (body.meta.code === 200) {
 
+                // Got list of venues, now sort into category groups
+
+                if (!output.foursquare) {
+                  output.foursquare = {};
                 }
 
-                output.foursquare[safeString(category.name)].push(venue);
+                body.response.venues.forEach(function (venue) {
 
-              })
+                  venue.categories.forEach(function (category) {
+
+                    if (!output.foursquare[safeString(category.name)]) {
+
+                      output.foursquare[safeString(category.name)] = [];
+
+                    }
+
+                    output.foursquare[safeString(category.name)].push(venue);
+
+                  })
+
+                })
+
+                // sort by distance
+
+                Object.keys(output.foursquare).forEach(function (category) {
+
+                  output.foursquare[category] = output.foursquare[category].sort(function (a, b) {
+
+                    if (a.location.distance < b.location.distance) {
+
+                      return -1;
+
+                    } else if (a.location > b.location.distance) {
+
+                      return 1;
+
+                    } else {
+
+                      return 0;
+
+                    }
+
+                  })
+
+                })
+
+                pass(output);
+
+              } else {
+
+                output.errors.push(body.meta.errorDetail);
+
+                pass(output);
+
+              }
 
             })
 
-            // sort by distance
+          })
 
-            Object.keys(output.foursquare).forEach(function (category) {
+          venuePromises.push(categoryPromise);
 
-              output.foursquare[category] = output.foursquare[category].sort(function (a, b) {
+        })
 
-                if (a.location.distance > b.location.distance) {
+        Promise.all(venuePromises).then(function () {
 
-                  return 1;
-
-                } else if (a.location < b.location.distance) {
-
-                  return -1;
-
-                } else {
-
-                  return 0;
-
-                }
-
-              })
-
-            })
-
-            next(output);
-
-          } else {
-            
-            output.errors.push(body.meta.errorDetail);
-            
-            next(output);
-
-          }
+          next(output);
 
         })
 
