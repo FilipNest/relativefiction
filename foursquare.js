@@ -74,7 +74,9 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         var newParams = {
           limit: 50,
-          ll: output.latitude + "," + output.longitude
+          ll: output.latitude + "," + output.longitude,
+          intent: "browse",
+          radius: 1000
         };
 
         // Get category ids
@@ -92,7 +94,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
         request('https://api.foursquare.com/v2/venues/search?' + querystring.stringify(Object.assign(params, newParams)), function (error, response, body) {
 
           body = JSON.parse(body);
-
+          
           if (body.meta.code === 200) {
 
             // Got list of venues, now sort into category groups
@@ -142,8 +144,10 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
             next(output);
 
           } else {
-
+            
             output.errors.push(body.meta.errorDetail);
+            
+            next(output);
 
           }
 
