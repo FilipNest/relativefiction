@@ -1,45 +1,10 @@
-var tagHooks = {};
+var tags = {};
 var alterHooks = [];
+
+var Handlebars = require("handlebars");
 
 module.exports = {
 
-  tagsInfo: function () {
-
-    var output = {};
-
-    Object.keys(tagHooks).forEach(function (tag) {
-
-      var category = "";
-
-      tagHooks[tag].forEach(function (hook) {
-
-        if (hook.category) {
-
-          category = hook.category;
-
-        } else {
-
-          category = "misc";
-
-        }
-
-      })
-
-      if (!output[category]) {
-
-        output[category] = [];
-
-      }
-
-      output[category].push({
-        name: tag
-      })
-
-    });
-
-    return output;
-
-  },
   process: function ({
     longitude,
     latitude,
@@ -108,7 +73,7 @@ module.exports = {
 
         function getWordsBetweenCurlies(str) {
           var results = [],
-            re = /{([^}]+)}/g,
+            re = /{{([^}}]+)}}/g,
             text;
 
           while (text = re.exec(str)) {
@@ -200,76 +165,23 @@ module.exports = {
 
           output.result = output.text;
 
-          var tagProcessors = [];
+          var source = output.result;
+          var template = Handlebars.compile(source);
 
-          output.tags.forEach(function (tag) {
+          output.result = (template({
+            context: output
+          }));
 
-            if (!tagHooks[tag.params[0]]) {
+          pass({
+            result: output.result,
+            errors: output.errors,
+            text: output.text
+          });
 
-              return false;
+        })
 
-            }
 
-            tagHooks[tag.params[0]].sort(sortByWeight).forEach(function (tagHook) {
-
-              // Check if promise or simple
-
-              var tagPromise = new Promise(function (passTag, failTag) {
-
-                var result = tagHook.processor(tag.params, output);
-
-                if (result) {
-
-                  if (result.then) {
-
-                    result.then(function (parsed) {
-
-                      output.result = output.result.split(tag.tag).join(parsed);
-
-                      passTag();
-
-                    })
-
-                  } else {
-
-                    output.result = output.result.split(tag.tag).join(result);
-
-                    passTag();
-
-                  }
-
-                } else if (typeof result === "undefined") {
-
-                  passTag();
-
-                }
-
-              })
-
-              tagProcessors.push(tagPromise);
-
-            });
-
-          })
-
-          Promise.all(tagProcessors).then(function () {
-
-            pass({
-              result: output.result,
-              errors: output.errors,
-              original: output.text
-            });
-
-          }, function (fail) {
-
-            pass("error");
-            console.error(fail);
-
-          })
-
-        });
-
-      }
+      };
 
     })
 
@@ -304,16 +216,20 @@ module.exports = {
 
     } else {
 
-      if (!tagHooks[tagName]) {
+      if (!tags[options.category]) {
 
-        tagHooks[tagName] = [];
+        tags[options.category] = [];
 
       }
 
-      tagHooks[tagName].push({
-        category: options.category,
-        processor: processor,
-        weight: options.weight
+      tags[options.category].push(tagName)
+
+      // Register helper
+
+      Handlebars.registerHelper(tagName, function () {
+
+        return processor(arguments, this.context);
+
       });
 
     }
