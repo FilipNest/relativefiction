@@ -17,7 +17,7 @@ Dynamic parts of stories are written in tags surrounded by a pair of single curl
 
 Stories look something like:
 
->I love {dayofweek}s. It was around {hour12}{ampm} on a {dayofweek} when I first saw its outlines. I was sitting in {park} and looking out at the sky. It was a {weather} day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards {supermarket street} as if going about their everyday business. This month is even more special. It happened in {monthofyear}. So I walk over to {park} and look out. But there's never anything anymore...
+>I love {{dayofweek}}s. It was around {{hour12}}{{ampm}} on a {{dayofweek}} when I first saw its outlines. I was sitting in {{park}} and looking out at the sky. It was a {{weather}} day much like this one. Wings. Clearly a pair of wings. Floating somewhere towards {{supermarket street}} as if going about their everyday business. This month is even more special. It happened in {{monthofyear}}. So I walk over to {{park}} and look out. But there's never anything anymore...
 
 Which localises into something like:
 
@@ -40,23 +40,23 @@ Which localises into something like:
 
 #### Offsetting dates
 
-The date can be offset by adding an offset parameter for example `{dayofweek + 1 day}` or `{year - 50 years}`
+The date can be offset by adding an offset parameter for example `{{dayofweek add 1 day}}` or `{{year minus 50 years}}`
 
 ### Foursquare
 
 Pulls in information about local venues. To see which you can use, go to https://developer.foursquare.com/categorytree to get relevant category names.
 
-The basic formula for these is to put in the category name, such as `{park}`.
+The basic formula for these is to put in the category name, such as `{{park}}`.
 
-If the venue category has spaces in it, pass it in with speech marks. Like `{"chinese restaurant" distance}`.
+If the venue category has spaces in it, pass it in with speech marks. Like `{{"chinese restaurant" distance}}`.
 
-If you have multiple locations in your story of the same type, use `{park 1}` etc with numbers for each unique location.
+If you have multiple locations in your story of the same type, use `{{park 1}}` etc with numbers for each unique location.
 
-If you want to show information about a venue rather than the venue itself you can use `{park distance}` to get the distance in meters and `{park street}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out.
+If you want to show information about a venue rather than the venue itself you can use `{{park distance}}` to get the distance in meters and `{{park street}}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out.
 
 ### Defaults
 
-If no suitable venues are found for a valid Foursquare category, the tag is replaced with something like `{the park}`, `{some distance}` and `{a street}`.
+If no suitable venues are found for a valid Foursquare category, the tag is replaced with something like `{the park}`, `{{some distance}}` and `{{a street}}`.
 
 ### Weather
 
@@ -78,13 +78,63 @@ Information about local weather.
 * longitude - current longitude
 * latitude - current latitude
 
+### Conditionals
+
+Alongside variables, writers can put in logic to show text if some statements are true and some other text if they are not.
+
+Relative Fiction is powered by the Handlebars library (http://handlebarsjs.com) so you can do things like condition blocks. To make things easier, some logical helpers have been put in to help you.
+
+These are:
+
+* equals
+* not
+* less
+* more
+
+Here's how you use them.
+
+Start with a double curly block as usual, followed by a `#` and the comparisson you want to use.
+
+`{{#equals`
+
+Then put a space followed by the values you wish to compare. If they're things you'd normally wrap in double curly brackets, wrap them in single round brackets. Then put another set of closing curlies to close the tag. It should look something like:
+
+`{{#more (hour24) 12}}`
+
+Then comes the fun part, you put in what you want to happen if the condition is true.
+
+
+```
+
+{{#more (hour24) 12}}
+
+It was a {{weather}} {{dayofweek}} afternoon.
+
+
+```
+
+If you want to put in something when the condition isn't true, put in an `{{else}}` followed by your text.
+
+Finally, when you're done, close off with a closing tag such as `{{/more}}`, `{{/less}}`, `{{/equal}}` or `{{/not}}`.
+
+When done it should look something like this:
+
+```
+
+{{#more (hour24) 12}}
+
+It was a {{weather}} {{dayofweek}} afternoon. Georgina was tired.
+
+{{else}}
+
+It was a {{weather}} {{dayofweek}} morning. Georgina was hungry.
+
+{{/more}}
+
+```
+
+
 ## API
-
-All return JSON.
-
-### Get a categorised list of available tags
-
-https://relativefiction.com/taghelp
 
 ### Parse a story
 
@@ -94,13 +144,13 @@ Send the following parameters to https://relativefiction.com as an HTTP POST.
 * latitude (number)
 * text (your text, complete with tags)
 
-You'll get back an object with the following parameters:
+You'll get back a JSON object with the following parameters:
 
 * result - your parsed story
 * errors - any errors (an array)
 * original - the text you sent
 
-## Extending with new tags
+## Running it yourself
 
 If you wish to roll your own version of this, require the `server.js` file in a node.js script (run `npm install` to get dependencies) and pass in the following options:
 
@@ -149,8 +199,6 @@ rf.tag("longitude", function (tagParams, context) {
 
 
 ```
-
-You can either return a value directly, or if you want to do some async work, you can return a JavaScript Promise. The system should detect you've returned a promise and wait for it to finish.
 
 ### Altering the context
 
