@@ -19,6 +19,8 @@ module.exports = function (config = {}) {
   var server = express();
   var port = rf.config.port || 80;
   
+  rf.server = server;
+  
   // Set static directory if one set
   
   if(rf.config.static){
