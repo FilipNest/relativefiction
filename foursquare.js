@@ -265,7 +265,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
           default:
             if (venue && venue.name) {
 
-              return venue.name
+              return venue.name.replace("The", "");
 
             } else {
 
