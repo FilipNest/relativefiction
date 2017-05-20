@@ -90,37 +90,12 @@ These are:
 * not
 * less
 * more
+* and
+* or
 
-Here's how you use them.
-
-Start with a double curly block as usual, followed by a `#` and the comparisson you want to use.
-
-`{{#equals`
-
-Then put a space followed by the values you wish to compare. If they're things you'd normally wrap in double curly brackets, wrap them in single round brackets. Then put another set of closing curlies to close the tag. It should look something like:
-
-`{{#more (hour24) 12}}`
-
-Then comes the fun part, you put in what you want to happen if the condition is true.
-
+Here's an example of how you use them. 
 
 ```
-
-{{#more (hour24) 12}}
-
-It was a {{weather}} {{dayofweek}} afternoon.
-
-
-```
-
-If you want to put in something when the condition isn't true, put in an `{{else}}` followed by your text.
-
-Finally, when you're done, close off with a closing tag such as `{{/more}}`, `{{/less}}`, `{{/equal}}` or `{{/not}}`.
-
-When done it should look something like this:
-
-```
-
 {{#more (hour24) 12}}
 
 It was a {{weather}} {{dayofweek}} afternoon. Georgina was tired.
@@ -133,6 +108,7 @@ It was a {{weather}} {{dayofweek}} morning. Georgina was hungry.
 
 ```
 
+Please see the Handlebars documentation for more information. The logical helpers above should be fairly straightforward once you've got a hang of Handlebars helper blocks. Note that expressions within blocks should be wrapped in round brackets (see subexpressions in the Handlebars docs). 
 
 ## API
 
