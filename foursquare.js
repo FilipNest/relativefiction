@@ -33,7 +33,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
     var categoryList = {};
 
     var checkCategories = function (category) {
-      
+
       // Skip country and city as they're used globally
 
       if (safeString(category.name) === "city" || safeString(category.name) === "country") {
@@ -234,7 +234,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
             } else {
 
-              return "a street";
+              return "some street";
 
             }
 
@@ -247,6 +247,18 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
             } else {
 
               return "some distance";
+
+            }
+
+          case "city":
+
+            if (venue && venue.location.city) {
+
+              return venue.location.city
+
+            } else {
+
+              return "some city";
 
             }
 
