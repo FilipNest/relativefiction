@@ -4,47 +4,7 @@ var globals = {};
 
 var Handlebars = require("handlebars");
 
-Handlebars.registerHelper('equals', function (lvalue, rvalue, options) {
-
-  if (arguments.length < 3)
-    throw new Error("equals needs two values to compare");
-  if (lvalue != rvalue) {
-    return options.inverse(this);
-  } else {
-    return options.fn(this);
-  }
-});
-
-Handlebars.registerHelper('not', function (lvalue, rvalue, options) {
-  if (arguments.length < 3)
-    throw new Error("equals needs two values to compare");
-  if (lvalue != rvalue) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
-Handlebars.registerHelper('more', function (lvalue, rvalue, options) {
-  if (arguments.length < 3)
-    throw new Error("equals needs two values to compare");
-  if (lvalue > rvalue) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
-Handlebars.registerHelper('less', function (lvalue, rvalue, options) {
-  if (arguments.length < 3)
-    throw new Error("equals needs two values to compare");
-  if (lvalue < rvalue) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
+require("./helpers")(Handlebars);
 
 module.exports = {
 
