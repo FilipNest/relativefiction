@@ -6786,7 +6786,7 @@
     "EDGAR": ""
   },
   {
-    "name": "UK",
+    "name": "The United Kingdom",
     "official_name_en": "United Kingdom of Great Britain and Northern Ireland",
     "official_name_fr": "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord",
     "ISO3166-1-Alpha-2": "GB",
