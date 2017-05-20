@@ -33,6 +33,14 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
     var categoryList = {};
 
     var checkCategories = function (category) {
+      
+      // Skip country and city as they're used globally
+
+      if (safeString(category.name) === "city" || safeString(category.name) === "country") {
+
+        return false;
+
+      }
 
       categoryList[safeString(category.name)] = category.id;
 

@@ -13,3 +13,11 @@ rf.tag("longitude", function (tagParams, output) {
 }, {
   category: "general"
 });
+
+rf.tag("country", function (tagParams, output) {
+
+  return output.country;
+
+}, {
+  category: "general"
+});

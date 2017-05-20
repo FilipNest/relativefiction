@@ -1,6 +1,10 @@
 var request = require("request");
 var querystring = require("querystring");
 
+var fs = require("fs");
+
+var countries = JSON.parse(fs.readFileSync(__dirname + "/countries.js", "utf8"));
+
 rf.alter(function (output, next) {
 
   var params = {
@@ -15,6 +19,20 @@ rf.alter(function (output, next) {
   request(url, function (error, response, body) {
 
     body = JSON.parse(body);
+
+    var country = body.sys.country;
+
+    // Get country data from JSON
+
+    countries.forEach(function (item) {
+
+      if (item["ISO3166-1-Alpha-2"] === country || item["ISO3166-1-Alpha-3"] === country) {
+
+        output.country = item.name;
+
+      }
+
+    })
 
     output.weather = body;
 
