@@ -9,6 +9,22 @@ Play around and read some stories at:
 
 https://relativefiction.com
 
+- [Story syntax](#)
+- [Tags](#)
+	- [Time](#)
+		- [Offsetting dates](#)
+	- [Foursquare](#)
+	- [Defaults](#)
+	- [Weather](#)
+	- [Misc](#)
+	- [Conditionals](#)
+- [Basic API](#)
+	- [Parse a story](#)
+	- [Customising and running yourself (it's open source)](#)
+- [Running it yourself](#)
+	- [Defining new tags](#)
+  - [Altering the context](#)
+
 ## Story syntax
 
 Dynamic parts of stories are written in tags surrounded by a pair of single curly brackets. Some of these take additional parameters which you can seperate within the brackets with a space.
