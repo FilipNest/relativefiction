@@ -26,7 +26,7 @@ rf.tag("minutes", function (tagParams, session) {
   var time = moment(session.time);
   time = alter(time, tagParams[0], tagParams[1], tagParams[2]);
 
-  return time.format("m");
+  return time.format("mm");
 
 }, {
   category: "time"
