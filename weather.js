@@ -125,7 +125,7 @@ rf.tag("humidity", function (tagParams, context) {
 
   var humidity = context.weather.main.humidity;
 
-  return math.floor(humidity);
+  return Math.floor(humidity);
 
 }, {
   category: "weather"
@@ -135,7 +135,7 @@ rf.tag("windspeed", function (tagParams, context) {
 
   var windspeed = context.weather.wind.speed;
 
-  return math.floor(windspeed);
+  return Math.floor(windspeed);
 
 }, {
   category: "weather"
