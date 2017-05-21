@@ -1,7 +1,7 @@
 Relative Fiction
 ================
 
-A tool for creating dynamic stories relative to a reader's place, time, location, weather (and more). Via the Foursquare API and OpenWeatherMap API and more.
+A tool for creating dynamic stories relative to a reader's place, time, location, weather. Via the Foursquare API and OpenWeatherMap API and more.
 
 Write stories that feel like they're taking place where the reader is, science fiction with dates that don't age and lots more.
 
