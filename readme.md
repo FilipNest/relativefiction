@@ -9,21 +9,21 @@ Play around and read some stories at:
 
 https://relativefiction.com
 
-- [Story syntax](#)
-- [Tags](#)
-	- [Time](#)
-		- [Offsetting dates](#)
-	- [Foursquare](#)
-	- [Defaults](#)
-	- [Weather](#)
-	- [Misc](#)
-	- [Conditionals](#)
-- [Basic API](#)
-	- [Parse a story](#)
-	- [Customising and running yourself (it's open source)](#)
-- [Running it yourself](#)
-	- [Defining new tags](#)
-  - [Altering the context](#)
+- [Story syntax](#Story syntax)
+- [Tags](#Tags)
+	- [Time](#Time)
+		- [Offsetting dates](#Offsetting-dates)
+	- [Foursquare](#Foursquare)
+		- [Defaults](#Defaults)
+	- [Weather](#Weather)
+	- [Misc](#Misc)
+	- [Conditionals](#Conditionals)
+- [Basic API](#Basic-API)
+	- [Parse a story](#Parse-a-story)
+- [Customising and running yourself](#Customising-and-running-yourself)
+	- [Running it yourself](#running-it-yourself)
+	- [Defining new tags](#defining-new-tags)
+  	- [Altering the context](#altering-the-context)
 
 ## Story syntax
 
