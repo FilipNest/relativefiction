@@ -4,7 +4,7 @@ var globals = {};
 
 var promisedHandlebars = require('promised-handlebars');
 
-var Handlebars = promisedHandlebars(require('handlebars'))
+Handlebars = promisedHandlebars(require('handlebars'))
 
 require("./helpers")(Handlebars);
 
@@ -177,17 +177,31 @@ module.exports = {
 
           parameters.context = output;
 
-          template(parameters).then(function (good) {
-            
-            pass({
-              result: good,
-              errors: output.errors,
-              text: output.text
-            });
+          try {
 
-          }, function (fail) {
+            template(parameters).then(function (good) {
 
-            output.errors.push(fail);
+              pass({
+                result: good,
+                errors: output.errors,
+                text: output.text
+              });
+
+            }, function (fail) {
+
+              output.errors.push(fail);
+
+              pass({
+                result: output.result,
+                errors: output.errors,
+                text: output.text
+              });
+
+            })
+
+          } catch (e) {
+
+            output.errors.push(e.message);
 
             pass({
               result: output.result,
@@ -195,7 +209,7 @@ module.exports = {
               text: output.text
             });
 
-          })
+          }
 
         })
 
@@ -247,7 +261,9 @@ module.exports = {
 
       Handlebars.registerHelper(tagName, function () {
 
-        return processor(arguments, this.context);
+        var value = processor(arguments, this.context);
+
+        return value;
 
       });
 
