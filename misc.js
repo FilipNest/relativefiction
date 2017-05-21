@@ -25,7 +25,7 @@ rf.tag("country", function (tagParams, output) {
 var request = require("request");
 
 rf.tag("url", function (tagParams, output) {
-  
+
   return new Promise(function (pass, fail) {
 
     if (typeof tagParams[0] !== "string") {
@@ -36,22 +36,62 @@ rf.tag("url", function (tagParams, output) {
 
     try {
 
-      request(tagParams[0], function (error, response, body) {
-        
+      request({
+        uri: tagParams[0],
+        timeout: 1000
+      }, function (error, response, body) {
+
         if (error) {
-          
+
           fail(error.message);
 
         } else {
 
-          pass(body);
+          if (tagParams[1] && typeof tagParams[1] === "string" && tagParams[1].toLowerCase() === "json" && typeof tagParams[2] === "string") {
+
+            try {
+
+              var feed = JSON.parse(body);
+
+              var selector = tagParams[2].split(".");
+
+              var currentPosition = feed;
+
+              selector.forEach(function (value) {
+
+                if (currentPosition[value]) {
+
+                  currentPosition = currentPosition[value];
+
+                } else {
+
+                  fail("No such value in feed " + value)
+
+                }
+
+              })
+
+              pass(currentPosition);
+
+            } catch (e) {
+
+              fail(e.message);
+
+            }
+
+          } else {
+
+            pass(body);
+
+          }
+
 
         }
 
       })
 
     } catch (e) {
-      
+
       fail(e.message);
 
     }
