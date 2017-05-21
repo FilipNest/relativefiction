@@ -5,9 +5,9 @@ A tool for creating dynamic stories relative to a reader's place, time, location
 
 Write stories that feel like they're taking place where the reader is, science fiction with dates that don't age and lots more.
 
-Play around and read some stories at:
+Play around and read some stories at: https://relativefiction.com
 
-https://relativefiction.com
+## This document
 
 - [Story syntax](#story-syntax)
 - [Tags](#tags)
