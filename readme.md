@@ -3,13 +3,11 @@ Relative Fiction
 
 A tool for creating dynamic stories relative to a reader's place, time, location, weather (and more). Via the Foursquare API and OpenWeatherMap API and more.
 
+Write stories that feel like they're taking place where the reader is, science fiction with dates that don't age and lots more.
+
+Play around and read some stories at:
+
 https://relativefiction.com
-
-## Quick links:
-
-* [Story Syntax](#story-syntax)
-* [API](#api)
-
 
 ## Story syntax
 
@@ -46,24 +44,22 @@ The date can be offset by adding an offset parameter for example `{{dayofweek ad
 
 Pulls in information about local venues. To see which you can use, go to https://developer.foursquare.com/categorytree to get relevant category names.
 
-The basic formula for these is to put in the category name, such as `{{park}}`.
-
-If the venue category has spaces in it, pass it in with speech marks. Like `{{"chinese restaurant" distance}}`.
+If you want to show information about a venue rather than the venue itself you can use `{{park distance}}` to get the distance in meters and `{{park street}}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out. `{{park city}}` would get the city the park is in.
 
 If you have multiple locations in your story of the same type, use `{{park 1}}` etc with numbers for each unique location.
 
-If you want to show information about a venue rather than the venue itself you can use `{{park distance}}` to get the distance in meters and `{{park street}}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out.
+The basic formula for these is to put in the category name, such as `{{park}}`. If the venue category has spaces in it, pass it in with hyphens. Like `{{"chinese-restaurant" distance}}`.
 
 ### Defaults
 
-If no suitable venues are found for a valid Foursquare category, the tag is replaced with something like `{the park}`, `{{some distance}}` and `{{a street}}`.
+If no suitable venues are found for a valid Foursquare category, the tag is replaced with something like `{the park}`, `{{some distance}}`, `{{some street}}` or `{{some city}}`.
 
 ### Weather
 
 Information about local weather.
 
 * weather - one of: stormy, rainy, snowy, hailing, clear, cloudy, calm, windy, scorching, freezing, misty, hazy
-* temperature in celcius
+* temperature - in celcius
 * humidity - in %
 * windspeed - in m/s
 * sunsethour24 - hour of sunset in 24 hour time
@@ -77,12 +73,17 @@ Information about local weather.
 
 * longitude - current longitude
 * latitude - current latitude
+* country - the country the reader is in
 
 ### Conditionals
 
-Alongside variables, writers can put in logic to show text if some statements are true and some other text if they are not.
+Alongside variables, writers can put in logic to show text if some statements are true and some other text if they are not. Master this bit and you can write stories that morph dramatically with the reader's circumstances.
 
-Relative Fiction is powered by the Handlebars library (http://handlebarsjs.com) so you can do things like condition blocks. To make things easier, some logical helpers have been put in to help you.
+Relative Fiction is powered by the Handlebars library (http://handlebarsjs.com)\*. Instead of explaining how Handlebars here, the Handlebars documentation itself is best. Understand blocks and subexpressions and you'll have all you need.
+
+<small>* the previous version had a probably impressive but hugely unnecessary template language of its own. It's now switched to a library.</small>
+
+Below are some of the extra Handlebars helpers that have been added to make your stories easier to write.
 
 These are:
 
@@ -108,9 +109,9 @@ It was a {{weather}} {{dayofweek}} morning. Georgina was hungry.
 
 ```
 
-Please see the Handlebars documentation for more information. The logical helpers above should be fairly straightforward once you've got a hang of Handlebars helper blocks. Note that expressions within blocks should be wrapped in round brackets (see subexpressions in the Handlebars docs). 
+Note that expressions within blocks (like `(hours24)` should be wrapped in round brackets and don't need their usual curly brackets (see subexpressions in the Handlebars docs).
 
-## API
+## Basic API
 
 ### Parse a story
 
@@ -126,7 +127,9 @@ You'll get back a JSON object with the following parameters:
 * errors - any errors (an array)
 * original - the text you sent
 
-## Running it yourself
+## Customising and running yourself (it's open source)
+
+### Running it yourself
 
 If you wish to roll your own version of this, require the `server.js` file in a node.js script (run `npm install` to get dependencies) and pass in the following options:
 
