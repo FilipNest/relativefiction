@@ -2,7 +2,9 @@ var tags = {};
 var alterHooks = [];
 var globals = {};
 
-var Handlebars = require("handlebars");
+var promisedHandlebars = require('promised-handlebars');
+
+var Handlebars = promisedHandlebars(require('handlebars'))
 
 require("./helpers")(Handlebars);
 
@@ -175,21 +177,25 @@ module.exports = {
 
           parameters.context = output;
 
-          try {
+          template(parameters).then(function (good) {
+            
+            pass({
+              result: good,
+              errors: output.errors,
+              text: output.text
+            });
 
-            output.result = (template(parameters));
+          }, function (fail) {
 
-          } catch (e) {
+            output.errors.push(fail);
 
-            output.errors.push(e.message)
+            pass({
+              result: output.result,
+              errors: output.errors,
+              text: output.text
+            });
 
-          }
-
-          pass({
-            result: output.result,
-            errors: output.errors,
-            text: output.text
-          });
+          })
 
         })
 
