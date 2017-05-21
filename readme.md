@@ -20,7 +20,7 @@ Play around and read some stories at: https://relativefiction.com
 	- [Conditionals](#conditionals)
 - [Basic API](#basic-api)
 	- [Parse a story](#parse-a-story)
-- [Customising and running yourself](#customising-and-running-yourself)
+- [Customising and running it yourself](#customising-and-running-it-yourself)
 	- [Running it yourself](#running-it-yourself)
 	- [Defining new tags](#defining-new-tags)
   	- [Altering the context](#altering-the-context)
@@ -143,7 +143,7 @@ You'll get back a JSON object with the following parameters:
 * errors - any errors (an array)
 * original - the text you sent
 
-## Customising and running yourself (it's open source)
+## Customising and running it yourself
 
 ### Running it yourself
 
