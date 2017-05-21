@@ -145,4 +145,28 @@ module.exports = function (Handlebars) {
   });
 
 
+  Handlebars.registerHelper('contains', function (lvalue, rvalue, options) {
+
+    if (arguments.length < 3) {
+      throw new Error("contains needs two values");
+    }
+
+    // Expression version
+
+    if (!options.fn) {
+
+      return (lvalue.indexOf(rvalue) !== -1);
+
+    }
+
+    // Block version
+
+    if (lvalue.indexOf(rvalue) !== -1) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+
+  });
+
 }
