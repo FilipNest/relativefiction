@@ -2,9 +2,7 @@ var tags = {};
 var alterHooks = [];
 var globals = {};
 
-Handlebars = require('handlebars');
-
-require("./helpers")(Handlebars);
+global.Handlebars = require('handlebars');
 
 module.exports = {
 
@@ -95,9 +93,19 @@ module.exports = {
 
           var splitTags = tag.match(/(?:[^\s"]+|"[^"]*")+/g);
 
+          splitTags = splitTags.filter(function (tag) {
+
+            return tag[0] !== "#";
+
+          })
+
           splitTags.forEach(function (splitTag, index) {
 
-            splitTags[index] = splitTag.split('"').join("");
+            if (splitTag[0] !== "#") {
+
+              splitTags[index] = splitTag.split('"').join("").split("(").join("").split(")").join("");
+
+            }
 
           })
 
@@ -146,7 +154,7 @@ module.exports = {
 
           var promise = function () {
 
-            return new Promise(function (resolve) {
+            return new Promise(function (resolve, reject) {
 
               alterHook.processor(output, function (processed) {
 

@@ -11,6 +11,8 @@ module.exports = function (config = {}) {
   require("./foursquare");
   require("./weather");
 
+  require("./helpers")(Handlebars);
+
   // Setup server
 
   const express = require('express');
@@ -18,15 +20,15 @@ module.exports = function (config = {}) {
 
   var server = express();
   var port = rf.config.port || 80;
-  
+
   rf.server = server;
-  
+
   // Set static directory if one set
-  
-  if(rf.config.static){
-    
+
+  if (rf.config.static) {
+
     server.use(express.static(rf.config.static));
-    
+
   }
 
   // parse application/x-www-form-urlencoded
@@ -39,20 +41,12 @@ module.exports = function (config = {}) {
 
   // serve static files
   server.use(express.static('static'));
-  
+
   rf.server = server;
 
   // Start server
 
   server.listen(port);
-
-  // Get info on tags
-  
-  server.get("/taghelp", function (req, res) {
-
-    res.json(rf.tagsInfo());
-
-  })
 
   server.post("/", (req, res) => {
 
