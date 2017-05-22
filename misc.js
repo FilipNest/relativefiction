@@ -24,79 +24,89 @@ rf.tag("country", function (tagParams, output) {
 
 var request = require("request");
 
-rf.tag("url", function (tagParams, output) {
+rf.alter(function (output, callback) {
 
-  return new Promise(function (pass, fail) {
+  output.urls = {};
+  var urlPromises = [];
 
-    if (typeof tagParams[0] !== "string") {
+  output.tags.forEach(function (tag) {
 
-      fail("Must pass in a url");
+    if (tag.params[0] === "url") {
 
-    }
+      var promise = new Promise(function (pass, fail) {
 
-    try {
+        try {
 
-      request({
-        uri: tagParams[0],
-        timeout: 1000
-      }, function (error, response, body) {
+          request({
+            uri: tag.params[1],
+            timeout: 1000
+          }, function (error, response, body) {
 
-        if (error) {
+            if (error) {
 
-          fail(error.message);
+              output.errors.push(error.message);
 
-        } else {
+              fail();
 
-          if (tagParams[1] && typeof tagParams[1] === "string" && tagParams[1].toLowerCase() === "json" && typeof tagParams[2] === "string") {
+            } else {
 
-            try {
+              output.urls[tag.params[1]] = body;
 
-              var feed = JSON.parse(body);
-
-              var selector = tagParams[2].split(".");
-
-              var currentPosition = feed;
-
-              selector.forEach(function (value) {
-
-                if (currentPosition[value]) {
-
-                  currentPosition = currentPosition[value];
-
-                } else {
-
-                  fail("No such value in feed " + value)
-
-                }
-
-              })
-
-              pass(currentPosition);
-
-            } catch (e) {
-
-              fail(e.message);
+              pass();
 
             }
 
-          } else {
+          })
 
-            pass(body);
+        } catch (e) {
 
-          }
+          output.errors.push(e.message);
 
+          fail();
 
         }
 
       })
 
-    } catch (e) {
-
-      fail(e.message);
+      urlPromises.push(promise);
 
     }
 
   })
+
+  if (urlPromises.length) {
+
+    Promise.all(urlPromises).then(function (pass) {
+
+      callback(output);
+
+    }, function (fail) {
+
+      if (fail) {
+
+        output.errors.push(fail);
+
+      }
+
+      callback(output);
+
+    })
+
+  } else {
+
+    callback(output);
+
+  }
+
+})
+
+rf.tag("url", function (tagParams, context) {
+
+  if (context.urls && context.urls[tagParams[0]]) {
+
+    return context.urls[tagParams[0]];
+
+  }
 
 }, {
   category: "general"
