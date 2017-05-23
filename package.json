@@ -26,6 +26,6 @@
     "handlebars": "^4.0.8",
     "moment": "^2.18.1",
     "pixl-xml": "^1.0.10",
-    "request": "^2.81.0",
+    "request": "^2.81.0"
   }
 }
