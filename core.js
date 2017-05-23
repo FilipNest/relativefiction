@@ -9,9 +9,9 @@ global.Handlebars = require('handlebars');
 function getWordsBetweenCurlies(str) {
   var results = [],
     re = /{{([^}}]+)}}/g,
-    text = re.exec(str);
+    text;
 
-  while (text) {
+  while (text = re.exec(str)) {
     results.push(text[1]);
   }
   return results;
