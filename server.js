@@ -11,7 +11,7 @@ module.exports = function (config = {}) {
   require("./foursquare");
   require("./weather");
 
-  require("./helpers")(Handlebars);
+  require("./helpers")(global.Handlebars);
 
   // Setup server
 
@@ -34,10 +34,10 @@ module.exports = function (config = {}) {
   // parse application/x-www-form-urlencoded
   server.use(bodyParser.urlencoded({
     extended: false
-  }))
+  }));
 
   // parse application/json
-  server.use(bodyParser.json())
+  server.use(bodyParser.json());
 
   // serve static files
   server.use(express.static('static'));
@@ -66,10 +66,10 @@ module.exports = function (config = {}) {
       res.status(400);
       res.json(output);
 
-    })
+    });
 
-  })
+  });
 
   return rf;
 
-}
+};

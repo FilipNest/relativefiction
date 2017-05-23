@@ -48,7 +48,7 @@ rf.alter(function (output, callback) {
 
             }
 
-          })
+          });
 
         } catch (e) {
 
@@ -58,13 +58,13 @@ rf.alter(function (output, callback) {
 
         }
 
-      })
+      });
 
       urlPromises.push(promise);
 
     }
 
-  })
+  });
 
   if (urlPromises.length) {
 
@@ -82,7 +82,7 @@ rf.alter(function (output, callback) {
 
       callback(output);
 
-    })
+    });
 
   } else {
 
@@ -90,7 +90,7 @@ rf.alter(function (output, callback) {
 
   }
 
-})
+});
 
 rf.tag("url", function (tagParams, context) {
 
@@ -102,7 +102,7 @@ rf.tag("url", function (tagParams, context) {
 
 }, {
   category: "general"
-})
+});
 
 // JSON helper
 

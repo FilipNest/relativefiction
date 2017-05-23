@@ -1,0 +1,5 @@
+{
+  "predef": ["rf", "Handlebars"],
+  "node": true,
+  "esversion": 6
+}

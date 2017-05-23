@@ -12,7 +12,7 @@ rf.alter(function (output, next) {
     lat: output.latitude,
     lon: output.longitude,
     units: "metric"
-  }
+  };
 
   var url = "http://api.openweathermap.org/data/2.5/weather?" + querystring.stringify(params);
 
@@ -32,15 +32,15 @@ rf.alter(function (output, next) {
 
       }
 
-    })
+    });
 
     output.weather = body;
 
     next(output);
 
-  })
+  });
 
-})
+});
 
 var moment = require("moment");
 
@@ -83,7 +83,7 @@ rf.tag("weather", function (tagParams, context) {
     {
       "hazy": [721]
     }
-  ]
+  ];
 
   var mainWeather = context.weather.weather[0].id;
   var weatherType;
@@ -97,7 +97,7 @@ rf.tag("weather", function (tagParams, context) {
       weatherType = Object.keys(type)[0];
 
     }
-  })
+  });
 
   if (!weatherType) {
 
@@ -109,7 +109,7 @@ rf.tag("weather", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("temperature", function (tagParams, context) {
 
@@ -119,7 +119,7 @@ rf.tag("temperature", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("humidity", function (tagParams, context) {
 
@@ -129,7 +129,7 @@ rf.tag("humidity", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("windspeed", function (tagParams, context) {
 
@@ -139,7 +139,7 @@ rf.tag("windspeed", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("hourstosunrise", function (tagParams, context) {
 
@@ -159,7 +159,7 @@ rf.tag("hourstosunrise", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("hourstosunset", function (tagParams, context) {
 
@@ -179,7 +179,7 @@ rf.tag("hourstosunset", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("sunrisehour24", function (tagParams, context) {
 
@@ -189,7 +189,7 @@ rf.tag("sunrisehour24", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 
 rf.tag("sunsethour24", function (tagParams, context) {
@@ -200,7 +200,7 @@ rf.tag("sunsethour24", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 rf.tag("sunrisehour12", function (tagParams, context) {
 
@@ -210,7 +210,7 @@ rf.tag("sunrisehour12", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});
 
 
 rf.tag("sunsethour12", function (tagParams, context) {
@@ -221,4 +221,4 @@ rf.tag("sunsethour12", function (tagParams, context) {
 
 }, {
   category: "weather"
-})
+});

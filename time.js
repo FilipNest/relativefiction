@@ -19,7 +19,7 @@ var alter = function (time, operator, first, second) {
     return time.subtract(first, second);
   }
 
-}
+};
 
 rf.tag("minutes", function (tagParams, session) {
 
@@ -30,7 +30,7 @@ rf.tag("minutes", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("hour24", function (tagParams, session) {
 
@@ -42,7 +42,7 @@ rf.tag("hour24", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("hour12", function (tagParams, session) {
 
@@ -53,7 +53,7 @@ rf.tag("hour12", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("hours12", function (tagParams, session) {
 
@@ -64,7 +64,7 @@ rf.tag("hours12", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("year", function (tagParams, session) {
 
@@ -75,7 +75,7 @@ rf.tag("year", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("seconds", function (tagParams, session) {
 
@@ -86,7 +86,7 @@ rf.tag("seconds", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("ampm", function (tagParams, session) {
 
@@ -97,7 +97,7 @@ rf.tag("ampm", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("dayofweek", function (tagParams, session) {
 
@@ -108,7 +108,7 @@ rf.tag("dayofweek", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("dayofmonth", function (tagParams, session) {
 
@@ -119,7 +119,7 @@ rf.tag("dayofmonth", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("dayofmonthsuffix", function (tagParams, session) {
 
@@ -130,7 +130,7 @@ rf.tag("dayofmonthsuffix", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});
 
 rf.tag("monthofyear", function (tagParams, session) {
 
@@ -141,4 +141,4 @@ rf.tag("monthofyear", function (tagParams, session) {
 
 }, {
   category: "time"
-})
+});

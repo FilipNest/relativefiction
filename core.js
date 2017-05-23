@@ -4,6 +4,19 @@ var globals = {};
 
 global.Handlebars = require('handlebars');
 
+// Get words between curlies (from StackOverflow user CMS )
+
+function getWordsBetweenCurlies(str) {
+  var results = [],
+    re = /{{([^}}]+)}}/g,
+    text = re.exec(str);
+
+  while (text) {
+    results.push(text[1]);
+  }
+  return results;
+}
+
 module.exports = {
 
   process: function ({
@@ -29,19 +42,19 @@ module.exports = {
 
       if (!latitude) {
 
-        output.errors.push("Missing 'latitude' parameter")
+        output.errors.push("Missing 'latitude' parameter");
 
       }
 
       if (!longitude) {
 
-        output.errors.push("Missing 'longitude' parameter")
+        output.errors.push("Missing 'longitude' parameter");
 
       }
 
       if (!latitude) {
 
-        output.errors.push("Missing 'text' parameter")
+        output.errors.push("Missing 'text' parameter");
 
       }
 
@@ -50,7 +63,7 @@ module.exports = {
 
       if (isNaN(latitude) || isNaN(longitude)) {
 
-        output.errors.push("Longitude and latitude need to be numbers")
+        output.errors.push("Longitude and latitude need to be numbers");
 
       }
 
@@ -70,19 +83,6 @@ module.exports = {
 
       } else {
 
-        // Get words between curlies (from StackOverflow user CMS )
-
-        function getWordsBetweenCurlies(str) {
-          var results = [],
-            re = /{{([^}}]+)}}/g,
-            text;
-
-          while (text = re.exec(str)) {
-            results.push(text[1]);
-          }
-          return results;
-        }
-
         var tags = getWordsBetweenCurlies(text);
 
         output.tags = [];
@@ -97,7 +97,7 @@ module.exports = {
 
             return tag[0] !== "#";
 
-          })
+          });
 
           splitTags.forEach(function (splitTag, index) {
 
@@ -107,14 +107,14 @@ module.exports = {
 
             }
 
-          })
+          });
 
           output.tags.push({
             tag: "{{" + tag + "}}",
             params: splitTags
           });
 
-        })
+        });
 
         var sortByWeight = function (a, b) {
 
@@ -162,9 +162,9 @@ module.exports = {
 
               });
 
-            })
+            });
 
-          }
+          };
 
           preprocessors.push(promise);
 
@@ -199,11 +199,11 @@ module.exports = {
             text: output.text
           });
 
-        })
+        });
 
-      };
+      }
 
-    })
+    });
 
   },
 
@@ -213,7 +213,7 @@ module.exports = {
 
     if (typeof preprocessor !== "function") {
 
-      throw "alter takes a function"
+      throw "alter takes a function";
 
     } else {
 
@@ -232,7 +232,7 @@ module.exports = {
 
     if (typeof processor !== "function") {
 
-      throw "tag takes a function"
+      throw "tag takes a function";
 
     } else {
 
@@ -242,7 +242,7 @@ module.exports = {
 
       }
 
-      tags[options.category].push(tagName)
+      tags[options.category].push(tagName);
 
       // Register helper
 
@@ -263,8 +263,8 @@ module.exports = {
 
       globals[global] = global;
 
-    })
+    });
 
   }
 
-}
+};

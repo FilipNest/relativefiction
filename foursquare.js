@@ -10,13 +10,13 @@ var params = {
   v: "20170517",
   client_id: rf.config.foursquareKey,
   client_secret: rf.config.foursquareSecret
-}
+};
 
 var safeString = function (input) {
 
   return input.toLowerCase().split(" ").join("-");
 
-}
+};
 
 var request = require('request');
 
@@ -48,9 +48,9 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         checkCategories(innerCategory);
 
-      })
+      });
 
-    }
+    };
 
     Object.keys(categories).forEach(function (id) {
 
@@ -74,7 +74,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
         }
 
-      })
+      });
 
       if (Object.keys(textVenues).length) {
 
@@ -87,7 +87,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
           categoryIDs.push(textVenues[venue]);
 
-        })
+        });
 
         var venuePromises = [];
 
@@ -129,9 +129,9 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
                     output.foursquare[safeString(category.name)].push(venue);
 
-                  })
+                  });
 
-                })
+                });
 
                 // sort by distance
 
@@ -153,9 +153,9 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
                     }
 
-                  })
+                  });
 
-                })
+                });
 
                 pass(output);
 
@@ -167,19 +167,19 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
               }
 
-            })
+            });
 
-          })
+          });
 
           venuePromises.push(categoryPromise);
 
-        })
+        });
 
         Promise.all(venuePromises).then(function () {
 
           next(output);
 
-        })
+        });
 
       } else {
 
@@ -187,7 +187,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       }
 
-    })
+    });
 
     // Actual replacement function
 
@@ -238,11 +238,12 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
             }
 
+            break;
           case "distance":
 
             if (venue && venue.location.distance) {
 
-              return venue.location.distance
+              return venue.location.distance;
 
             } else {
 
@@ -250,11 +251,12 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
             }
 
+            break;
           case "city":
 
             if (venue && venue.location.city) {
 
-              return venue.location.city
+              return venue.location.city;
 
             } else {
 
@@ -262,6 +264,7 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
             }
 
+            break;
           default:
             if (venue && venue.name) {
 
@@ -277,9 +280,9 @@ request('https://api.foursquare.com/v2/venues/categories?' + querystring.stringi
 
       }, {
         category: "foursquare"
-      })
+      });
 
-    })
+    });
 
   }
 
