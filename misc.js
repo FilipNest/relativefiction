@@ -1,11 +1,3 @@
-rf.tag("latitude", function (tagParams, output) {
-
-  return output.latitude;
-
-}, {
-  category: "general"
-});
-
 rf.tag("longitude", function (tagParams, output) {
 
   return output.longitude;
@@ -111,3 +103,34 @@ rf.tag("url", function (tagParams, context) {
 }, {
   category: "general"
 })
+
+// JSON helper
+
+Handlebars.registerHelper('json', function (value, options) {
+
+  if (!options.fn) {
+
+    throw new Error("json needs to be used as a block helper");
+
+  }
+
+  return options.fn(JSON.parse(value));
+
+});
+
+
+var XML = require('pixl-xml');
+
+Handlebars.registerHelper('xml', function (value, options) {
+
+  if (!options.fn) {
+
+    throw new Error("xml needs to be used as a block helper");
+
+  }
+
+  var doc = XML.parse(value);
+
+  return options.fn(doc);
+
+});
