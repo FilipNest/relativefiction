@@ -1,9 +1,9 @@
 Relative Fiction
 ================
 
-A tool for creating dynamic stories relative to a reader's place, time, location, weather. Via the Foursquare API and OpenWeatherMap API and more.
+A tool for creating dynamic stories relative to a reader's place, time, location, weather. Via the Foursquare API and OpenWeatherMap API, custom XML/RSS/JSON feeds and more.
 
-Write stories that feel like they're taking place where the reader is, science fiction with dates that don't age and lots more.
+Write stories that feel like they're taking place where the reader is, science fiction with dates and information that doesn't age and lots more.
 
 Play around and read some stories at: https://relativefiction.com
 
@@ -16,6 +16,7 @@ Play around and read some stories at: https://relativefiction.com
 	- [Foursquare](#foursquare)
 		- [Defaults](#defaults)
 	- [Weather](#weather)
+    - [Feeds](#external-feeds)
 	- [Misc](#misc)
 	- [Conditionals](#conditionals)
 - [Basic API](#basic-api)
@@ -85,6 +86,24 @@ Information about local weather.
 * hourstosunset - hours to next sunset
 * hourstosunrise - hours to next sunrise 
 
+### External feeds
+
+Relative Fiction supports XML feeds (RSS extra) and JSON feeds for you to customise your story. This is super powerful.
+
+#### Getting the contents of a website
+
+Both XML and JSON depend on parsing a url. So first you'll need to use the `url` tag.
+
+`{{url "https://relativefiction.com"}}` - Would print the contents of the Relative Fiction homepage. This is a bit useless on its own but you can use it in contains queries (see conditionals below) like:
+
+`{{#contains (url "https://en.wikipedia.org/wiki/Main_Page") "goat"}}The wikipedia front page had goats on it{{/contains}}`
+
+#### Parsing JSON or XML
+
+The `xml` and `json` tags are block tags. Anything possible in Handlebars is possible within the block so you can do conditionals and more based on anything in the fetched data. The following example gets the 1st top news story from the UK edition of BBC news.
+
+`{{#xml (url "http://feeds.bbci.co.uk/news/rss.xml?edition=uk")}}{{channel.item.[0].title}}{{/xml}}`
+
 ### Misc
 
 * longitude - current longitude
@@ -109,6 +128,7 @@ These are:
 * more
 * and
 * or
+* contains
 
 Here's an example of how you use them. 
 
