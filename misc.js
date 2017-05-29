@@ -129,7 +129,15 @@ Handlebars.registerHelper('xml', function (value, options) {
 
   }
 
-  var doc = XML.parse(value);
+  try {
+
+    var doc = XML.parse(value);
+
+  } catch (e) {
+
+    throw new Error(e.message);
+
+  }
 
   return options.fn(doc);
 
