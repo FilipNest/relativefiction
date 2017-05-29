@@ -31,7 +31,7 @@ rf.alter(function (output, callback) {
 
           request({
             uri: tag.params[1],
-            timeout: 1000
+            timeout: 7000
           }, function (error, response, body) {
 
             if (error) {
