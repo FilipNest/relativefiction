@@ -1,5 +1,7 @@
 // Require main RF code
 
+process.env.UV_THREADPOOL_SIZE=64;
+
 module.exports = function (config = {}) {
 
   global.rf = require("./core");
