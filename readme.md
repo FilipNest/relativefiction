@@ -59,7 +59,7 @@ The date can be offset by adding an offset parameter for example `{{dayofweek ad
 
 ### Foursquare
 
-Pulls in information about local venues. To see which you can use, go to https://developer.foursquare.com/categorytree to get relevant category names.
+Pulls in information about local venues. To see which you can use, go to https://location.foursquare.com/places/docs/categories to get relevant category names.
 
 If you want to show information about a venue rather than the venue itself you can use `{{park distance}}` to get the distance in meters and `{{park street}}` to get the street the park is on. The street is taken from the Foursquare address and takes the house number part out. `{{park city}}` would get the city the park is in.
 
